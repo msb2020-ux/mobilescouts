@@ -3,43 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobile Area Camporee</title>
+<title>Mobile Area Camporee 2026</title>
 
 <style>
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background:#f4f1e8;
-    color:#2e3d2f;
+    background:#ffffff;
+    color:#1a1a1a;
+}
+
+/* HEADER */
+.header {
+    background:#002868;
+    padding:15px;
+    text-align:center;
+}
+.header img {
+    max-height:60px;
 }
 
 /* HERO */
 .hero {
-    background:#2e5e3e;
+    background:#bf0a30;
     color:white;
     text-align:center;
-    padding:40px 20px;
+    padding:50px 20px;
 }
-.hero h1 {
-    font-size:2.5rem;
-}
-.hero p {
-    margin:10px 0 20px;
-}
+.hero h1 { font-size:2.5rem; margin-bottom:10px; }
+.hero p { margin-bottom:20px; }
+
 .cta {
     display:inline-block;
     padding:12px 25px;
-    background:#f2b705;
-    color:black;
+    background:white;
+    color:#002868;
     font-weight:bold;
     text-decoration:none;
-    border-radius:6px;
+    border-radius:5px;
 }
-.cta:hover {
-    background:#d99a04;
-}
+.cta:hover { background:#f0f0f0; }
 
-/* FEATURED 2026 */
+/* FEATURE */
 .feature {
     text-align:center;
     padding:40px 20px;
@@ -48,16 +53,30 @@ body {
     max-width:350px;
     width:100%;
     border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
-.feature h2 {
-    margin-top:20px;
+
+/* COUNTDOWN */
+.countdown {
+    margin-top:15px;
+    font-weight:bold;
+    color:#bf0a30;
+    font-size:1.2rem;
+}
+
+/* DATE BADGE */
+.date {
+    font-weight:bold;
+    margin-top:10px;
+    color:#002868;
 }
 
 /* CAROUSEL */
 .carousel {
+    background:#f4f4f4;
     padding:40px 20px;
-    text-align:center;
 }
+.carousel h2 { text-align:center; }
 .carousel-container {
     display:flex;
     overflow-x:auto;
@@ -65,7 +84,7 @@ body {
     padding:10px;
 }
 .card {
-    min-width:250px;
+    min-width:260px;
     background:white;
     border-radius:10px;
     padding:10px;
@@ -75,21 +94,46 @@ body {
     width:100%;
     border-radius:8px;
 }
-.card h3 {
-    margin:10px 0;
+
+/* SOCIAL */
+.social {
+    text-align:center;
+    padding:40px 20px;
+}
+.social img.qr {
+    width:150px;
+    margin-top:20px;
 }
 
 /* FOOTER */
 footer {
+    background:#002868;
+    color:white;
     text-align:center;
     padding:20px;
-    background:#2e5e3e;
-    color:white;
 }
 footer a {
-    color:#f2b705;
+    color:#ffcc00;
     text-decoration:none;
     font-weight:bold;
+}
+
+/* STICKY CTA */
+.sticky {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:#bf0a30;
+    text-align:center;
+    padding:10px;
+}
+.sticky a {
+    background:white;
+    color:#002868;
+    padding:10px 20px;
+    border-radius:5px;
+    font-weight:bold;
+    text-decoration:none;
 }
 
 </style>
@@ -97,35 +141,45 @@ footer a {
 
 <body>
 
+<!-- HEADER -->
+<div class="header">
+    <img src="Graphics/Scouting-America-MOBILE_COUNCIL_MAIN-LOGO-HEADER-NAV-edit.svg">
+</div>
+
 <!-- HERO -->
 <section class="hero">
-    <h1>Mobile Area Camporee</h1>
-    <p>Adventure • Leadership • Scouting Tradition</p>
-    <a class="cta" href="#2026">View 2026 Event</a>
+    <h1>Mobile Area Camporee 2026</h1>
+    <p>Adventure • Leadership • Scouting Excellence</p>
+    <a class="cta" href="#2026">View Event</a>
 </section>
 
-<!-- FEATURED 2026 -->
+<!-- 2026 FEATURE -->
 <section class="feature" id="2026">
-    <h2>2026 Camporee</h2>
-    <p>Join us for our biggest and best Camporee yet!</p>
+    <h2>🇺🇸 Camporee 2026</h2>
 
-    <img src="2026/2026-Flyer.png" alt="2026 Camporee Flyer">
+    <div class="date">October 23–25, 2026</div>
+
+    <p>Join scouts from across the Mobile Area for our premier annual Camporee event.</p>
+
+    <img src="2026/2026-Flyer.png">
+
+    <div class="countdown" id="countdown"></div>
 
     <br><br>
 
-    <a class="cta" href="#" target="_blank">Register Now</a>
+    <a class="cta" href="https://scoutingevent.com/004" target="_blank">Register Now</a>
 </section>
 
-<!-- PAST EVENTS -->
+<!-- CAROUSEL -->
 <section class="carousel">
     <h2>Past Camporees</h2>
 
-    <div class="carousel-container">
+    <div class="carousel-container" id="carousel">
 
         <div class="card">
             <h3>2025</h3>
             <img src="2025/2025-patch.png">
-            <a href="2025/2025-Flyer.pdf" target="_blank">View Flyer</a>
+            <a href="2025/2025-Flyer.pdf" target="_blank">Flyer</a>
         </div>
 
         <div class="card">
@@ -136,29 +190,61 @@ footer a {
         <div class="card">
             <h3>2023</h3>
             <img src="2023/IMG_1168.JPG">
-            <a href="2023/Fall Camporee - 1 Page Flyer R3.pdf" target="_blank">View Flyer</a>
+            <a href="2023/Fall Camporee - 1 Page Flyer R3.pdf" target="_blank">Flyer</a>
         </div>
 
         <div class="card">
             <h3>2022</h3>
             <img src="2023/Map.jpg">
-            <a href="2022/Infographic Map-Rev 6.pdf" target="_blank">View Map</a>
+            <a href="2022/Infographic Map-Rev 6.pdf" target="_blank">Map</a>
         </div>
 
     </div>
 </section>
 
 <!-- SOCIAL -->
-<section class="feature">
-    <h2>Follow Us</h2>
-    <p>Stay updated with announcements and highlights</p>
-    <a class="cta" href="#" target="_blank">Instagram</a>
+<section class="social">
+    <h2>Follow Mobile Area Scouts</h2>
+
+    <p>
+        <a href="https://www.instagram.com/mobile_area_scouts/" target="_blank">Instagram</a> |
+        <a href="https://www.youtube.com/@MobileAreaScouts-sv1xm" target="_blank">YouTube</a>
+    </p>
+
+    <img class="qr" src="Graphics/mobile_area_scouts_qr (2).png">
 </section>
 
 <!-- FOOTER -->
 <footer>
-    <p>Mobile Area Scouting • Camporee Events</p>
+    <p>Mobile Area Scouting | Camporee Events</p>
 </footer>
+
+<!-- STICKY CTA -->
+<div class="sticky">
+    <a href="https://scoutingevent.com/004" target="_blank">Register for 2026</a>
+</div>
+
+<script>
+// COUNTDOWN
+const eventDate = new Date("October 23, 2026 08:00:00").getTime();
+const timer = document.getElementById("countdown");
+
+setInterval(() => {
+    const now = new Date().getTime();
+    const diff = eventDate - now;
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+
+    timer.innerHTML = "⏳ " + days + " days, " + hours + " hours until Camporee!";
+}, 1000);
+
+// AUTO SCROLL CAROUSEL
+const carousel = document.getElementById("carousel");
+setInterval(() => {
+    carousel.scrollBy({ left: 260, behavior: 'smooth' });
+}, 3500);
+</script>
 
 </body>
 </html>
