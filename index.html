@@ -32,7 +32,6 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 .feature-tab-panel{display:none;background:var(--offwhite);border-radius:0 0 10px 10px;border:2px solid var(--navy);border-top:none;padding:32px}
 .feature-tab-panel.active{display:block}
 
-/* FLYER */
 .flyer-panel{display:flex;flex-direction:column;align-items:center;gap:20px}
 .flyer-panel img{max-width:680px;width:100%;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18)}
 .flyer-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
@@ -41,12 +40,10 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 .flyer-btn.outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
 .flyer-btn.outline:hover{background:var(--navy);color:white}
 
-/* PROMO VIDEO */
 .promo-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;max-width:860px;margin:0 auto}
 .promo-video-wrap video{width:100%;height:100%;display:block}
 .promo-video-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
 
-/* ABOUT */
 .about-panel{max-width:760px;margin:0 auto}
 .about-kicker{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:14px}
 .about-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:0.04em;color:var(--navy);line-height:1.1;margin-bottom:20px}
@@ -59,7 +56,6 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 .about-highlight strong{color:var(--gold)}
 .about-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
 
-/* FILE MODAL */
 .file-modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;padding:20px}
 .file-modal.open{display:flex}
 .file-modal-inner{background:white;border-radius:14px;overflow:hidden;width:90vw;max-width:960px;height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
@@ -74,7 +70,6 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 .file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700;transition:background 0.18s}
 .file-modal-footer a:hover{background:var(--red)}
 
-/* PAST EVENTS */
 .past-events{background:#f4f4f4;padding:48px 20px}
 .past-events h2{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--navy);margin-bottom:8px}
 .past-events-sub{text-align:center;font-size:0.85rem;color:#666;margin-bottom:28px}
@@ -130,7 +125,6 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
     <button class="feature-tab-btn" data-ftab="about">📖 About This Event</button>
   </div>
 
-  <!-- FLYER TAB -->
   <div class="feature-tab-panel active" id="ftab-flyer">
     <div class="flyer-panel">
       <img src="2026/2026-Flyer.png" alt="2026 Camporee Flyer">
@@ -141,15 +135,9 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
     </div>
   </div>
 
-  <!-- PROMO VIDEO TAB -->
   <div class="feature-tab-panel" id="ftab-promo">
     <div class="promo-video-wrap">
-      <video
-        src="2026/Video_Generation_Request_Fulfilled.mp4"
-        controls
-        playsinline
-        preload="metadata"
-        poster="2026/2026-Flyer.png">
+      <video src="2026/Video_Generation_Request_Fulfilled.mp4" controls playsinline preload="metadata" poster="2026/2026-Flyer.png">
         Your browser does not support video playback.
       </video>
     </div>
@@ -159,7 +147,6 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
     </div>
   </div>
 
-  <!-- ABOUT TAB -->
   <div class="feature-tab-panel" id="ftab-about">
     <div class="about-panel">
       <div class="about-kicker">Camp Maubila · October 23–25, 2026</div>
@@ -189,32 +176,44 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   </div>
 </div>
 
-<!-- PAST EVENTS -->
 <section class="past-events" id="carousel">
   <h2>Past Camporees</h2>
   <p class="past-events-sub">Five Rivers District · Camp Maubila, Grove Hill, AL</p>
   <div class="cards-outer">
     <div class="cards-track">
+
       <div class="event-card">
         <div class="event-card-img-wrap"><img class="event-card-img" src="2025/2025-patch.png" alt="2025 Avengers Quest Patch"></div>
         <div class="event-card-body"><div class="event-card-year">2025</div><div class="event-card-title">Avengers Quest</div><a class="event-card-btn" href="2025/">View Details →</a></div>
       </div>
+
       <div class="event-card">
         <div class="event-card-img-wrap"><img class="event-card-img" src="2024/event-patch/20240927_005637275_iOS.jpg" alt="2024 Galactic Heist Patch"></div>
         <div class="event-card-body"><div class="event-card-year">2024</div><div class="event-card-title">Galactic Heist</div><a class="event-card-btn disabled" href="#">Coming Soon</a></div>
       </div>
+
       <div class="event-card">
         <div class="event-card-img-wrap"><img class="event-card-img" src="2023/event-patch/IMG_1168.JPG" alt="2023 Code Breaker Patch"></div>
         <div class="event-card-body"><div class="event-card-year">2023</div><div class="event-card-title">Code Breaker: Impossible Mission</div><a class="event-card-btn disabled" href="#">Coming Soon</a></div>
       </div>
+
       <div class="event-card">
         <div class="event-card-img-wrap"><img class="event-card-img" src="2022/event-patch/2022 zombie.jpg" alt="2022 Zombie Survival Patch"></div>
         <div class="event-card-body"><div class="event-card-year">2022</div><div class="event-card-title">Zombie Survival</div><a class="event-card-btn disabled" href="#">Coming Soon</a></div>
       </div>
+
+      <div class="event-card">
+        <div class="event-card-img-wrap">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#ccc;letter-spacing:0.05em">🍳</div>
+        </div>
+        <div class="event-card-body"><div class="event-card-year">2022</div><div class="event-card-title">Cooking</div><a class="event-card-btn disabled" href="#">Coming Soon</a></div>
+      </div>
+
       <div class="event-card">
         <div class="event-card-img-wrap"><img class="event-card-img" src="2021/event-patch/2021 highland games.jpg" alt="2021 Highland Games Patch"></div>
         <div class="event-card-body"><div class="event-card-year">2021</div><div class="event-card-title">Highland Games</div><a class="event-card-btn disabled" href="#">Coming Soon</a></div>
       </div>
+
     </div>
   </div>
 </section>
@@ -232,7 +231,6 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
 
 <div class="sticky"><a href="https://scoutingevent.com/004" target="_blank">Register for 2026</a></div>
 
-<!-- FILE MODAL -->
 <div class="file-modal" id="fileModal">
   <div class="file-modal-inner">
     <div class="file-modal-header">
@@ -245,7 +243,6 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
 </div>
 
 <script>
-// COUNTDOWN
 const eventDate = new Date("October 23, 2026 08:00:00").getTime();
 const timer = document.getElementById("countdown");
 setInterval(() => {
@@ -255,10 +252,8 @@ setInterval(() => {
   timer.innerHTML = "⏳ " + days + " days, " + hours + " hours until Camporee!";
 }, 1000);
 
-// FEATURE TABS — pause video when switching away
 document.querySelectorAll('.feature-tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    // Pause any playing video before switching
     const vid = document.querySelector('#ftab-promo video');
     if (vid) vid.pause();
     document.querySelectorAll('.feature-tab-btn').forEach(b => b.classList.remove('active'));
@@ -268,7 +263,6 @@ document.querySelectorAll('.feature-tab-btn').forEach(btn => {
   });
 });
 
-// FILE MODAL
 const fileModal = document.getElementById('fileModal');
 const fileModalTitle = document.getElementById('fileModalTitle');
 const fileModalBody = document.getElementById('fileModalBody');
