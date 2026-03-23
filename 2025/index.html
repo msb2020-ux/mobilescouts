@@ -16,7 +16,6 @@
   html{scroll-behavior:smooth}
   body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink);overflow-x:hidden}
 
-  /* NAV */
   .topnav{background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:12px 32px;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
   .topnav img{height:44px}
   .topnav-links{display:flex;gap:24px;align-items:center}
@@ -30,7 +29,6 @@
   .year-btn:hover{background:rgba(255,255,255,0.12);color:white}
   .year-btn.active{background:var(--red);color:white;border-color:var(--red)}
 
-  /* HERO */
   .hero{background:var(--navy);color:white;position:relative;overflow:hidden;padding:72px 40px 64px;text-align:center}
   .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.18) 1px,transparent 1px),radial-gradient(circle,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:38px 38px,76px 76px;background-position:0 0,19px 19px;opacity:0.45}
   .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--red) 0%,var(--gold) 50%,var(--red) 100%)}
@@ -45,7 +43,6 @@
   .hero-meta-item .label{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
   .hero-meta-item .value{font-size:1rem;font-weight:500;color:white}
 
-  /* OVERVIEW */
   .overview-section{max-width:1100px;margin:0 auto;padding:48px 24px 0}
   .overview-grid{display:grid;grid-template-columns:240px 1fr;gap:40px;align-items:start}
   @media(max-width:680px){.overview-grid{grid-template-columns:1fr}}
@@ -60,24 +57,21 @@
   .stat .stat-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--red);display:block;line-height:1}
   .stat .stat-lbl{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:4px}
 
-  /* TABS */
   .tabs-container{max-width:1100px;margin:48px auto 0;padding:0 24px 80px}
-  .tab-bar{display:flex;gap:4px;background:var(--navy);border-radius:12px 12px 0 0;padding:8px 8px 0}
-  .tab-btn{flex:1;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.05em;padding:12px 20px;border-radius:8px 8px 0 0;transition:background 0.2s,color 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .tab-bar{display:flex;gap:4px;background:var(--navy);border-radius:12px 12px 0 0;padding:8px 8px 0;flex-wrap:wrap}
+  .tab-btn{flex:1;min-width:120px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.05em;padding:12px 16px;border-radius:8px 8px 0 0;transition:background 0.2s,color 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
   .tab-btn:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8)}
   .tab-btn.active{background:var(--offwhite);color:var(--navy)}
   .tab-btn .tab-icon{font-size:1.1rem}
   .tab-panel{display:none;background:var(--offwhite);border-radius:0 0 12px 12px;border:2px solid var(--navy);border-top:none;padding:40px 32px}
   .tab-panel.active{display:block}
 
-  /* SECTION HEADERS */
   .section-header{display:flex;align-items:center;gap:14px;margin:40px 0 20px}
   .section-header:first-child{margin-top:0}
   .section-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:1;color:var(--red);opacity:0.2;min-width:48px}
   .section-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.07em;color:var(--navy);text-transform:uppercase}
   .section-header .rule{flex:1;height:2px;background:linear-gradient(90deg,var(--navy) 0%,transparent 100%);opacity:0.12}
 
-  /* DOWNLOAD CARDS */
   .downloads-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
   .dl-card{background:white;border-radius:12px;padding:18px 16px 18px 20px;box-shadow:var(--card-shadow);display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink);cursor:pointer;border-left:4px solid var(--navy);transition:transform 0.18s,box-shadow 0.18s,border-color 0.18s}
   .dl-card:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,40,104,0.16);border-color:var(--red)}
@@ -86,7 +80,6 @@
   .dl-info .dl-sub{font-size:0.73rem;color:var(--muted);margin-top:3px}
   .dl-arrow{margin-left:auto;font-size:1rem;color:var(--red);opacity:0.55}
 
-  /* SPEECHES */
   .speeches-wrap{margin-top:14px;border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow)}
   .speeches-toggle{width:100%;background:var(--navy);color:white;border:none;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.95rem;transition:background 0.2s}
   .speeches-toggle:hover{background:#003580}
@@ -102,15 +95,14 @@
   .speech-card:last-child{border-bottom:none}
   .speech-card:hover{border-color:var(--red)!important}
 
-  /* ── PHOTO SLIDESHOW ── */
+  /* SLIDESHOW */
   .slideshow-wrap{position:relative;border-radius:16px;overflow:hidden;background:#111;box-shadow:var(--card-shadow);aspect-ratio:16/9}
   .slideshow-track{display:flex;height:100%;transition:transform 0.5s ease}
   .slideshow-slide{flex-shrink:0;width:100%;height:100%}
   .slideshow-slide img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
   .ss-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);color:white;border:none;font-size:2rem;cursor:pointer;padding:10px 16px;z-index:10;transition:background 0.2s;border-radius:4px;line-height:1}
   .ss-btn:hover{background:rgba(0,0,0,0.75)}
-  .ss-prev{left:10px}
-  .ss-next{right:10px}
+  .ss-prev{left:10px}.ss-next{right:10px}
   .ss-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10}
   .ss-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.45);cursor:pointer;transition:background 0.2s,transform 0.2s;border:none}
   .ss-dot.active{background:white;transform:scale(1.25)}
@@ -126,9 +118,9 @@
   .ss-empty .ss-empty-icon{font-size:3rem;opacity:0.4}
   .ss-empty p{font-size:0.82rem;letter-spacing:0.06em}
 
-  /* ── EVENT VIDEO PLAYER ── */
+  /* EVENT VIDEO */
   .ev-player{display:flex;flex-direction:column;gap:14px}
-  .ev-featured{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;position:relative}
+  .ev-featured{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9}
   .ev-featured iframe{width:100%;height:100%;border:none;display:block}
   .ev-empty{border-radius:14px;aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:rgba(255,255,255,0.4);box-shadow:var(--card-shadow)}
   .ev-empty .ev-empty-icon{font-size:3.5rem;opacity:0.4}
@@ -147,7 +139,7 @@
   .ev-thumb-label{font-size:0.73rem;font-weight:600;color:var(--navy);padding:7px 10px 8px;background:white;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ev-thumb.active .ev-thumb-label{color:var(--red)}
 
-  /* PROMO VIDEO PLAYER */
+  /* PROMO VIDEO */
   .video-player{display:flex;flex-direction:column;gap:14px}
   .video-featured{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;position:relative;transition:aspect-ratio 0.3s}
   .video-featured iframe{width:100%;height:100%;border:none;display:block}
@@ -189,7 +181,7 @@
   .file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700;transition:background 0.18s}
   .file-modal-footer a:hover{background:var(--red)}
 
-  /* PHOTO LIGHTBOX */
+  /* LIGHTBOX */
   .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:998;display:none;align-items:center;justify-content:center;padding:24px}
   .lightbox.open{display:flex}
   .lightbox img{max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain;box-shadow:0 0 80px rgba(0,0,0,0.8)}
@@ -197,8 +189,7 @@
   .lightbox-close:hover{opacity:1}
   .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);color:white;font-size:3rem;cursor:pointer;opacity:0.55;padding:12px;user-select:none}
   .lightbox-nav:hover{opacity:1}
-  .lightbox-prev{left:12px}
-  .lightbox-next{right:12px}
+  .lightbox-prev{left:12px}.lightbox-next{right:12px}
   .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.78rem;letter-spacing:0.05em;white-space:nowrap}
 
   .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease}
@@ -211,7 +202,7 @@
   @media(max-width:600px){
     .topnav{padding:10px 16px}
     .topnav-links a:not(.btn-home){display:none}
-    .tab-btn{font-size:0.78rem;padding:10px 10px}
+    .tab-btn{font-size:0.75rem;padding:10px 8px;min-width:80px}
     .tab-panel{padding:28px 16px}
     .file-modal-inner{width:96vw;height:90vh}
   }
@@ -277,7 +268,7 @@
     <button class="tab-btn" data-tab="marketing"><span class="tab-icon">📣</span> Event Marketing</button>
   </div>
 
-  <!-- ═══ EVENT PROGRAM ═══ -->
+  <!-- EVENT PROGRAM -->
   <div class="tab-panel active" id="tab-program">
 
     <div class="section-header">
@@ -298,6 +289,7 @@
       </div>
     </div>
 
+    <!-- SPEECHES — now PDF, open in modal -->
     <div class="speeches-wrap" style="margin-top:28px">
       <button class="speeches-toggle" id="speechesToggle" aria-expanded="false">
         <span class="speeches-toggle-left">
@@ -307,22 +299,32 @@
         <span class="speeches-chevron" id="speechesChevron">▼</span>
       </button>
       <div class="speeches-body" id="speechesBody">
-        <a class="dl-card speech-card" href="Speeches/Welcome Speech - Friday Night - 1.docx" download><span class="dl-icon">🌙</span><div class="dl-info"><div class="dl-title">Welcome Speech — Friday Night (v1)</div><div class="dl-sub">DOCX · Opening Ceremony</div></div><span class="dl-arrow">↓</span></a>
-        <a class="dl-card speech-card" href="Speeches/Welcome Speech - Friday Night - 2.docx" download><span class="dl-icon">🌙</span><div class="dl-info"><div class="dl-title">Welcome Speech — Friday Night (v2)</div><div class="dl-sub">DOCX · Opening Ceremony</div></div><span class="dl-arrow">↓</span></a>
-        <a class="dl-card speech-card" href="Speeches/Saturday AM - Speech 3.docx" download><span class="dl-icon">🌄</span><div class="dl-info"><div class="dl-title">Saturday AM — Speech 3</div><div class="dl-sub">DOCX · Morning Session</div></div><span class="dl-arrow">↓</span></a>
-        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 4.docx" download><span class="dl-icon">☀️</span><div class="dl-info"><div class="dl-title">Saturday PM — Speech 4</div><div class="dl-sub">DOCX · Afternoon Session</div></div><span class="dl-arrow">↓</span></a>
-        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 5.docx" download><span class="dl-icon">☀️</span><div class="dl-info"><div class="dl-title">Saturday PM — Speech 5</div><div class="dl-sub">DOCX · Afternoon Session</div></div><span class="dl-arrow">↓</span></a>
-        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 6.docx" download><span class="dl-icon">☀️</span><div class="dl-info"><div class="dl-title">Saturday PM — Speech 6</div><div class="dl-sub">DOCX · Afternoon Session</div></div><span class="dl-arrow">↓</span></a>
+        <div class="dl-card speech-card" data-modal-src="event-speeches/Welcome Speech - Friday Night - 1.pdf" data-modal-title="Welcome Speech — Friday Night (v1)" data-modal-type="pdf" data-modal-file="Welcome Speech - Friday Night - 1.pdf">
+          <span class="dl-icon">🌙</span><div class="dl-info"><div class="dl-title">Welcome Speech — Friday Night (v1)</div><div class="dl-sub">PDF · Opening Ceremony</div></div><span class="dl-arrow">↗</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="event-speeches/Welcome Speech - Friday Night - 2.pdf" data-modal-title="Welcome Speech — Friday Night (v2)" data-modal-type="pdf" data-modal-file="Welcome Speech - Friday Night - 2.pdf">
+          <span class="dl-icon">🌙</span><div class="dl-info"><div class="dl-title">Welcome Speech — Friday Night (v2)</div><div class="dl-sub">PDF · Opening Ceremony</div></div><span class="dl-arrow">↗</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="event-speeches/Saturday AM - Speech 3.pdf" data-modal-title="Saturday AM — Speech 3" data-modal-type="pdf" data-modal-file="Saturday AM - Speech 3.pdf">
+          <span class="dl-icon">🌄</span><div class="dl-info"><div class="dl-title">Saturday AM — Speech 3</div><div class="dl-sub">PDF · Morning Session</div></div><span class="dl-arrow">↗</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="event-speeches/Saturday PM - Speech 4.pdf" data-modal-title="Saturday PM — Speech 4" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 4.pdf">
+          <span class="dl-icon">☀️</span><div class="dl-info"><div class="dl-title">Saturday PM — Speech 4</div><div class="dl-sub">PDF · Afternoon Session</div></div><span class="dl-arrow">↗</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="event-speeches/Saturday PM - Speech 5.pdf" data-modal-title="Saturday PM — Speech 5" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 5.pdf">
+          <span class="dl-icon">☀️</span><div class="dl-info"><div class="dl-title">Saturday PM — Speech 5</div><div class="dl-sub">PDF · Afternoon Session</div></div><span class="dl-arrow">↗</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="event-speeches/Saturday PM - Speech 6.pdf" data-modal-title="Saturday PM — Speech 6" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 6.pdf">
+          <span class="dl-icon">☀️</span><div class="dl-info"><div class="dl-title">Saturday PM — Speech 6</div><div class="dl-sub">PDF · Afternoon Session</div></div><span class="dl-arrow">↗</span>
+        </div>
       </div>
     </div>
 
-    <!-- DYNAMIC EVENT VIDEOS -->
     <div class="section-header" style="margin-top:48px">
       <span class="section-num">02</span><h2>Event Videos</h2><div class="rule"></div>
     </div>
     <div id="eventVideosSection"></div>
 
-    <!-- DYNAMIC PHOTO SLIDESHOW -->
     <div class="section-header" style="margin-top:48px">
       <span class="section-num">03</span><h2>Event Photos</h2><div class="rule"></div>
     </div>
@@ -330,9 +332,8 @@
 
   </div>
 
-  <!-- ═══ EVENT MARKETING ═══ -->
+  <!-- EVENT MARKETING -->
   <div class="tab-panel" id="tab-marketing">
-
     <div class="section-header">
       <span class="section-num">01</span><h2>Promo Videos</h2><div class="rule"></div>
     </div>
@@ -355,7 +356,6 @@
         </div>
       </div>
     </div>
-
     <div class="section-header" style="margin-top:48px">
       <span class="section-num">02</span><h2>Graphics &amp; Flyers</h2><div class="rule"></div>
     </div>
@@ -377,8 +377,8 @@
         <span class="dl-icon">📄</span><div class="dl-info"><div class="dl-title">Event Flyer</div><div class="dl-sub">PDF · Promotional</div></div><span class="dl-arrow">↗</span>
       </div>
     </div>
-
   </div>
+
 </div>
 
 <!-- FILE MODAL -->
@@ -393,7 +393,7 @@
   </div>
 </div>
 
-<!-- PHOTO LIGHTBOX -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <span class="lightbox-close" id="lbClose">×</span>
   <span class="lightbox-nav lightbox-prev" id="lbPrev">‹</span>
@@ -409,18 +409,12 @@
 </footer>
 
 <script>
-// ═══════════════════════════════════════════════════
-// CONFIG — change YEAR and REPO to reuse this template
-// ═══════════════════════════════════════════════════
-const REPO  = 'msb2020-ux/mobilescouts';
-const YEAR  = '2025';
+const REPO = 'msb2020-ux/mobilescouts';
+const YEAR = '2025';
 const BRANCH = 'main';
-const API   = `https://api.github.com/repos/${REPO}/contents/${YEAR}`;
-const RAW   = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${YEAR}`;
-
+const RAW = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${YEAR}`;
 const IMAGE_EXTS = ['jpg','jpeg','png','gif','webp'];
 
-// ── Fetch folder and return files (non-README) ──
 async function fetchFolder(path) {
   try {
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
@@ -430,257 +424,131 @@ async function fetchFolder(path) {
   } catch { return []; }
 }
 
-// ═══════════════════════════════════════════════════
-// DYNAMIC PHOTO SLIDESHOW
-// ═══════════════════════════════════════════════════
 async function buildPhotoSlideshow() {
   const container = document.getElementById('photoSlideshowSection');
   const files = await fetchFolder(`${YEAR}/event-photos`);
   const photos = files.filter(f => IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
-
   if (photos.length === 0) {
-    container.innerHTML = `
-      <div class="ss-empty">
-        <div class="ss-empty-icon">📷</div>
-        <p>Event photos coming soon — drop images into <code>event-photos/</code></p>
-      </div>`;
+    container.innerHTML = `<div class="ss-empty"><div class="ss-empty-icon">📷</div><p>Upload photos to <code>event-photos/</code> to display here</p></div>`;
     return;
   }
-
-  let current = 0;
-  let autoTimer;
-
+  let current = 0, autoTimer;
   const urls = photos.map(f => f.download_url);
-  const names = photos.map(f => f.name);
-
   container.innerHTML = `
-    <div class="slideshow-wrap" id="ssWrap">
-      <div class="slideshow-track" id="ssTrack">
-        ${urls.map((u,i) => `
-          <div class="slideshow-slide">
-            <img src="${u}" alt="Photo ${i+1}" loading="${i===0?'eager':'lazy'}">
-          </div>`).join('')}
-      </div>
+    <div class="slideshow-wrap">
+      <div class="slideshow-track" id="ssTrack">${urls.map((u,i) => `<div class="slideshow-slide"><img src="${u}" alt="Photo ${i+1}" loading="${i===0?'eager':'lazy'}"></div>`).join('')}</div>
       <button class="ss-btn ss-prev" id="ssPrev">&#8249;</button>
       <button class="ss-btn ss-next" id="ssNext">&#8250;</button>
-      <div class="ss-dots" id="ssDots">
-        ${urls.map((_,i) => `<button class="ss-dot${i===0?' active':''}" data-i="${i}"></button>`).join('')}
-      </div>
+      <div class="ss-dots" id="ssDots">${urls.map((_,i) => `<button class="ss-dot${i===0?' active':''}" data-i="${i}"></button>`).join('')}</div>
       <div class="ss-counter" id="ssCounter">1 / ${urls.length}</div>
     </div>
-    <div class="ss-thumbs" id="ssThumbs">
-      ${urls.map((u,i) => `
-        <div class="ss-thumb${i===0?' active':''}" data-i="${i}">
-          <img src="${u}" alt="Thumb ${i+1}" loading="lazy">
-        </div>`).join('')}
-    </div>`;
-
-  const track   = document.getElementById('ssTrack');
-  const dots    = document.getElementById('ssDots');
+    <div class="ss-thumbs" id="ssThumbs">${urls.map((u,i) => `<div class="ss-thumb${i===0?' active':''}" data-i="${i}"><img src="${u}" alt="" loading="lazy"></div>`).join('')}</div>`;
+  const track = document.getElementById('ssTrack');
   const counter = document.getElementById('ssCounter');
-  const thumbsEl= document.getElementById('ssThumbs');
-
   function goTo(i) {
     current = (i + urls.length) % urls.length;
     track.style.transform = `translateX(-${current * 100}%)`;
     counter.textContent = `${current+1} / ${urls.length}`;
     document.querySelectorAll('.ss-dot').forEach((d,j) => d.classList.toggle('active', j===current));
     document.querySelectorAll('.ss-thumb').forEach((t,j) => t.classList.toggle('active', j===current));
-    resetAuto();
+    clearInterval(autoTimer); autoTimer = setInterval(() => goTo(current+1), 4500);
   }
-
-  function resetAuto() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(() => goTo(current+1), 4500);
-  }
-
   document.getElementById('ssPrev').onclick = () => goTo(current-1);
   document.getElementById('ssNext').onclick = () => goTo(current+1);
-  dots.addEventListener('click', e => { if(e.target.dataset.i !== undefined) goTo(+e.target.dataset.i); });
-  thumbsEl.addEventListener('click', e => { const t = e.target.closest('.ss-thumb'); if(t) goTo(+t.dataset.i); });
-
-  // Click photo to open lightbox
-  track.addEventListener('click', e => {
-    if (e.target.tagName === 'IMG') openLightboxAt(current);
-  });
+  document.getElementById('ssDots').addEventListener('click', e => { if(e.target.dataset.i !== undefined) goTo(+e.target.dataset.i); });
+  document.getElementById('ssThumbs').addEventListener('click', e => { const t = e.target.closest('.ss-thumb'); if(t) goTo(+t.dataset.i); });
+  track.addEventListener('click', e => { if(e.target.tagName==='IMG') openLightboxAt(current); });
   track.style.cursor = 'zoom-in';
-
-  // Swipe support
   let touchX = null;
   track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend', e => {
-    if (touchX === null) return;
-    const diff = touchX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) goTo(diff > 0 ? current+1 : current-1);
-    touchX = null;
-  }, {passive:true});
-
-  resetAuto();
-
-  // Wire lightbox for slideshow photos
-  window._ssUrls = urls;
-  window._ssNames = names;
-  window._ssCurrent = () => current;
-  window._ssGoTo = goTo;
+  track.addEventListener('touchend', e => { if(touchX===null) return; const diff = touchX - e.changedTouches[0].clientX; if(Math.abs(diff)>40) goTo(diff>0?current+1:current-1); touchX=null; }, {passive:true});
+  autoTimer = setInterval(() => goTo(current+1), 4500);
+  window._ssUrls = urls; window._ssGoTo = goTo;
 }
 
-// ═══════════════════════════════════════════════════
-// DYNAMIC EVENT VIDEOS
-// ═══════════════════════════════════════════════════
 async function buildEventVideos() {
   const container = document.getElementById('eventVideosSection');
-
-  // Read README.md from event-videos folder for YouTube IDs
   let videoEntries = [];
   try {
     const r = await fetch(`${RAW}/event-videos/README.md`);
     if (r.ok) {
       const text = await r.text();
-      // Parse lines like: ID | Label
       const lines = text.split('\n').filter(l => !l.startsWith('#') && l.includes('|'));
-      videoEntries = lines.map(l => {
-        const [id, label] = l.split('|').map(s => s.trim());
-        return { id, label: label || 'Event Video' };
-      }).filter(e => e.id && e.id.length > 3);
+      videoEntries = lines.map(l => { const [id, label] = l.split('|').map(s => s.trim()); return {id, label: label||'Event Video'}; }).filter(e => e.id && e.id.length > 3);
     }
   } catch {}
-
   if (videoEntries.length === 0) {
-    container.innerHTML = `
-      <div class="ev-empty">
-        <div class="ev-empty-icon">▶</div>
-        <p>Add YouTube video IDs to <code>event-videos/README.md</code> to display here</p>
-      </div>`;
+    container.innerHTML = `<div class="ev-empty"><div class="ev-empty-icon">▶</div><p>Add YouTube IDs to <code>event-videos/README.md</code></p></div>`;
     return;
   }
-
-  let evCurrent = 0;
   const first = videoEntries[0];
-
   container.innerHTML = `
     <div class="ev-player">
-      <div class="ev-featured">
-        <iframe id="evIframe"
-          src="https://www.youtube.com/embed/${first.id}?rel=0&modestbranding=1"
-          title="${first.label}"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      </div>
-      ${videoEntries.length > 1 ? `
-      <div class="ev-thumbs" id="evThumbs">
-        ${videoEntries.map((v,i) => `
-          <div class="ev-thumb${i===0?' active':''}" data-id="${v.id}" data-label="${v.label}">
-            <div class="ev-thumb-img">
-              <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy">
-              <div class="ev-thumb-play">▶</div>
-            </div>
-            <div class="ev-thumb-label">${v.label}</div>
-          </div>`).join('')}
-      </div>` : ''}
+      <div class="ev-featured"><iframe id="evIframe" src="https://www.youtube.com/embed/${first.id}?rel=0&modestbranding=1" title="${first.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      ${videoEntries.length > 1 ? `<div class="ev-thumbs" id="evThumbs">${videoEntries.map((v,i) => `<div class="ev-thumb${i===0?' active':''}" data-id="${v.id}"><div class="ev-thumb-img"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy"><div class="ev-thumb-play">▶</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>` : ''}
     </div>`;
-
   if (videoEntries.length > 1) {
     document.getElementById('evThumbs').addEventListener('click', e => {
-      const thumb = e.target.closest('.ev-thumb');
-      if (!thumb) return;
+      const thumb = e.target.closest('.ev-thumb'); if(!thumb) return;
       document.querySelectorAll('.ev-thumb').forEach(t => t.classList.remove('active'));
       thumb.classList.add('active');
-      document.getElementById('evIframe').src =
-        `https://www.youtube.com/embed/${thumb.dataset.id}?rel=0&modestbranding=1&autoplay=1`;
+      document.getElementById('evIframe').src = `https://www.youtube.com/embed/${thumb.dataset.id}?rel=0&modestbranding=1&autoplay=1`;
     });
   }
 }
 
-// ═══════════════════════════════════════════════════
-// PHOTO LIGHTBOX
-// ═══════════════════════════════════════════════════
-const lightbox  = document.getElementById('lightbox');
-const lbImg     = document.getElementById('lbImg');
+// LIGHTBOX
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
 const lbCaption = document.getElementById('lbCaption');
 let lbPhotos = [], lbIdx = 0;
-
-function openLightboxAt(i) {
-  lbPhotos = window._ssUrls || [];
-  const names = window._ssNames || [];
-  lbIdx = i;
-  lbImg.src = lbPhotos[lbIdx];
-  lbCaption.textContent = `${lbIdx+1} / ${lbPhotos.length}`;
-  lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
-function lbNav(dir) {
-  lbIdx = (lbIdx + dir + lbPhotos.length) % lbPhotos.length;
-  lbImg.src = lbPhotos[lbIdx];
-  lbCaption.textContent = `${lbIdx+1} / ${lbPhotos.length}`;
-  if (window._ssGoTo) window._ssGoTo(lbIdx);
-}
+function openLightboxAt(i) { lbPhotos = window._ssUrls||[]; lbIdx=i; lbImg.src=lbPhotos[lbIdx]; lbCaption.textContent=`${lbIdx+1} / ${lbPhotos.length}`; lightbox.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow=''; }
+function lbNav(dir) { lbIdx=(lbIdx+dir+lbPhotos.length)%lbPhotos.length; lbImg.src=lbPhotos[lbIdx]; lbCaption.textContent=`${lbIdx+1} / ${lbPhotos.length}`; if(window._ssGoTo) window._ssGoTo(lbIdx); }
 document.getElementById('lbClose').onclick = closeLightbox;
 lightbox.addEventListener('click', e => { if(e.target===lightbox) closeLightbox(); });
 document.getElementById('lbPrev').onclick = () => lbNav(-1);
 document.getElementById('lbNext').onclick = () => lbNav(1);
 
-// ═══════════════════════════════════════════════════
 // FILE MODAL
-// ═══════════════════════════════════════════════════
-const fileModal         = document.getElementById('fileModal');
-const fileModalTitle    = document.getElementById('fileModalTitle');
-const fileModalBody     = document.getElementById('fileModalBody');
+const fileModal = document.getElementById('fileModal');
+const fileModalTitle = document.getElementById('fileModalTitle');
+const fileModalBody = document.getElementById('fileModalBody');
 const fileModalDownload = document.getElementById('fileModalDownload');
-const fileModalClose    = document.getElementById('fileModalClose');
-
+const fileModalClose = document.getElementById('fileModalClose');
 function openFileModal(src, title, type, file) {
   fileModalTitle.textContent = title;
-  fileModalDownload.href = src;
-  fileModalDownload.download = file;
+  fileModalDownload.href = src; fileModalDownload.download = file;
   fileModalBody.innerHTML = '';
-  if (type === 'pdf') {
-    const iframe = document.createElement('iframe');
-    iframe.src = src;
-    fileModalBody.appendChild(iframe);
-  } else {
-    const img = document.createElement('img');
-    img.src = src; img.alt = title;
-    fileModalBody.appendChild(img);
-  }
-  fileModal.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  if (type === 'pdf') { const f = document.createElement('iframe'); f.src = src; fileModalBody.appendChild(f); }
+  else { const img = document.createElement('img'); img.src = src; img.alt = title; fileModalBody.appendChild(img); }
+  fileModal.classList.add('open'); document.body.style.overflow = 'hidden';
 }
-function closeFileModal() {
-  fileModal.classList.remove('open');
-  fileModalBody.innerHTML = '';
-  document.body.style.overflow = '';
-}
+function closeFileModal() { fileModal.classList.remove('open'); fileModalBody.innerHTML = ''; document.body.style.overflow = ''; }
 fileModalClose.onclick = closeFileModal;
 fileModal.addEventListener('click', e => { if(e.target===fileModal) closeFileModal(); });
 document.querySelectorAll('[data-modal-src]').forEach(el => {
   el.addEventListener('click', () => openFileModal(el.dataset.modalSrc, el.dataset.modalTitle, el.dataset.modalType, el.dataset.modalFile));
 });
 
-// ═══════════════════════════════════════════════════
-// PROMO VIDEO SWITCHER
-// ═══════════════════════════════════════════════════
-const thumbs         = document.querySelectorAll('.vthumb');
-const featuredFrame  = document.getElementById('featuredFrame');
+// PROMO VIDEOS
+const thumbs = document.querySelectorAll('.vthumb');
+const featuredFrame = document.getElementById('featuredFrame');
 const featuredIframe = document.getElementById('featuredIframe');
 thumbs.forEach(thumb => {
   thumb.addEventListener('click', () => {
-    thumbs.forEach(t => t.classList.remove('active'));
-    thumb.classList.add('active');
+    thumbs.forEach(t => t.classList.remove('active')); thumb.classList.add('active');
     const isShort = thumb.dataset.short === 'true';
     featuredFrame.style.aspectRatio = isShort ? '9/16' : '16/9';
-    featuredFrame.style.maxWidth    = isShort ? '360px' : '';
-    featuredFrame.style.margin      = isShort ? '0 auto' : '';
+    featuredFrame.style.maxWidth = isShort ? '360px' : '';
+    featuredFrame.style.margin = isShort ? '0 auto' : '';
     featuredIframe.src = `https://www.youtube.com/embed/${thumb.dataset.id}?rel=0&modestbranding=1&autoplay=1`;
   });
 });
 
-// ═══════════════════════════════════════════════════
-// SPEECHES TOGGLE
-// ═══════════════════════════════════════════════════
-const speechesToggle  = document.getElementById('speechesToggle');
-const speechesBody    = document.getElementById('speechesBody');
+// SPEECHES
+const speechesToggle = document.getElementById('speechesToggle');
+const speechesBody = document.getElementById('speechesBody');
 const speechesChevron = document.getElementById('speechesChevron');
 speechesToggle.addEventListener('click', () => {
   const isOpen = speechesBody.classList.toggle('open');
@@ -688,9 +556,7 @@ speechesToggle.addEventListener('click', () => {
   speechesToggle.setAttribute('aria-expanded', isOpen);
 });
 
-// ═══════════════════════════════════════════════════
 // TABS
-// ═══════════════════════════════════════════════════
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -700,29 +566,18 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
-// ═══════════════════════════════════════════════════
 // KEYBOARD
-// ═══════════════════════════════════════════════════
 document.addEventListener('keydown', e => {
-  if (lightbox.classList.contains('open')) {
-    if (e.key==='Escape') closeLightbox();
-    if (e.key==='ArrowLeft') lbNav(-1);
-    if (e.key==='ArrowRight') lbNav(1);
-  }
+  if (lightbox.classList.contains('open')) { if(e.key==='Escape') closeLightbox(); if(e.key==='ArrowLeft') lbNav(-1); if(e.key==='ArrowRight') lbNav(1); }
   if (fileModal.classList.contains('open') && e.key==='Escape') closeFileModal();
 });
 
-// ═══════════════════════════════════════════════════
 // FADE IN
-// ═══════════════════════════════════════════════════
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*80); obs.unobserve(e.target); }});
 }, {threshold:0.08});
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
-// ═══════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════
 buildPhotoSlideshow();
 buildEventVideos();
 </script>
