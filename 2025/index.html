@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avengers Quest 2025 | Mobile Area Scouts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002868;
+    --red:         #bf0a30;
+    --gold:        #f5c518;
+    --offwhite:    #f8f6f1;
+    --ink:         #1a1a2e;
+    --muted:       #6b6b7b;
+    --card-shadow: 0 6px 28px rgba(0,40,104,0.11);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--offwhite); color: var(--ink); overflow-x: hidden; }
+
+  .topnav {
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px; position: sticky; top: 0; z-index: 200;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .topnav img { height: 44px; }
+  .topnav-links { display: flex; gap: 24px; align-items: center; }
+  .topnav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
+  .topnav-links a:hover { color: var(--gold); }
+  .topnav-links .btn-home { background: var(--red); color: white; padding: 7px 16px; border-radius: 4px; font-weight: 700; }
+  .topnav-links .btn-home:hover { background: #a00828; color: white; }
+
+  .year-nav {
+    background: var(--navy); border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 13px 32px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+  }
+  .year-nav > span { color: rgba(255,255,255,0.4); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; margin-right: 8px; }
+  .year-btn { padding: 5px 14px; border-radius: 20px; text-decoration: none; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; transition: background 0.18s, color 0.18s; color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.15); }
+  .year-btn:hover { background: rgba(255,255,255,0.12); color: white; }
+  .year-btn.active { background: var(--red); color: white; border-color: var(--red); }
+
+  .hero {
+    background: var(--navy); color: white;
+    position: relative; overflow: hidden; padding: 72px 40px 64px; text-align: center;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 38px 38px, 76px 76px; background-position: 0 0, 19px 19px; opacity: 0.45;
+  }
+  .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
+  .hero-year-bg {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(6rem, 20vw, 14rem); line-height: 0.85;
+    color: rgba(255,255,255,0.055); position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); letter-spacing: 0.02em; user-select: none; white-space: nowrap;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 9vw, 6rem); letter-spacing: 0.05em; line-height: 1; margin-bottom: 8px; }
+  .hero-year-label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: 0.2em; color: var(--gold); margin-bottom: 6px; }
+  .hero-subtheme { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 30px; }
+  .hero-meta { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .hero-meta-item .label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .hero-meta-item .value { font-size: 1rem; font-weight: 500; color: white; }
+
+  .overview-section { max-width: 1100px; margin: 0 auto; padding: 48px 24px 0; }
+  .overview-grid { display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 680px) { .overview-grid { grid-template-columns: 1fr; } }
+  .patch-card { background: white; border-radius: 16px; padding: 28px 20px; box-shadow: var(--card-shadow); text-align: center; }
+  .patch-card img { width: 100%; max-width: 180px; border-radius: 8px; margin-bottom: 14px; }
+  .patch-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); font-weight: 600; }
+  .patch-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--navy); margin-top: 4px; letter-spacing: 0.05em; }
+  .overview-text p { font-family: 'Crimson Pro', serif; font-size: 1.15rem; line-height: 1.78; color: #333; margin-bottom: 20px; }
+  .stats-strip { display: flex; border: 2px solid var(--navy); border-radius: 10px; overflow: hidden; }
+  .stat { flex: 1; padding: 16px 10px; text-align: center; border-right: 1px solid rgba(0,40,104,0.14); background: white; }
+  .stat:last-child { border-right: none; }
+  .stat .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--red); display: block; line-height: 1; }
+  .stat .stat-lbl { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-top: 4px; }
+
+  .tabs-container { max-width: 1100px; margin: 48px auto 0; padding: 0 24px 80px; }
+  .tab-bar { display: flex; gap: 4px; background: var(--navy); border-radius: 12px 12px 0 0; padding: 8px 8px 0; }
+  .tab-btn {
+    flex: 1; border: none; background: transparent; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 700;
+    color: rgba(255,255,255,0.5); letter-spacing: 0.05em;
+    padding: 12px 20px; border-radius: 8px 8px 0 0;
+    transition: background 0.2s, color 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .tab-btn:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); }
+  .tab-btn.active { background: var(--offwhite); color: var(--navy); }
+  .tab-btn .tab-icon { font-size: 1.1rem; }
+  .tab-panel { display: none; background: var(--offwhite); border-radius: 0 0 12px 12px; border: 2px solid var(--navy); border-top: none; padding: 40px 32px; }
+  .tab-panel.active { display: block; }
+
+  .section-header { display: flex; align-items: center; gap: 14px; margin: 40px 0 20px; }
+  .section-header:first-child { margin-top: 0; }
+  .section-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; color: var(--red); opacity: 0.2; min-width: 48px; }
+  .section-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 0.07em; color: var(--navy); text-transform: uppercase; }
+  .section-header .rule { flex: 1; height: 2px; background: linear-gradient(90deg, var(--navy) 0%, transparent 100%); opacity: 0.12; }
+
+  .downloads-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .dl-card {
+    background: white; border-radius: 12px; padding: 18px 16px 18px 20px;
+    box-shadow: var(--card-shadow); display: flex; align-items: center; gap: 14px;
+    text-decoration: none; color: var(--ink);
+    border-left: 4px solid var(--navy);
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  }
+  .dl-card:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,40,104,0.16); border-color: var(--red); }
+  .dl-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .dl-info .dl-title { font-weight: 700; font-size: 0.92rem; color: var(--navy); }
+  .dl-info .dl-sub { font-size: 0.73rem; color: var(--muted); margin-top: 3px; }
+  .dl-arrow { margin-left: auto; font-size: 1rem; color: var(--red); opacity: 0.55; }
+
+  .speeches-wrap { margin-top: 14px; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); }
+  .speeches-toggle {
+    width: 100%; background: var(--navy); color: white; border: none;
+    padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; transition: background 0.2s;
+  }
+  .speeches-toggle:hover { background: #003580; }
+  .speeches-toggle-left { display: flex; align-items: center; gap: 12px; text-align: left; }
+  .speeches-icon { font-size: 1.3rem; }
+  .speeches-toggle strong { display: block; font-size: 0.92rem; }
+  .speeches-sub { font-size: 0.73rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .speeches-chevron { font-size: 0.85rem; transition: transform 0.3s ease; opacity: 0.7; }
+  .speeches-chevron.open { transform: rotate(180deg); }
+  .speeches-body { background: var(--offwhite); max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .speeches-body.open { max-height: 900px; }
+  .speech-card { border-radius: 0 !important; border-left: 4px solid #3a5fa0 !important; box-shadow: none !important; border-bottom: 1px solid rgba(0,40,104,0.08); }
+  .speech-card:last-child { border-bottom: none; }
+  .speech-card:hover { border-color: var(--red) !important; }
+
+  .video-player { display: flex; flex-direction: column; gap: 14px; }
+  .video-featured { border-radius: 14px; overflow: hidden; box-shadow: var(--card-shadow); background: #000; aspect-ratio: 16/9; position: relative; transition: aspect-ratio 0.3s; }
+  .video-featured iframe { width: 100%; height: 100%; border: none; display: block; }
+  .video-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--navy), #00408a); color: rgba(255,255,255,0.4); gap: 12px; }
+  .video-placeholder .play-icon { font-size: 3.5rem; opacity: 0.4; }
+  .video-placeholder p { font-size: 0.82rem; letter-spacing: 0.06em; }
+  .video-thumbs { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; }
+  .video-thumbs::-webkit-scrollbar { height: 4px; }
+  .video-thumbs::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 2px; }
+  .vthumb { flex-shrink: 0; cursor: pointer; border-radius: 10px; overflow: hidden; border: 3px solid transparent; transition: border-color 0.2s, transform 0.2s; background: white; box-shadow: 0 3px 12px rgba(0,40,104,0.1); width: 175px; }
+  .vthumb:hover { transform: translateY(-2px); border-color: var(--navy); }
+  .vthumb.active { border-color: var(--red); }
+  .vthumb-img { position: relative; aspect-ratio: 16/9; overflow: hidden; background: #111; }
+  .vthumb-img--short { aspect-ratio: 9/16; max-height: 115px; }
+  .vthumb-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+  .vthumb:hover .vthumb-img img { transform: scale(1.05); }
+  .vthumb-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.35); color: white; font-size: 1.3rem; opacity: 0; transition: opacity 0.2s; }
+  .vthumb:hover .vthumb-play, .vthumb.active .vthumb-play { opacity: 1; }
+  .short-badge { position: absolute; top: 5px; right: 5px; background: var(--red); color: white; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; padding: 2px 5px; border-radius: 3px; }
+  .vthumb-label { font-size: 0.73rem; font-weight: 600; color: var(--navy); padding: 7px 10px 8px; background: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .vthumb.active .vthumb-label { color: var(--red); }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .gallery-item { border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; background: #ddd; position: relative; cursor: pointer; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; display: block; }
+  .gallery-item:hover img { transform: scale(1.07); }
+  .gallery-overlay { position: absolute; inset: 0; background: rgba(0,40,104,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s; font-size: 1.6rem; }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .graphics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .graphic-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); transition: transform 0.2s, box-shadow 0.2s; }
+  .graphic-card:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,40,104,0.16); }
+  .graphic-card img { width: 100%; display: block; object-fit: cover; max-height: 220px; }
+  .graphic-card-label { padding: 10px 14px; font-size: 0.78rem; font-weight: 600; color: var(--navy); }
+
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 999; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 8px; object-fit: contain; box-shadow: 0 0 80px rgba(0,0,0,0.8); }
+  .lightbox-close { position: absolute; top: 18px; right: 26px; color: white; font-size: 2.5rem; cursor: pointer; opacity: 0.6; line-height: 1; }
+  .lightbox-close:hover { opacity: 1; }
+  .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 3rem; cursor: pointer; opacity: 0.55; padding: 12px; user-select: none; }
+  .lightbox-nav:hover { opacity: 1; }
+  .lightbox-prev { left: 12px; }
+  .lightbox-next { right: 12px; }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  footer { background: var(--ink); color: rgba(255,255,255,0.45); text-align: center; padding: 28px 20px; font-size: 0.78rem; letter-spacing: 0.05em; }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .topnav { padding: 10px 16px; }
+    .topnav-links a:not(.btn-home) { display: none; }
+    .tab-btn { font-size: 0.78rem; padding: 10px 10px; }
+    .tab-panel { padding: 28px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <img src="../Graphics/Scouting-America-MOBILE_COUNCIL_MAIN-LOGO-HEADER-NAV-edit.svg" alt="Mobile Area Scouts">
+  <div class="topnav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#carousel">All Years</a>
+    <a class="btn-home" href="../index.html#2026">2026 Event →</a>
+  </div>
+</nav>
+
+<div class="year-nav">
+  <span>Archive</span>
+  <a class="year-btn" href="../2022/">2022</a>
+  <a class="year-btn" href="../2023/">2023</a>
+  <a class="year-btn" href="../2024/">2024</a>
+  <a class="year-btn active" href="../2025/">2025</a>
+</div>
+
+<section class="hero">
+  <div class="hero-year-bg">2025</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mobile Area Council · Camporee Archive</div>
+    <h1>Avengers Quest</h1>
+    <div class="hero-year-label">2025</div>
+    <div class="hero-subtheme">Five Rivers Fall Camporee</div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="label">Dates</span>
+        <span class="value">October 24–26, 2025</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Location</span>
+        <span class="value">Camp Maubila, Grove Hill, AL</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Edition</span>
+        <span class="value">Annual Camporee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="overview-section">
+  <div class="overview-grid fade-in">
+    <div class="patch-card">
+      <img src="2025-patch.png" alt="2025 Camporee Patch" onerror="this.style.opacity='0.15'">
+      <div class="patch-label">Official Patch</div>
+      <div class="patch-name">Avengers Quest 2025</div>
+    </div>
+    <div class="overview-text">
+      <p>The 2025 Mobile Area Camporee — Avengers Quest — brought Scouts from across the council together at Camp Maubila for a weekend of adventure, teamwork, and scouting excellence. Replace this with a real description of the event.</p>
+      <p>Add a second paragraph here about competitions, notable achievements, or any highlights from the weekend. This is the permanent record for future Scouts to look back on!</p>
+      <div class="stats-strip">
+        <div class="stat"><span class="stat-val">—</span><span class="stat-lbl">Scouts</span></div>
+        <div class="stat"><span class="stat-val">—</span><span class="stat-lbl">Units</span></div>
+        <div class="stat"><span class="stat-val">—</span><span class="stat-lbl">Events</span></div>
+        <div class="stat"><span class="stat-val">3</span><span class="stat-lbl">Days</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-container">
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="program"><span class="tab-icon">📋</span> Event Program</button>
+    <button class="tab-btn" data-tab="marketing"><span class="tab-icon">📣</span> Marketing</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-program">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Event Documents</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="downloads-grid">
+      <a class="dl-card" href="2025 - Five Rivers Fall Camporee - FINAL.pdf" target="_blank">
+        <span class="dl-icon">📋</span>
+        <div class="dl-info"><div class="dl-title">Leader's Guide</div><div class="dl-sub">PDF · 2025 Final Edition</div></div>
+        <span class="dl-arrow">↓</span>
+      </a>
+      <a class="dl-card" href="Map-PSD.jpg" target="_blank">
+        <span class="dl-icon">🗺️</span>
+        <div class="dl-info"><div class="dl-title">Event Map</div><div class="dl-sub">JPG · Camp Layout</div></div>
+        <span class="dl-arrow">↓</span>
+      </a>
+      <a class="dl-card" href="SPL 2025.pdf" target="_blank">
+        <span class="dl-icon">⭐</span>
+        <div class="dl-info"><div class="dl-title">SPL Guide</div><div class="dl-sub">PDF · Senior Patrol Leader</div></div>
+        <span class="dl-arrow">↓</span>
+      </a>
+      <a class="dl-card" href="Scoring Rubrik.pdf" target="_blank">
+        <span class="dl-icon">📊</span>
+        <div class="dl-info"><div class="dl-title">Scoring Rubric</div><div class="dl-sub">PDF · Event Judging</div></div>
+        <span class="dl-arrow">↓</span>
+      </a>
+    </div>
+
+    <div class="speeches-wrap" style="margin-top:28px;">
+      <button class="speeches-toggle" id="speechesToggle" aria-expanded="false">
+        <span class="speeches-toggle-left">
+          <span class="speeches-icon">🎤</span>
+          <span>
+            <strong>Event Speeches</strong>
+            <span class="speeches-sub">6 documents · Friday &amp; Saturday ceremonies</span>
+          </span>
+        </span>
+        <span class="speeches-chevron" id="speechesChevron">▼</span>
+      </button>
+      <div class="speeches-body" id="speechesBody">
+        <a class="dl-card speech-card" href="Speeches/Welcome Speech - Friday Night - 1.docx" target="_blank">
+          <span class="dl-icon">🌙</span>
+          <div class="dl-info"><div class="dl-title">Welcome Speech — Friday Night (v1)</div><div class="dl-sub">DOCX · Opening Ceremony</div></div>
+          <span class="dl-arrow">↓</span>
+        </a>
+        <a class="dl-card speech-card" href="Speeches/Welcome Speech - Friday Night - 2.docx" target="_blank">
+          <span class="dl-icon">🌙</span>
+          <div class="dl-info"><div class="dl-title">Welcome Speech — Friday Night (v2)</div><div class="dl-sub">DOCX · Opening Ceremony</div></div>
+          <span class="dl-arrow">↓</span>
+        </a>
+        <a class="dl-card speech-card" href="Speeches/Saturday AM - Speech 3.docx" target="_blank">
+          <span class="dl-icon">🌄</span>
+          <div class="dl-info"><div class="dl-title">Saturday AM — Speech 3</div><div class="dl-sub">DOCX · Morning Session</div></div>
+          <span class="dl-arrow">↓</span>
+        </a>
+        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 4.docx" target="_blank">
+          <span class="dl-icon">☀️</span>
+          <div class="dl-info"><div class="dl-title">Saturday PM — Speech 4</div><div class="dl-sub">DOCX · Afternoon Session</div></div>
+          <span class="dl-arrow">↓</span>
+        </a>
+        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 5.docx" target="_blank">
+          <span class="dl-icon">☀️</span>
+          <div class="dl-info"><div class="dl-title">Saturday PM — Speech 5</div><div class="dl-sub">DOCX · Afternoon Session</div></div>
+          <span class="dl-arrow">↓</span>
+        </a>
+        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 6.docx" target="_blank">
+          <span class="dl-icon">☀️</span>
+          <div class="dl-info"><div class="dl-title">Saturday PM — Speech 6</div><div class="dl-sub">DOCX · Afternoon Session</div></div>
+          <span class="dl-arrow">↓</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:48px;">
+      <span class="section-num">02</span>
+      <h2>Event Videos</h2>
+      <div class="rule"></div>
+    </div>
+    <div style="border-radius:14px; aspect-ratio:16/9; position:relative; background:linear-gradient(135deg,var(--navy),#00408a); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:rgba(255,255,255,0.4); box-shadow:var(--card-shadow);">
+      <div style="font-size:3.5rem; opacity:0.4;">▶</div>
+      <p style="font-size:0.82rem; letter-spacing:0.06em;">Event videos coming soon</p>
+    </div>
+
+    <div class="section-header" style="margin-top:48px;">
+      <span class="section-num">03</span>
+      <h2>Event Photos</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="gallery-grid" id="gallery">
+      <div class="gallery-item"><img src="_bee6e4d6-8f01-4d87-8445-62cea44c754e.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-02.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-03.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-04.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-05.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-06.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-07.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-08.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-09.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-10.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-11.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+      <div class="gallery-item"><img src="photo-12.jpg" alt="Camporee 2025" onerror="this.closest('.gallery-item').style.display='none'"><div class="gallery-overlay">🔍</div></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-marketing">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Promo Videos</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="video-player">
+      <div class="video-featured" id="featuredFrame">
+        <iframe id="featuredIframe"
+          src="https://www.youtube.com/embed/rfPglFOq-a0?rel=0&modestbranding=1"
+          title="Mobile Area Camporee 2025 — Promo Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-thumbs">
+        <div class="vthumb active" data-id="rfPglFOq-a0" data-short="false">
+          <div class="vthumb-img"><img src="https://img.youtube.com/vi/rfPglFOq-a0/mqdefault.jpg" alt="Promo Video"><div class="vthumb-play">▶</div></div>
+          <div class="vthumb-label">Promo Video</div>
+        </div>
+        <div class="vthumb" data-id="tED-gZDS5vk" data-short="false">
+          <div class="vthumb-img"><img src="https://img.youtube.com/vi/tED-gZDS5vk/mqdefault.jpg" alt="Recap Video"><div class="vthumb-play">▶</div></div>
+          <div class="vthumb-label">Recap Video</div>
+        </div>
+        <div class="vthumb" data-id="EkirhLIQpws" data-short="true">
+          <div class="vthumb-img vthumb-img--short"><img src="https://img.youtube.com/vi/EkirhLIQpws/mqdefault.jpg" alt="Highlights Short"><div class="vthumb-play">▶</div><span class="short-badge">SHORT</span></div>
+          <div class="vthumb-label">Highlights Short</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:48px;">
+      <span class="section-num">02</span>
+      <h2>Graphics &amp; Flyers</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="graphics-grid">
+      <div class="graphic-card"><img src="Forging.png" alt="Forging graphic" onerror="this.closest('.graphic-card').style.display='none'"><div class="graphic-card-label">Forging Graphic</div></div>
+      <div class="graphic-card"><img src="A 17-year-old Boy Sc.png" alt="Scout promo image" onerror="this.closest('.graphic-card').style.display='none'"><div class="graphic-card-label">Scout Promo Image</div></div>
+    </div>
+    <div class="downloads-grid" style="margin-top:14px;">
+      <a class="dl-card" href="2025-Flyer.pdf" target="_blank">
+        <span class="dl-icon">📄</span>
+        <div class="dl-info"><div class="dl-title">Camporee Flyer</div><div class="dl-sub">PDF · Promotional</div></div>
+        <span class="dl-arrow">↓</span>
+      </a>
+      <a class="dl-card" href="FLYER.pdf" target="_blank">
+        <span class="dl-icon">📄</span>
+        <div class="dl-info"><div class="dl-title">Event Flyer</div><div class="dl-sub">PDF · Promotional</div></div>
+        <span class="dl-arrow">↓</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lbClose">×</span>
+  <span class="lightbox-nav lightbox-prev" id="lbPrev">‹</span>
+  <img id="lbImg" src="" alt="">
+  <span class="lightbox-nav lightbox-next" id="lbNext">›</span>
+</div>
+
+<footer>
+  <p>Mobile Area Scouting &nbsp;·&nbsp; Camporee Archive &nbsp;·&nbsp;
+    <a href="../index.html">Return to Main Site</a>
+  </p>
+</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  const speechesToggle  = document.getElementById('speechesToggle');
+  const speechesBody    = document.getElementById('speechesBody');
+  const speechesChevron = document.getElementById('speechesChevron');
+  speechesToggle.addEventListener('click', () => {
+    const isOpen = speechesBody.classList.toggle('open');
+    speechesChevron.classList.toggle('open', isOpen);
+    speechesToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  const thumbs         = document.querySelectorAll('.vthumb');
+  const featuredFrame  = document.getElementById('featuredFrame');
+  const featuredIframe = document.getElementById('featuredIframe');
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      const isShort = thumb.dataset.short === 'true';
+      featuredFrame.style.aspectRatio = isShort ? '9/16' : '16/9';
+      featuredFrame.style.maxWidth    = isShort ? '360px' : '';
+      featuredFrame.style.margin      = isShort ? '0 auto' : '';
+      featuredIframe.src = `https://www.youtube.com/embed/${thumb.dataset.id}?rel=0&modestbranding=1&autoplay=1`;
+    });
+  });
+
+  const gallery  = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lbImg');
+  let items = [], idx = 0;
+  function getItems() { return [...gallery.querySelectorAll('.gallery-item:not([style*="display: none"]):not([style*="display:none"])')]; }
+  gallery.addEventListener('click', e => {
+    const item = e.target.closest('.gallery-item');
+    if (!item) return;
+    items = getItems(); idx = items.indexOf(item); show(idx);
+  });
+  function show(i) { lbImg.src = items[i].querySelector('img').src; lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function close() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('lbClose').onclick = close;
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+  document.getElementById('lbPrev').onclick = () => { idx = (idx - 1 + items.length) % items.length; show(idx); };
+  document.getElementById('lbNext').onclick = () => { idx = (idx + 1) % items.length; show(idx); };
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft')  { idx = (idx - 1 + items.length) % items.length; show(idx); }
+    if (e.key === 'ArrowRight') { idx = (idx + 1) % items.length; show(idx); }
+  });
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
