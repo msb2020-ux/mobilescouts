@@ -44,7 +44,13 @@ body { font-family: 'DM Sans', Arial, sans-serif; background:#ffffff; color:#1a1
   font-size:2rem;
   letter-spacing:0.08em;
   color:var(--navy);
-  margin-bottom:32px;
+  margin-bottom:8px;
+}
+.past-events-sub {
+  text-align:center;
+  font-size:0.85rem;
+  color:#666;
+  margin-bottom:28px;
 }
 
 .cards-track {
@@ -60,7 +66,7 @@ body { font-family: 'DM Sans', Arial, sans-serif; background:#ffffff; color:#1a1
 
 .event-card {
   flex-shrink:0;
-  width:220px;
+  width:210px;
   background:white;
   border-radius:14px;
   box-shadow:0 4px 18px rgba(0,40,104,0.12);
@@ -72,12 +78,26 @@ body { font-family: 'DM Sans', Arial, sans-serif; background:#ffffff; color:#1a1
 }
 .event-card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(0,40,104,0.18); }
 
-.event-card-img {
+.event-card-img-wrap {
   width:100%;
   aspect-ratio:1/1;
-  object-fit:cover;
   background:#e8e8e8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.event-card-img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
   display:block;
+}
+.event-card-img-placeholder {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:4rem;
+  color:#ccc;
+  letter-spacing:0.05em;
 }
 
 .event-card-body {
@@ -85,6 +105,7 @@ body { font-family: 'DM Sans', Arial, sans-serif; background:#ffffff; color:#1a1
   display:flex;
   flex-direction:column;
   flex:1;
+  border-top:3px solid var(--navy);
 }
 .event-card-year {
   font-family:'Bebas Neue', sans-serif;
@@ -95,7 +116,7 @@ body { font-family: 'DM Sans', Arial, sans-serif; background:#ffffff; color:#1a1
 }
 .event-card-title {
   font-weight:700;
-  font-size:0.95rem;
+  font-size:0.92rem;
   color:var(--navy);
   line-height:1.3;
   margin-bottom:12px;
@@ -107,7 +128,7 @@ body { font-family: 'DM Sans', Arial, sans-serif; background:#ffffff; color:#1a1
   background:var(--navy);
   color:white;
   text-decoration:none;
-  font-size:0.78rem;
+  font-size:0.75rem;
   font-weight:700;
   letter-spacing:0.06em;
   padding:8px 14px;
@@ -115,10 +136,8 @@ body { font-family: 'DM Sans', Arial, sans-serif; background:#ffffff; color:#1a1
   transition:background 0.18s;
 }
 .event-card-btn:hover { background:var(--red); }
-
-/* placeholder card for years without a page yet */
 .event-card-btn.disabled {
-  background:#ccc;
+  background:#bbb;
   pointer-events:none;
   cursor:default;
 }
@@ -164,11 +183,14 @@ footer a { color:var(--gold); text-decoration:none; font-weight:bold; }
 <!-- PAST EVENTS -->
 <section class="past-events" id="carousel">
   <h2>Past Camporees</h2>
+  <p class="past-events-sub">Five Rivers District · Camp Maubila, Grove Hill, AL</p>
   <div class="cards-track" id="cardsTrack">
 
     <!-- 2025 -->
     <div class="event-card">
-      <img class="event-card-img" src="2025/2025-patch.png" alt="2025 Camporee Patch">
+      <div class="event-card-img-wrap">
+        <img class="event-card-img" src="2025/2025-patch.png" alt="2025 Avengers Quest Patch">
+      </div>
       <div class="event-card-body">
         <div class="event-card-year">2025</div>
         <div class="event-card-title">Avengers Quest</div>
@@ -176,33 +198,57 @@ footer a { color:var(--gold); text-decoration:none; font-weight:bold; }
       </div>
     </div>
 
-    <!-- 2024 — page coming soon, use best photo available -->
+    <!-- 2024 -->
     <div class="event-card">
-      <img class="event-card-img" src="2024/20240928_160323194_iOS.jpg" alt="2024 Camporee">
+      <div class="event-card-img-wrap">
+        <img class="event-card-img" src="2024/event-patch/20240927_005637275_iOS.jpg" alt="2024 Galactic Heist Patch">
+      </div>
       <div class="event-card-body">
         <div class="event-card-year">2024</div>
-        <div class="event-card-title">Coming Soon</div>
-        <a class="event-card-btn disabled" href="#">View Details →</a>
+        <div class="event-card-title">Galactic Heist</div>
+        <a class="event-card-btn disabled" href="#">Coming Soon</a>
       </div>
     </div>
 
     <!-- 2023 -->
     <div class="event-card">
-      <img class="event-card-img" src="2023/IMG_1168.JPG" alt="2023 Camporee">
+      <div class="event-card-img-wrap">
+        <img class="event-card-img" src="2023/event-patch/patch.jpg" alt="2023 Code Breaker Patch"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="event-card-img-placeholder" style="display:none">23</span>
+      </div>
       <div class="event-card-body">
         <div class="event-card-year">2023</div>
-        <div class="event-card-title">Coming Soon</div>
-        <a class="event-card-btn disabled" href="#">View Details →</a>
+        <div class="event-card-title">Code Breaker: Impossible Mission</div>
+        <a class="event-card-btn disabled" href="#">Coming Soon</a>
       </div>
     </div>
 
     <!-- 2022 -->
     <div class="event-card">
-      <img class="event-card-img" src="2025/2025-patch.png" alt="2022 Camporee" style="opacity:0.3">
+      <div class="event-card-img-wrap">
+        <img class="event-card-img" src="2022/event-patch/patch.jpg" alt="2022 Zombie Survival Patch"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="event-card-img-placeholder" style="display:none">22</span>
+      </div>
       <div class="event-card-body">
         <div class="event-card-year">2022</div>
-        <div class="event-card-title">Coming Soon</div>
-        <a class="event-card-btn disabled" href="#">View Details →</a>
+        <div class="event-card-title">Zombie Survival</div>
+        <a class="event-card-btn disabled" href="#">Coming Soon</a>
+      </div>
+    </div>
+
+    <!-- 2021 -->
+    <div class="event-card">
+      <div class="event-card-img-wrap">
+        <img class="event-card-img" src="2021/event-patch/patch.jpg" alt="2021 Highland Games Patch"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="event-card-img-placeholder" style="display:none">21</span>
+      </div>
+      <div class="event-card-body">
+        <div class="event-card-year">2021</div>
+        <div class="event-card-title">Highland Games</div>
+        <a class="event-card-btn disabled" href="#">Coming Soon</a>
       </div>
     </div>
 
@@ -241,12 +287,14 @@ setInterval(() => {
   timer.innerHTML = "⏳ " + days + " days, " + hours + " hours until Camporee!";
 }, 1000);
 
-// AUTO SCROLL CAROUSEL
+// AUTO SCROLL — loops back to start
 const track = document.getElementById("cardsTrack");
 setInterval(() => {
-  track.scrollBy({ left: 240, behavior: 'smooth' });
-  if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
-    setTimeout(() => track.scrollTo({ left: 0, behavior: 'smooth' }), 800);
+  const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 10;
+  if (atEnd) {
+    track.scrollTo({ left: 0, behavior: 'smooth' });
+  } else {
+    track.scrollBy({ left: 210, behavior: 'smooth' });
   }
 }, 3500);
 </script>
