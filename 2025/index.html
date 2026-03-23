@@ -108,7 +108,7 @@
   .dl-card {
     background: white; border-radius: 12px; padding: 18px 16px 18px 20px;
     box-shadow: var(--card-shadow); display: flex; align-items: center; gap: 14px;
-    text-decoration: none; color: var(--ink);
+    text-decoration: none; color: var(--ink); cursor: pointer;
     border-left: 4px solid var(--navy);
     transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
   }
@@ -167,12 +167,51 @@
   .gallery-item:hover .gallery-overlay { opacity: 1; }
 
   .graphics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-  .graphic-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); transition: transform 0.2s, box-shadow 0.2s; }
+  .graphic-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
   .graphic-card:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,40,104,0.16); }
   .graphic-card img { width: 100%; display: block; object-fit: cover; max-height: 220px; }
   .graphic-card-label { padding: 10px 14px; font-size: 0.78rem; font-weight: 600; color: var(--navy); }
 
-  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 999; display: none; align-items: center; justify-content: center; padding: 24px; }
+  /* ── FILE MODAL ── */
+  .file-modal {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(0,0,0,0.85);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .file-modal.open { display: flex; }
+  .file-modal-inner {
+    background: white; border-radius: 14px; overflow: hidden;
+    width: 90vw; max-width: 960px; height: 85vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  }
+  .file-modal-header {
+    background: var(--navy); color: white;
+    padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .file-modal-title { font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; }
+  .file-modal-close {
+    background: none; border: none; color: white; font-size: 1.6rem;
+    cursor: pointer; line-height: 1; opacity: 0.7; padding: 0 4px;
+  }
+  .file-modal-close:hover { opacity: 1; }
+  .file-modal-body { flex: 1; overflow: hidden; }
+  .file-modal-body iframe { width: 100%; height: 100%; border: none; display: block; }
+  .file-modal-body img { width: 100%; height: 100%; object-fit: contain; display: block; background: #f0f0f0; }
+  .file-modal-footer {
+    background: #f4f4f4; padding: 10px 20px; display: flex; justify-content: flex-end; gap: 10px; flex-shrink: 0;
+  }
+  .file-modal-footer a {
+    background: var(--navy); color: white; text-decoration: none;
+    padding: 8px 18px; border-radius: 6px; font-size: 0.8rem; font-weight: 700;
+    transition: background 0.18s;
+  }
+  .file-modal-footer a:hover { background: var(--red); }
+
+  /* ── LIGHTBOX (photos) ── */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 998; display: none; align-items: center; justify-content: center; padding: 24px; }
   .lightbox.open { display: flex; }
   .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 8px; object-fit: contain; box-shadow: 0 0 80px rgba(0,0,0,0.8); }
   .lightbox-close { position: absolute; top: 18px; right: 26px; color: white; font-size: 2.5rem; cursor: pointer; opacity: 0.6; line-height: 1; }
@@ -194,6 +233,7 @@
     .topnav-links a:not(.btn-home) { display: none; }
     .tab-btn { font-size: 0.78rem; padding: 10px 10px; }
     .tab-panel { padding: 28px 16px; }
+    .file-modal-inner { width: 96vw; height: 90vh; }
   }
 </style>
 </head>
@@ -263,9 +303,10 @@
 <div class="tabs-container">
   <div class="tab-bar">
     <button class="tab-btn active" data-tab="program"><span class="tab-icon">📋</span> Event Program</button>
-    <button class="tab-btn" data-tab="marketing"><span class="tab-icon">📣</span> Marketing</button>
+    <button class="tab-btn" data-tab="marketing"><span class="tab-icon">📣</span> Event Marketing</button>
   </div>
 
+  <!-- EVENT PROGRAM TAB -->
   <div class="tab-panel active" id="tab-program">
     <div class="section-header">
       <span class="section-num">01</span>
@@ -273,26 +314,26 @@
       <div class="rule"></div>
     </div>
     <div class="downloads-grid">
-      <a class="dl-card" href="2025 - Five Rivers Fall Camporee - FINAL.pdf" target="_blank">
+      <div class="dl-card" data-modal-src="2025 - Five Rivers Fall Camporee - FINAL.pdf" data-modal-title="Leader's Guide" data-modal-type="pdf" data-modal-file="2025 - Five Rivers Fall Camporee - FINAL.pdf">
         <span class="dl-icon">📋</span>
         <div class="dl-info"><div class="dl-title">Leader's Guide</div><div class="dl-sub">PDF · 2025 Final Edition</div></div>
-        <span class="dl-arrow">↓</span>
-      </a>
-      <a class="dl-card" href="Map-PSD.jpg" target="_blank">
+        <span class="dl-arrow">↗</span>
+      </div>
+      <div class="dl-card" data-modal-src="Map-PSD.jpg" data-modal-title="Event Map" data-modal-type="image" data-modal-file="Map-PSD.jpg">
         <span class="dl-icon">🗺️</span>
         <div class="dl-info"><div class="dl-title">Event Map</div><div class="dl-sub">JPG · Camp Layout</div></div>
-        <span class="dl-arrow">↓</span>
-      </a>
-      <a class="dl-card" href="SPL 2025.pdf" target="_blank">
+        <span class="dl-arrow">↗</span>
+      </div>
+      <div class="dl-card" data-modal-src="SPL 2025.pdf" data-modal-title="SPL Guide" data-modal-type="pdf" data-modal-file="SPL 2025.pdf">
         <span class="dl-icon">⭐</span>
         <div class="dl-info"><div class="dl-title">SPL Guide</div><div class="dl-sub">PDF · Senior Patrol Leader</div></div>
-        <span class="dl-arrow">↓</span>
-      </a>
-      <a class="dl-card" href="Scoring Rubrik.pdf" target="_blank">
+        <span class="dl-arrow">↗</span>
+      </div>
+      <div class="dl-card" data-modal-src="Scoring Rubrik.pdf" data-modal-title="Scoring Rubric" data-modal-type="pdf" data-modal-file="Scoring Rubrik.pdf">
         <span class="dl-icon">📊</span>
         <div class="dl-info"><div class="dl-title">Scoring Rubric</div><div class="dl-sub">PDF · Event Judging</div></div>
-        <span class="dl-arrow">↓</span>
-      </a>
+        <span class="dl-arrow">↗</span>
+      </div>
     </div>
 
     <div class="speeches-wrap" style="margin-top:28px;">
@@ -307,32 +348,33 @@
         <span class="speeches-chevron" id="speechesChevron">▼</span>
       </button>
       <div class="speeches-body" id="speechesBody">
-        <a class="dl-card speech-card" href="Speeches/Welcome Speech - Friday Night - 1.docx" target="_blank">
+        <!-- Speeches are DOCX — download directly -->
+        <a class="dl-card speech-card" href="Speeches/Welcome Speech - Friday Night - 1.docx" download>
           <span class="dl-icon">🌙</span>
           <div class="dl-info"><div class="dl-title">Welcome Speech — Friday Night (v1)</div><div class="dl-sub">DOCX · Opening Ceremony</div></div>
           <span class="dl-arrow">↓</span>
         </a>
-        <a class="dl-card speech-card" href="Speeches/Welcome Speech - Friday Night - 2.docx" target="_blank">
+        <a class="dl-card speech-card" href="Speeches/Welcome Speech - Friday Night - 2.docx" download>
           <span class="dl-icon">🌙</span>
           <div class="dl-info"><div class="dl-title">Welcome Speech — Friday Night (v2)</div><div class="dl-sub">DOCX · Opening Ceremony</div></div>
           <span class="dl-arrow">↓</span>
         </a>
-        <a class="dl-card speech-card" href="Speeches/Saturday AM - Speech 3.docx" target="_blank">
+        <a class="dl-card speech-card" href="Speeches/Saturday AM - Speech 3.docx" download>
           <span class="dl-icon">🌄</span>
           <div class="dl-info"><div class="dl-title">Saturday AM — Speech 3</div><div class="dl-sub">DOCX · Morning Session</div></div>
           <span class="dl-arrow">↓</span>
         </a>
-        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 4.docx" target="_blank">
+        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 4.docx" download>
           <span class="dl-icon">☀️</span>
           <div class="dl-info"><div class="dl-title">Saturday PM — Speech 4</div><div class="dl-sub">DOCX · Afternoon Session</div></div>
           <span class="dl-arrow">↓</span>
         </a>
-        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 5.docx" target="_blank">
+        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 5.docx" download>
           <span class="dl-icon">☀️</span>
           <div class="dl-info"><div class="dl-title">Saturday PM — Speech 5</div><div class="dl-sub">DOCX · Afternoon Session</div></div>
           <span class="dl-arrow">↓</span>
         </a>
-        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 6.docx" target="_blank">
+        <a class="dl-card speech-card" href="Speeches/Saturday PM - Speech 6.docx" download>
           <span class="dl-icon">☀️</span>
           <div class="dl-info"><div class="dl-title">Saturday PM — Speech 6</div><div class="dl-sub">DOCX · Afternoon Session</div></div>
           <span class="dl-arrow">↓</span>
@@ -371,6 +413,7 @@
     </div>
   </div>
 
+  <!-- EVENT MARKETING TAB -->
   <div class="tab-panel" id="tab-marketing">
     <div class="section-header">
       <span class="section-num">01</span>
@@ -408,24 +451,45 @@
       <div class="rule"></div>
     </div>
     <div class="graphics-grid">
-      <div class="graphic-card"><img src="Forging.png" alt="Forging graphic" onerror="this.closest('.graphic-card').style.display='none'"><div class="graphic-card-label">Forging Graphic</div></div>
-      <div class="graphic-card"><img src="A 17-year-old Boy Sc.png" alt="Scout promo image" onerror="this.closest('.graphic-card').style.display='none'"><div class="graphic-card-label">Scout Promo Image</div></div>
+      <div class="graphic-card" data-modal-src="Forging.png" data-modal-title="Forging Graphic" data-modal-type="image" data-modal-file="Forging.png">
+        <img src="Forging.png" alt="Forging graphic" onerror="this.closest('.graphic-card').style.display='none'">
+        <div class="graphic-card-label">Forging Graphic</div>
+      </div>
+      <div class="graphic-card" data-modal-src="A 17-year-old Boy Sc.png" data-modal-title="Scout Promo Image" data-modal-type="image" data-modal-file="A 17-year-old Boy Sc.png">
+        <img src="A 17-year-old Boy Sc.png" alt="Scout promo image" onerror="this.closest('.graphic-card').style.display='none'">
+        <div class="graphic-card-label">Scout Promo Image</div>
+      </div>
     </div>
     <div class="downloads-grid" style="margin-top:14px;">
-      <a class="dl-card" href="2025-Flyer.pdf" target="_blank">
+      <div class="dl-card" data-modal-src="2025-Flyer.pdf" data-modal-title="Camporee Flyer" data-modal-type="pdf" data-modal-file="2025-Flyer.pdf">
         <span class="dl-icon">📄</span>
         <div class="dl-info"><div class="dl-title">Camporee Flyer</div><div class="dl-sub">PDF · Promotional</div></div>
-        <span class="dl-arrow">↓</span>
-      </a>
-      <a class="dl-card" href="FLYER.pdf" target="_blank">
+        <span class="dl-arrow">↗</span>
+      </div>
+      <div class="dl-card" data-modal-src="FLYER.pdf" data-modal-title="Event Flyer" data-modal-type="pdf" data-modal-file="FLYER.pdf">
         <span class="dl-icon">📄</span>
         <div class="dl-info"><div class="dl-title">Event Flyer</div><div class="dl-sub">PDF · Promotional</div></div>
-        <span class="dl-arrow">↓</span>
-      </a>
+        <span class="dl-arrow">↗</span>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- FILE MODAL -->
+<div class="file-modal" id="fileModal">
+  <div class="file-modal-inner">
+    <div class="file-modal-header">
+      <span class="file-modal-title" id="fileModalTitle">Document</span>
+      <button class="file-modal-close" id="fileModalClose">×</button>
+    </div>
+    <div class="file-modal-body" id="fileModalBody"></div>
+    <div class="file-modal-footer">
+      <a id="fileModalDownload" href="#" download>⬇ Download</a>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <span class="lightbox-close" id="lbClose">×</span>
   <span class="lightbox-nav lightbox-prev" id="lbPrev">‹</span>
@@ -440,6 +504,7 @@
 </footer>
 
 <script>
+  // ── Tab switching ──
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -449,6 +514,7 @@
     });
   });
 
+  // ── Speeches toggle ──
   const speechesToggle  = document.getElementById('speechesToggle');
   const speechesBody    = document.getElementById('speechesBody');
   const speechesChevron = document.getElementById('speechesChevron');
@@ -458,6 +524,54 @@
     speechesToggle.setAttribute('aria-expanded', isOpen);
   });
 
+  // ── File Modal ──
+  const fileModal         = document.getElementById('fileModal');
+  const fileModalTitle    = document.getElementById('fileModalTitle');
+  const fileModalBody     = document.getElementById('fileModalBody');
+  const fileModalDownload = document.getElementById('fileModalDownload');
+  const fileModalClose    = document.getElementById('fileModalClose');
+
+  function openFileModal(src, title, type, file) {
+    fileModalTitle.textContent = title;
+    fileModalDownload.href = src;
+    fileModalDownload.download = file;
+    fileModalBody.innerHTML = '';
+    if (type === 'pdf') {
+      const iframe = document.createElement('iframe');
+      iframe.src = src;
+      fileModalBody.appendChild(iframe);
+    } else {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = title;
+      fileModalBody.appendChild(img);
+    }
+    fileModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeFileModal() {
+    fileModal.classList.remove('open');
+    fileModalBody.innerHTML = ''; // stop PDF/image loading
+    document.body.style.overflow = '';
+  }
+
+  fileModalClose.onclick = closeFileModal;
+  fileModal.addEventListener('click', e => { if (e.target === fileModal) closeFileModal(); });
+
+  // Wire up all dl-cards and graphic-cards with data-modal-src
+  document.querySelectorAll('[data-modal-src]').forEach(el => {
+    el.addEventListener('click', () => {
+      openFileModal(
+        el.dataset.modalSrc,
+        el.dataset.modalTitle,
+        el.dataset.modalType,
+        el.dataset.modalFile
+      );
+    });
+  });
+
+  // ── Video switcher ──
   const thumbs         = document.querySelectorAll('.vthumb');
   const featuredFrame  = document.getElementById('featuredFrame');
   const featuredIframe = document.getElementById('featuredIframe');
@@ -473,6 +587,7 @@
     });
   });
 
+  // ── Photo Lightbox ──
   const gallery  = document.getElementById('gallery');
   const lightbox = document.getElementById('lightbox');
   const lbImg    = document.getElementById('lbImg');
@@ -481,21 +596,24 @@
   gallery.addEventListener('click', e => {
     const item = e.target.closest('.gallery-item');
     if (!item) return;
-    items = getItems(); idx = items.indexOf(item); show(idx);
+    items = getItems(); idx = items.indexOf(item); showPhoto(idx);
   });
-  function show(i) { lbImg.src = items[i].querySelector('img').src; lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function close() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
-  document.getElementById('lbClose').onclick = close;
-  lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
-  document.getElementById('lbPrev').onclick = () => { idx = (idx - 1 + items.length) % items.length; show(idx); };
-  document.getElementById('lbNext').onclick = () => { idx = (idx + 1) % items.length; show(idx); };
+  function showPhoto(i) { lbImg.src = items[i].querySelector('img').src; lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closePhoto() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('lbClose').onclick = closePhoto;
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closePhoto(); });
+  document.getElementById('lbPrev').onclick = () => { idx = (idx - 1 + items.length) % items.length; showPhoto(idx); };
+  document.getElementById('lbNext').onclick = () => { idx = (idx + 1) % items.length; showPhoto(idx); };
   document.addEventListener('keydown', e => {
-    if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowLeft')  { idx = (idx - 1 + items.length) % items.length; show(idx); }
-    if (e.key === 'ArrowRight') { idx = (idx + 1) % items.length; show(idx); }
+    if (lightbox.classList.contains('open')) {
+      if (e.key === 'Escape') closePhoto();
+      if (e.key === 'ArrowLeft')  { idx = (idx - 1 + items.length) % items.length; showPhoto(idx); }
+      if (e.key === 'ArrowRight') { idx = (idx + 1) % items.length; showPhoto(idx); }
+    }
+    if (fileModal.classList.contains('open') && e.key === 'Escape') closeFileModal();
   });
 
+  // ── Fade in ──
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); } });
   }, { threshold: 0.08 });
