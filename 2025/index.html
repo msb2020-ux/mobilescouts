@@ -231,9 +231,9 @@
       <p>The 2025 Mobile Area Camporee — Avengers Quest — brought Scouts from across the council together at Camp Maubila for a weekend of adventure, teamwork, and scouting excellence.</p>
       <p>Add a second paragraph here about competitions, notable achievements, or highlights from the weekend. This is the permanent record for future Scouts to look back on!</p>
       <div class="stats-strip">
-        <div class="stat"><span class="stat-val">—</span><span class="stat-lbl">Scouts</span></div>
-        <div class="stat"><span class="stat-val">—</span><span class="stat-lbl">Units</span></div>
-        <div class="stat"><span class="stat-val">—</span><span class="stat-lbl">Events</span></div>
+        <div class="stat"><span class="stat-val">170</span><span class="stat-lbl">Scouts</span></div>
+        <div class="stat"><span class="stat-val">16</span><span class="stat-lbl">Units</span></div>
+        <div class="stat"><span class="stat-val">9</span><span class="stat-lbl">Events</span></div>
         <div class="stat"><span class="stat-val">3</span><span class="stat-lbl">Days</span></div>
       </div>
     </div>
@@ -394,7 +394,6 @@ async function fetchFolder(path) {
   } catch { return []; }
 }
 
-// ── PHOTO SLIDESHOW ──
 async function buildPhotoSlideshow() {
   const container = document.getElementById('photoSlideshowSection');
   const files = await fetchFolder(`${YEAR}/event-photos`);
@@ -417,7 +416,7 @@ async function buildPhotoSlideshow() {
   const track = document.getElementById('ssTrack');
   const counter = document.getElementById('ssCounter');
   function goTo(i) {
-    current = (i+urls.length)%urls.length;
+    current=(i+urls.length)%urls.length;
     track.style.transform=`translateX(-${current*100}%)`;
     counter.textContent=`${current+1} / ${urls.length}`;
     document.querySelectorAll('.ss-dot').forEach((d,j)=>d.classList.toggle('active',j===current));
@@ -437,11 +436,8 @@ async function buildPhotoSlideshow() {
   window._ssUrls=urls; window._ssGoTo=goTo;
 }
 
-// ── EVENT VIDEOS — hybrid YouTube + MP4 ──
 async function buildEventVideos() {
   const container = document.getElementById('eventVideosSection');
-
-  // 1. YouTube IDs from README
   let ytEntries = [];
   try {
     const r = await fetch(`${RAW}/event-videos/README.md`);
@@ -454,8 +450,6 @@ async function buildEventVideos() {
       }).filter(e => e.id && e.id.length > 3);
     }
   } catch {}
-
-  // 2. MP4 files from folder
   let mp4Entries = [];
   try {
     const files = await fetchFolder(`${YEAR}/event-videos`);
@@ -463,19 +457,15 @@ async function buildEventVideos() {
       .filter(f => f.name.toLowerCase().endsWith('.mp4'))
       .map((f, i) => ({ type:'mp4', url:f.download_url, label:`Event Clip ${i+1}`, thumb:null }));
   } catch {}
-
   const all = [...ytEntries, ...mp4Entries];
-
   if (all.length === 0) {
     container.innerHTML = `<div class="ev-empty"><div class="ev-empty-icon">▶</div><p>Add YouTube IDs to <code>event-videos/README.md</code> or drop .mp4 files in that folder</p></div>`;
     return;
   }
-
   const first = all[0];
   const makeFeatured = v => v.type === 'yt'
     ? `<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1" title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`
     : `<video src="${v.url}" controls playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;
-
   const thumbsHTML = all.length > 1 ? `
     <div class="ev-thumbs" id="evThumbs">
       ${all.map((v,i) => `
@@ -488,13 +478,11 @@ async function buildEventVideos() {
           <div class="ev-thumb-label">${v.label}</div>
         </div>`).join('')}
     </div>` : '';
-
   container.innerHTML = `
     <div class="ev-player">
       <div class="ev-featured" id="evFeatured">${makeFeatured(first)}</div>
       ${thumbsHTML}
     </div>`;
-
   if (all.length > 1) {
     document.getElementById('evThumbs').addEventListener('click', e => {
       const thumb = e.target.closest('.ev-thumb'); if(!thumb) return;
@@ -511,11 +499,10 @@ async function buildEventVideos() {
   }
 }
 
-// ── LIGHTBOX ──
-const lightbox  = document.getElementById('lightbox');
-const lbImg     = document.getElementById('lbImg');
-const lbCaption = document.getElementById('lbCaption');
-let lbPhotos=[], lbIdx=0;
+const lightbox=document.getElementById('lightbox');
+const lbImg=document.getElementById('lbImg');
+const lbCaption=document.getElementById('lbCaption');
+let lbPhotos=[],lbIdx=0;
 function openLightboxAt(i){lbPhotos=window._ssUrls||[];lbIdx=i;lbImg.src=lbPhotos[lbIdx];lbCaption.textContent=`${lbIdx+1} / ${lbPhotos.length}`;lightbox.classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow='';}
 function lbNav(dir){lbIdx=(lbIdx+dir+lbPhotos.length)%lbPhotos.length;lbImg.src=lbPhotos[lbIdx];lbCaption.textContent=`${lbIdx+1} / ${lbPhotos.length}`;if(window._ssGoTo)window._ssGoTo(lbIdx);}
@@ -524,15 +511,14 @@ lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox();});
 document.getElementById('lbPrev').onclick=()=>lbNav(-1);
 document.getElementById('lbNext').onclick=()=>lbNav(1);
 
-// ── FILE MODAL ──
-const fileModal         = document.getElementById('fileModal');
-const fileModalTitle    = document.getElementById('fileModalTitle');
-const fileModalBody     = document.getElementById('fileModalBody');
-const fileModalDownload = document.getElementById('fileModalDownload');
-const fileModalClose    = document.getElementById('fileModalClose');
+const fileModal=document.getElementById('fileModal');
+const fileModalTitle=document.getElementById('fileModalTitle');
+const fileModalBody=document.getElementById('fileModalBody');
+const fileModalDownload=document.getElementById('fileModalDownload');
+const fileModalClose=document.getElementById('fileModalClose');
 function openFileModal(src,title,type,file){
   fileModalTitle.textContent=title;
-  fileModalDownload.href=src; fileModalDownload.download=file;
+  fileModalDownload.href=src;fileModalDownload.download=file;
   fileModalBody.innerHTML='';
   if(type==='pdf'){const f=document.createElement('iframe');f.src=src;fileModalBody.appendChild(f);}
   else{const img=document.createElement('img');img.src=src;img.alt=title;fileModalBody.appendChild(img);}
@@ -545,7 +531,6 @@ document.querySelectorAll('[data-modal-src]').forEach(el=>{
   el.addEventListener('click',()=>openFileModal(el.dataset.modalSrc,el.dataset.modalTitle,el.dataset.modalType,el.dataset.modalFile));
 });
 
-// ── PROMO VIDEOS ──
 const thumbs=document.querySelectorAll('.vthumb');
 const featuredFrame=document.getElementById('featuredFrame');
 const featuredIframe=document.getElementById('featuredIframe');
@@ -560,7 +545,6 @@ thumbs.forEach(thumb=>{
   });
 });
 
-// ── SPEECHES ──
 const speechesToggle=document.getElementById('speechesToggle');
 const speechesBody=document.getElementById('speechesBody');
 const speechesChevron=document.getElementById('speechesChevron');
@@ -570,7 +554,6 @@ speechesToggle.addEventListener('click',()=>{
   speechesToggle.setAttribute('aria-expanded',isOpen);
 });
 
-// ── TABS ──
 document.querySelectorAll('.tab-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -580,13 +563,11 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
   });
 });
 
-// ── KEYBOARD ──
 document.addEventListener('keydown',e=>{
   if(lightbox.classList.contains('open')){if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);}
   if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();
 });
 
-// ── FADE IN ──
 const obs=new IntersectionObserver((entries)=>{
   entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});
 },{threshold:0.08});
