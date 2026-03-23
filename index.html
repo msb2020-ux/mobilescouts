@@ -44,19 +44,28 @@ body { font-family: 'DM Sans', Arial, sans-serif; background:#ffffff; color:#1a1
 }
 .past-events-sub { text-align:center; font-size:0.85rem; color:#666; margin-bottom:28px; }
 
-.cards-track {
-  display:flex; gap:20px; overflow-x:auto;
-  padding:8px 4px 16px;
-  scroll-snap-type:x mandatory;
+/* Centering wrapper — scrolls on small screens, centers on large */
+.cards-outer {
+  overflow-x:auto;
+  padding:8px 0 16px;
   -webkit-overflow-scrolling:touch;
 }
-.cards-track::-webkit-scrollbar { height:5px; }
-.cards-track::-webkit-scrollbar-thumb { background:var(--navy); border-radius:3px; }
+.cards-outer::-webkit-scrollbar { height:5px; }
+.cards-outer::-webkit-scrollbar-thumb { background:var(--navy); border-radius:3px; }
+
+.cards-track {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  min-width:min-content;
+  padding:4px 4px;
+}
 
 .event-card {
   flex-shrink:0; width:210px; background:white;
   border-radius:14px; box-shadow:0 4px 18px rgba(0,40,104,0.12);
-  overflow:hidden; scroll-snap-align:start;
+  overflow:hidden;
   display:flex; flex-direction:column;
   transition:transform 0.2s, box-shadow 0.2s;
 }
@@ -123,63 +132,65 @@ footer a { color:var(--gold); text-decoration:none; font-weight:bold; }
 <section class="past-events" id="carousel">
   <h2>Past Camporees</h2>
   <p class="past-events-sub">Five Rivers District · Camp Maubila, Grove Hill, AL</p>
-  <div class="cards-track" id="cardsTrack">
+  <div class="cards-outer">
+    <div class="cards-track" id="cardsTrack">
 
-    <div class="event-card">
-      <div class="event-card-img-wrap">
-        <img class="event-card-img" src="2025/2025-patch.png" alt="2025 Avengers Quest Patch">
+      <div class="event-card">
+        <div class="event-card-img-wrap">
+          <img class="event-card-img" src="2025/2025-patch.png" alt="2025 Avengers Quest Patch">
+        </div>
+        <div class="event-card-body">
+          <div class="event-card-year">2025</div>
+          <div class="event-card-title">Avengers Quest</div>
+          <a class="event-card-btn" href="2025/">View Details →</a>
+        </div>
       </div>
-      <div class="event-card-body">
-        <div class="event-card-year">2025</div>
-        <div class="event-card-title">Avengers Quest</div>
-        <a class="event-card-btn" href="2025/">View Details →</a>
+
+      <div class="event-card">
+        <div class="event-card-img-wrap">
+          <img class="event-card-img" src="2024/event-patch/20240927_005637275_iOS.jpg" alt="2024 Galactic Heist Patch">
+        </div>
+        <div class="event-card-body">
+          <div class="event-card-year">2024</div>
+          <div class="event-card-title">Galactic Heist</div>
+          <a class="event-card-btn disabled" href="#">Coming Soon</a>
+        </div>
       </div>
+
+      <div class="event-card">
+        <div class="event-card-img-wrap">
+          <img class="event-card-img" src="2023/event-patch/IMG_1168.JPG" alt="2023 Code Breaker Patch">
+        </div>
+        <div class="event-card-body">
+          <div class="event-card-year">2023</div>
+          <div class="event-card-title">Code Breaker: Impossible Mission</div>
+          <a class="event-card-btn disabled" href="#">Coming Soon</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-card-img-wrap">
+          <img class="event-card-img" src="2022/event-patch/2022 zombie.jpg" alt="2022 Zombie Survival Patch">
+        </div>
+        <div class="event-card-body">
+          <div class="event-card-year">2022</div>
+          <div class="event-card-title">Zombie Survival</div>
+          <a class="event-card-btn disabled" href="#">Coming Soon</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-card-img-wrap">
+          <img class="event-card-img" src="2021/event-patch/2021 highland games.jpg" alt="2021 Highland Games Patch">
+        </div>
+        <div class="event-card-body">
+          <div class="event-card-year">2021</div>
+          <div class="event-card-title">Highland Games</div>
+          <a class="event-card-btn disabled" href="#">Coming Soon</a>
+        </div>
+      </div>
+
     </div>
-
-    <div class="event-card">
-      <div class="event-card-img-wrap">
-        <img class="event-card-img" src="2024/event-patch/20240927_005637275_iOS.jpg" alt="2024 Galactic Heist Patch">
-      </div>
-      <div class="event-card-body">
-        <div class="event-card-year">2024</div>
-        <div class="event-card-title">Galactic Heist</div>
-        <a class="event-card-btn disabled" href="#">Coming Soon</a>
-      </div>
-    </div>
-
-    <div class="event-card">
-      <div class="event-card-img-wrap">
-        <img class="event-card-img" src="2023/event-patch/IMG_1168.JPG" alt="2023 Code Breaker Patch">
-      </div>
-      <div class="event-card-body">
-        <div class="event-card-year">2023</div>
-        <div class="event-card-title">Code Breaker: Impossible Mission</div>
-        <a class="event-card-btn disabled" href="#">Coming Soon</a>
-      </div>
-    </div>
-
-    <div class="event-card">
-      <div class="event-card-img-wrap">
-        <img class="event-card-img" src="2022/event-patch/2022 zombie.jpg" alt="2022 Zombie Survival Patch">
-      </div>
-      <div class="event-card-body">
-        <div class="event-card-year">2022</div>
-        <div class="event-card-title">Zombie Survival</div>
-        <a class="event-card-btn disabled" href="#">Coming Soon</a>
-      </div>
-    </div>
-
-    <div class="event-card">
-      <div class="event-card-img-wrap">
-        <img class="event-card-img" src="2021/event-patch/2021 highland games.jpg" alt="2021 Highland Games Patch">
-      </div>
-      <div class="event-card-body">
-        <div class="event-card-year">2021</div>
-        <div class="event-card-title">Highland Games</div>
-        <a class="event-card-btn disabled" href="#">Coming Soon</a>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -210,16 +221,6 @@ setInterval(() => {
   const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
   timer.innerHTML = "⏳ " + days + " days, " + hours + " hours until Camporee!";
 }, 1000);
-
-const track = document.getElementById("cardsTrack");
-setInterval(() => {
-  const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 10;
-  if (atEnd) {
-    track.scrollTo({ left: 0, behavior: 'smooth' });
-  } else {
-    track.scrollBy({ left: 210, behavior: 'smooth' });
-  }
-}, 3500);
 </script>
 
 </body>
