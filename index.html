@@ -20,20 +20,19 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 .cta{display:inline-block;padding:12px 25px;background:white;color:var(--navy);font-weight:bold;text-decoration:none;border-radius:5px}
 .cta:hover{background:#f0f0f0}
 
-/* ── 2026 FEATURE WITH TABS ── */
 .feature-section{padding:40px 20px;max-width:1100px;margin:0 auto}
 .feature-section h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.06em;color:var(--navy);text-align:center;margin-bottom:6px}
 .feature-date{text-align:center;font-weight:700;color:var(--navy);margin-bottom:6px}
 .countdown{text-align:center;font-weight:bold;color:var(--red);font-size:1.1rem;margin-bottom:28px}
 
-.feature-tabs{display:flex;gap:4px;background:var(--navy);border-radius:10px 10px 0 0;padding:8px 8px 0}
-.feature-tab-btn{flex:1;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.04em;padding:11px 14px;border-radius:7px 7px 0 0;transition:background 0.2s,color 0.2s;display:flex;align-items:center;justify-content:center;gap:7px}
+.feature-tabs{display:flex;gap:4px;background:var(--navy);border-radius:10px 10px 0 0;padding:8px 8px 0;flex-wrap:wrap}
+.feature-tab-btn{flex:1;min-width:100px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.04em;padding:11px 12px;border-radius:7px 7px 0 0;transition:background 0.2s,color 0.2s;display:flex;align-items:center;justify-content:center;gap:6px}
 .feature-tab-btn:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8)}
 .feature-tab-btn.active{background:var(--offwhite);color:var(--navy)}
 .feature-tab-panel{display:none;background:var(--offwhite);border-radius:0 0 10px 10px;border:2px solid var(--navy);border-top:none;padding:32px}
 .feature-tab-panel.active{display:block}
 
-/* FLYER panel */
+/* FLYER */
 .flyer-panel{display:flex;flex-direction:column;align-items:center;gap:20px}
 .flyer-panel img{max-width:680px;width:100%;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18)}
 .flyer-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
@@ -42,7 +41,12 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 .flyer-btn.outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
 .flyer-btn.outline:hover{background:var(--navy);color:white}
 
-/* ABOUT panel */
+/* PROMO VIDEO */
+.promo-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;max-width:860px;margin:0 auto}
+.promo-video-wrap video{width:100%;height:100%;display:block}
+.promo-video-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+
+/* ABOUT */
 .about-panel{max-width:760px;margin:0 auto}
 .about-kicker{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:14px}
 .about-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:0.04em;color:var(--navy);line-height:1.1;margin-bottom:20px}
@@ -91,15 +95,13 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 
 .social{text-align:center;padding:40px 20px}
 .social img.qr{width:150px;margin-top:20px}
-
 footer{background:var(--navy);color:white;text-align:center;padding:20px}
 footer a{color:var(--gold);text-decoration:none;font-weight:bold}
-
 .sticky{position:fixed;bottom:0;width:100%;background:var(--red);text-align:center;padding:10px;z-index:99}
 .sticky a{background:white;color:var(--navy);padding:10px 20px;border-radius:5px;font-weight:bold;text-decoration:none}
 
 @media(max-width:600px){
-  .feature-tab-btn{font-size:0.75rem;padding:9px 8px}
+  .feature-tab-btn{font-size:0.72rem;padding:9px 6px;min-width:80px}
   .feature-tab-panel{padding:20px 16px}
   .file-modal-inner{width:96vw;height:90vh}
 }
@@ -117,14 +119,14 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   <a class="cta" href="#2026">View Event</a>
 </section>
 
-<!-- 2026 FEATURE WITH TABS -->
 <div class="feature-section" id="2026">
   <h2>🎃 Ride of the Headless Horseman</h2>
   <div class="feature-date">October 23–25, 2026 · Camp Maubila, Grove Hill, AL</div>
   <div class="countdown" id="countdown"></div>
 
   <div class="feature-tabs">
-    <button class="feature-tab-btn active" data-ftab="flyer">🖼️ Flyer & Register</button>
+    <button class="feature-tab-btn active" data-ftab="flyer">🖼️ Flyer &amp; Register</button>
+    <button class="feature-tab-btn" data-ftab="promo">🎬 Promo Video</button>
     <button class="feature-tab-btn" data-ftab="about">📖 About This Event</button>
   </div>
 
@@ -136,6 +138,24 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
         <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">⚡ Register Now</a>
         <button class="flyer-btn outline" onclick="openFileModal('2026/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">📄 View PDF Flyer</button>
       </div>
+    </div>
+  </div>
+
+  <!-- PROMO VIDEO TAB -->
+  <div class="feature-tab-panel" id="ftab-promo">
+    <div class="promo-video-wrap">
+      <video
+        src="2026/Video_Generation_Request_Fulfilled.mp4"
+        controls
+        playsinline
+        preload="metadata"
+        poster="2026/2026-Flyer.png">
+        Your browser does not support video playback.
+      </video>
+    </div>
+    <div class="promo-video-btns">
+      <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">⚡ Register Now</a>
+      <a class="flyer-btn outline" href="2026/Video_Generation_Request_Fulfilled.mp4" download>⬇ Download Video</a>
     </div>
   </div>
 
@@ -162,11 +182,11 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
         <div class="about-cta">
           <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">⚡ Register Now</a>
           <button class="flyer-btn outline" onclick="document.querySelector('[data-ftab=flyer]').click()">🖼️ View Flyer</button>
+          <button class="flyer-btn outline" onclick="document.querySelector('[data-ftab=promo]').click()">🎬 Watch Promo</button>
         </div>
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- PAST EVENTS -->
@@ -235,9 +255,12 @@ setInterval(() => {
   timer.innerHTML = "⏳ " + days + " days, " + hours + " hours until Camporee!";
 }, 1000);
 
-// FEATURE TABS
+// FEATURE TABS — pause video when switching away
 document.querySelectorAll('.feature-tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
+    // Pause any playing video before switching
+    const vid = document.querySelector('#ftab-promo video');
+    if (vid) vid.pause();
     document.querySelectorAll('.feature-tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.feature-tab-panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
