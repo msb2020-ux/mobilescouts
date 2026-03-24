@@ -84,9 +84,14 @@
   .speeches-chevron.open{transform:rotate(180deg)}
   .speeches-body{background:var(--offwhite);max-height:0;overflow:hidden;transition:max-height 0.4s ease}
   .speeches-body.open{max-height:900px}
-  .speech-card{border-radius:0!important;border-left:4px solid #3a5fa0!important;box-shadow:none!important;border-bottom:1px solid rgba(0,40,104,0.08)}
-  .speech-card:last-child{border-bottom:none}
-  .speech-card:hover{border-color:var(--red)!important}
+  /* Speech cards are plain download links — no modal */
+  .speech-dl{display:flex;align-items:center;gap:14px;padding:16px 20px;background:white;border-left:4px solid #3a5fa0;border-bottom:1px solid rgba(0,40,104,0.08);text-decoration:none;color:var(--ink);transition:border-color 0.18s,background 0.18s}
+  .speech-dl:last-child{border-bottom:none}
+  .speech-dl:hover{border-left-color:var(--red);background:#fafafa}
+  .speech-dl .dl-icon{font-size:1.6rem;flex-shrink:0}
+  .speech-dl .dl-info .dl-title{font-weight:700;font-size:0.9rem;color:var(--navy)}
+  .speech-dl .dl-info .dl-sub{font-size:0.72rem;color:var(--muted);margin-top:2px}
+  .speech-dl .dl-badge{margin-left:auto;background:var(--navy);color:white;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;padding:3px 8px;border-radius:4px;white-space:nowrap}
   .slideshow-wrap{position:relative;border-radius:16px;overflow:hidden;background:#111;box-shadow:var(--card-shadow);aspect-ratio:16/9}
   .slideshow-track{display:flex;height:100%;transition:transform 0.5s ease}
   .slideshow-slide{flex-shrink:0;width:100%;height:100%}
@@ -243,7 +248,6 @@
     <button class="tab-btn" data-tab="marketing"><span class="tab-icon">&#128138;</span> Event Marketing</button>
   </div>
 
-  <!-- EVENT PROGRAM TAB -->
   <div class="tab-panel active" id="tab-program">
     <div class="section-header">
       <span class="section-num">01</span><h2>Event Documents</h2><div class="rule"></div>
@@ -263,51 +267,61 @@
       </div>
     </div>
 
-    <!-- SPEECHES -->
+    <!-- SPEECHES — direct download links (files are .docx, live in 2025/ root) -->
     <div class="speeches-wrap" style="margin-top:28px">
       <button class="speeches-toggle" id="speechesToggle" aria-expanded="false">
         <span class="speeches-toggle-left">
           <span class="speeches-icon">&#127908;</span>
-          <span><strong>Event Speeches</strong><span class="speeches-sub">6 documents &middot; Friday &amp; Saturday ceremonies</span></span>
+          <span><strong>Event Speeches</strong><span class="speeches-sub">6 documents &middot; Friday &amp; Saturday ceremonies &middot; click to download</span></span>
         </span>
         <span class="speeches-chevron" id="speechesChevron">&#9660;</span>
       </button>
       <div class="speeches-body" id="speechesBody">
-        <div class="dl-card speech-card" data-modal-src="../2025/event-speeches/Welcome Speech - Friday Night - 1.pdf" data-modal-title="Welcome Speech &mdash; Friday Night (v1)" data-modal-type="pdf" data-modal-file="Welcome Speech - Friday Night - 1.pdf">
-          <span class="dl-icon">&#127769;</span><div class="dl-info"><div class="dl-title">Welcome Speech &mdash; Friday Night (v1)</div><div class="dl-sub">PDF &middot; Opening Ceremony</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="../2025/event-speeches/Welcome Speech - Friday Night - 2.pdf" data-modal-title="Welcome Speech &mdash; Friday Night (v2)" data-modal-type="pdf" data-modal-file="Welcome Speech - Friday Night - 2.pdf">
-          <span class="dl-icon">&#127769;</span><div class="dl-info"><div class="dl-title">Welcome Speech &mdash; Friday Night (v2)</div><div class="dl-sub">PDF &middot; Opening Ceremony</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="../2025/event-speeches/Saturday AM - Speech 3.pdf" data-modal-title="Saturday AM &mdash; Speech 3" data-modal-type="pdf" data-modal-file="Saturday AM - Speech 3.pdf">
-          <span class="dl-icon">&#127748;</span><div class="dl-info"><div class="dl-title">Saturday AM &mdash; Speech 3</div><div class="dl-sub">PDF &middot; Morning Session</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="../2025/event-speeches/Saturday PM - Speech 4.pdf" data-modal-title="Saturday PM &mdash; Speech 4" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 4.pdf">
-          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 4</div><div class="dl-sub">PDF &middot; Afternoon Session</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="../2025/event-speeches/Saturday PM - Speech 5.pdf" data-modal-title="Saturday PM &mdash; Speech 5" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 5.pdf">
-          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 5</div><div class="dl-sub">PDF &middot; Afternoon Session</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="../2025/event-speeches/Saturday PM - Speech 6.pdf" data-modal-title="Saturday PM &mdash; Speech 6" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 6.pdf">
-          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 6</div><div class="dl-sub">PDF &middot; Afternoon Session</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
+
+        <a class="speech-dl" href="../2025/Welcome Speech - Friday Night - 1.docx" download>
+          <span class="dl-icon">&#127769;</span>
+          <span class="dl-info"><span class="dl-title">Welcome Speech &mdash; Friday Night (v1)</span><span class="dl-sub">DOCX &middot; Opening Ceremony</span></span>
+          <span class="dl-badge">&#11015; DOCX</span>
+        </a>
+
+        <a class="speech-dl" href="../2025/Welcome Speech - Friday Night - 2.docx" download>
+          <span class="dl-icon">&#127769;</span>
+          <span class="dl-info"><span class="dl-title">Welcome Speech &mdash; Friday Night (v2)</span><span class="dl-sub">DOCX &middot; Opening Ceremony</span></span>
+          <span class="dl-badge">&#11015; DOCX</span>
+        </a>
+
+        <a class="speech-dl" href="../2025/Saturday PM - Speech 4.docx" download>
+          <span class="dl-icon">&#9728;&#65039;</span>
+          <span class="dl-info"><span class="dl-title">Saturday PM &mdash; Speech 4</span><span class="dl-sub">DOCX &middot; Afternoon Session</span></span>
+          <span class="dl-badge">&#11015; DOCX</span>
+        </a>
+
+        <a class="speech-dl" href="../2025/Saturday PM - Speech 5.docx" download>
+          <span class="dl-icon">&#9728;&#65039;</span>
+          <span class="dl-info"><span class="dl-title">Saturday PM &mdash; Speech 5</span><span class="dl-sub">DOCX &middot; Afternoon Session</span></span>
+          <span class="dl-badge">&#11015; DOCX</span>
+        </a>
+
+        <a class="speech-dl" href="../2025/Saturday PM - Speech 6.docx" download>
+          <span class="dl-icon">&#9728;&#65039;</span>
+          <span class="dl-info"><span class="dl-title">Saturday PM &mdash; Speech 6</span><span class="dl-sub">DOCX &middot; Afternoon Session</span></span>
+          <span class="dl-badge">&#11015; DOCX</span>
+        </a>
+
       </div>
     </div>
 
-    <!-- EVENT VIDEOS -->
     <div class="section-header" style="margin-top:48px">
       <span class="section-num">02</span><h2>Event Videos</h2><div class="rule"></div>
     </div>
     <div id="eventVideosSection"></div>
 
-    <!-- PHOTOS -->
     <div class="section-header" style="margin-top:48px">
       <span class="section-num">03</span><h2>Event Photos</h2><div class="rule"></div>
     </div>
     <div id="photoSlideshowSection"></div>
   </div>
 
-  <!-- MARKETING TAB -->
   <div class="tab-panel" id="tab-marketing">
     <div class="section-header">
       <span class="section-num">01</span><h2>Promo Videos</h2><div class="rule"></div>
@@ -355,7 +369,6 @@
   </div>
 </div>
 
-<!-- FILE MODAL -->
 <div class="file-modal" id="fileModal">
   <div class="file-modal-inner">
     <div class="file-modal-header">
@@ -367,7 +380,6 @@
   </div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <span class="lightbox-close" id="lbClose">&times;</span>
   <span class="lightbox-nav lightbox-prev" id="lbPrev">&#8249;</span>
@@ -383,148 +395,81 @@
 </footer>
 
 <script>
-// Dynamic content reads from the 2025/ folder (files live there)
-const REPO   = 'msb2020-ux/mobilescouts';
-const YEAR   = '2025';
-const BRANCH = 'main';
-const RAW    = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${YEAR}`;
-const IMAGE_EXTS = ['jpg','jpeg','png','gif','webp'];
+const REPO='msb2020-ux/mobilescouts', YEAR='2025', BRANCH='main';
+const RAW=`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${YEAR}`;
+const IMAGE_EXTS=['jpg','jpeg','png','gif','webp'];
 
-async function fetchFolder(path) {
-  try {
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
-    if (!r.ok) return [];
-    return (await r.json()).filter(f => f.type === 'file' && f.name !== 'README.md');
-  } catch { return []; }
+async function fetchFolder(path){
+  try{const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);if(!r.ok)return[];return(await r.json()).filter(f=>f.type==='file'&&f.name!=='README.md');}catch{return[];}
 }
 
-async function buildPhotoSlideshow() {
-  const container = document.getElementById('photoSlideshowSection');
-  const files = await fetchFolder(`${YEAR}/event-photos`);
-  const photos = files.filter(f => IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
-  if (!photos.length) {
-    container.innerHTML = `<div class="ss-empty"><div class="ss-empty-icon">&#128247;</div><p>No photos found in event-photos/</p></div>`;
-    return;
-  }
-  let current = 0, autoTimer;
-  const urls = photos.map(f => f.download_url);
-  container.innerHTML = `
-    <div class="slideshow-wrap">
-      <div class="slideshow-track" id="ssTrack">${urls.map((u,i)=>`<div class="slideshow-slide"><img src="${u}" alt="Photo ${i+1}" loading="${i===0?'eager':'lazy'}"></div>`).join('')}</div>
-      <button class="ss-btn ss-prev" id="ssPrev">&#8249;</button>
-      <button class="ss-btn ss-next" id="ssNext">&#8250;</button>
-      <div class="ss-dots" id="ssDots">${urls.map((_,i)=>`<button class="ss-dot${i===0?' active':''}" data-i="${i}"></button>`).join('')}</div>
-      <div class="ss-counter" id="ssCounter">1 / ${urls.length}</div>
-    </div>
-    <div class="ss-thumbs" id="ssThumbs">${urls.map((u,i)=>`<div class="ss-thumb${i===0?' active':''}" data-i="${i}"><img src="${u}" alt="" loading="lazy"></div>`).join('')}</div>`;
-  const track = document.getElementById('ssTrack');
-  const counter = document.getElementById('ssCounter');
-  function goTo(i) {
-    current = (i + urls.length) % urls.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    counter.textContent = `${current+1} / ${urls.length}`;
-    document.querySelectorAll('.ss-dot').forEach((d,j) => d.classList.toggle('active', j===current));
-    document.querySelectorAll('.ss-thumb').forEach((t,j) => t.classList.toggle('active', j===current));
-    clearInterval(autoTimer); autoTimer = setInterval(() => goTo(current+1), 4500);
-  }
-  document.getElementById('ssPrev').onclick = () => goTo(current-1);
-  document.getElementById('ssNext').onclick = () => goTo(current+1);
-  document.getElementById('ssDots').addEventListener('click', e => { if(e.target.dataset.i !== undefined) goTo(+e.target.dataset.i); });
-  document.getElementById('ssThumbs').addEventListener('click', e => { const t = e.target.closest('.ss-thumb'); if(t) goTo(+t.dataset.i); });
-  track.addEventListener('click', e => { if(e.target.tagName==='IMG') openLightboxAt(current); });
-  let touchX = null;
-  track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend', e => { if(touchX===null) return; const diff = touchX - e.changedTouches[0].clientX; if(Math.abs(diff)>40) goTo(diff>0?current+1:current-1); touchX=null; }, {passive:true});
-  autoTimer = setInterval(() => goTo(current+1), 4500);
-  window._ssUrls = urls; window._ssGoTo = goTo;
+async function buildPhotoSlideshow(){
+  const container=document.getElementById('photoSlideshowSection');
+  const files=await fetchFolder(`${YEAR}/event-photos`);
+  const photos=files.filter(f=>IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
+  if(!photos.length){container.innerHTML=`<div class="ss-empty"><div class="ss-empty-icon">&#128247;</div><p>No photos found</p></div>`;return;}
+  let current=0,autoTimer;
+  const urls=photos.map(f=>f.download_url);
+  container.innerHTML=`<div class="slideshow-wrap"><div class="slideshow-track" id="ssTrack">${urls.map((u,i)=>`<div class="slideshow-slide"><img src="${u}" alt="Photo ${i+1}" loading="${i===0?'eager':'lazy'}"></div>`).join('')}</div><button class="ss-btn ss-prev" id="ssPrev">&#8249;</button><button class="ss-btn ss-next" id="ssNext">&#8250;</button><div class="ss-dots" id="ssDots">${urls.map((_,i)=>`<button class="ss-dot${i===0?' active':''}" data-i="${i}"></button>`).join('')}</div><div class="ss-counter" id="ssCounter">1 / ${urls.length}</div></div><div class="ss-thumbs" id="ssThumbs">${urls.map((u,i)=>`<div class="ss-thumb${i===0?' active':''}" data-i="${i}"><img src="${u}" alt="" loading="lazy"></div>`).join('')}</div>`;
+  const track=document.getElementById('ssTrack'),counter=document.getElementById('ssCounter');
+  function goTo(i){current=(i+urls.length)%urls.length;track.style.transform=`translateX(-${current*100}%)`;counter.textContent=`${current+1} / ${urls.length}`;document.querySelectorAll('.ss-dot').forEach((d,j)=>d.classList.toggle('active',j===current));document.querySelectorAll('.ss-thumb').forEach((t,j)=>t.classList.toggle('active',j===current));clearInterval(autoTimer);autoTimer=setInterval(()=>goTo(current+1),4500);}
+  document.getElementById('ssPrev').onclick=()=>goTo(current-1);
+  document.getElementById('ssNext').onclick=()=>goTo(current+1);
+  document.getElementById('ssDots').addEventListener('click',e=>{if(e.target.dataset.i!==undefined)goTo(+e.target.dataset.i);});
+  document.getElementById('ssThumbs').addEventListener('click',e=>{const t=e.target.closest('.ss-thumb');if(t)goTo(+t.dataset.i);});
+  track.addEventListener('click',e=>{if(e.target.tagName==='IMG')openLightboxAt(current);});
+  let touchX=null;
+  track.addEventListener('touchstart',e=>{touchX=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',e=>{if(touchX===null)return;const diff=touchX-e.changedTouches[0].clientX;if(Math.abs(diff)>40)goTo(diff>0?current+1:current-1);touchX=null;},{passive:true});
+  autoTimer=setInterval(()=>goTo(current+1),4500);
+  window._ssUrls=urls;window._ssGoTo=goTo;
 }
 
-async function buildEventVideos() {
-  const container = document.getElementById('eventVideosSection');
-  let ytEntries = [];
-  try {
-    const r = await fetch(`${RAW}/event-videos/README.md`);
-    if (r.ok) {
-      const text = await r.text();
-      const lines = text.split('\n').filter(l => !l.startsWith('#') && l.includes('|'));
-      ytEntries = lines.map(l => {
-        const [id, label] = l.split('|').map(s => s.trim());
-        return { type:'yt', id, label: label||'Event Video', thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg` };
-      }).filter(e => e.id && e.id.length > 3);
-    }
-  } catch {}
-  let mp4Entries = [];
-  try {
-    const files = await fetchFolder(`${YEAR}/event-videos`);
-    mp4Entries = files.filter(f => f.name.toLowerCase().endsWith('.mp4')).map((f,i) => ({
-      type:'mp4', url:f.download_url, label:`Event Clip ${i+1}`, thumb:null
-    }));
-  } catch {}
-  const all = [...ytEntries, ...mp4Entries];
-  if (!all.length) {
-    container.innerHTML = `<div class="ev-empty"><p>No event videos found.</p></div>`;
-    return;
-  }
-  const first = all[0];
-  const makeFeatured = v => v.type === 'yt'
-    ? `<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1" title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`
-    : `<video src="${v.url}" controls playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;
-  const thumbsHTML = all.length > 1 ? `<div class="ev-thumbs" id="evThumbs">${all.map((v,i)=>`
-    <div class="ev-thumb${i===0?' active':''}" data-idx="${i}">
-      <div class="ev-thumb-img">${v.thumb?`<img src="${v.thumb}" alt="${v.label}" loading="lazy">`:'<div style="color:rgba(255,255,255,0.5);font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;height:100%">MP4</div>'}<div class="ev-thumb-play">&#9654;</div></div>
-      <div class="ev-thumb-label">${v.label}</div>
-    </div>`).join('')}</div>` : '';
-  container.innerHTML = `<div class="ev-player"><div class="ev-featured" id="evFeatured">${makeFeatured(first)}</div>${thumbsHTML}</div>`;
-  if (all.length > 1) {
-    document.getElementById('evThumbs').addEventListener('click', e => {
-      const thumb = e.target.closest('.ev-thumb'); if(!thumb) return;
-      document.querySelectorAll('.ev-thumb').forEach(t => t.classList.remove('active'));
-      thumb.classList.add('active');
-      const v = all[+thumb.dataset.idx];
-      document.getElementById('evFeatured').innerHTML = v.type === 'yt'
-        ? `<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&autoplay=1" title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`
-        : `<video src="${v.url}" controls autoplay playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;
-    });
-  }
+async function buildEventVideos(){
+  const container=document.getElementById('eventVideosSection');
+  let ytEntries=[];
+  try{const r=await fetch(`${RAW}/event-videos/README.md`);if(r.ok){const text=await r.text();ytEntries=text.split('\n').filter(l=>!l.startsWith('#')&&l.includes('|')).map(l=>{const[id,label]=l.split('|').map(s=>s.trim());return{type:'yt',id,label:label||'Event Video',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`};}).filter(e=>e.id&&e.id.length>3);}}catch{}
+  let mp4Entries=[];
+  try{const files=await fetchFolder(`${YEAR}/event-videos`);mp4Entries=files.filter(f=>f.name.toLowerCase().endsWith('.mp4')).map((f,i)=>({type:'mp4',url:f.download_url,label:`Event Clip ${i+1}`,thumb:null}));}catch{}
+  const all=[...ytEntries,...mp4Entries];
+  if(!all.length){container.innerHTML=`<div class="ev-empty"><p>No event videos found.</p></div>`;return;}
+  const first=all[0];
+  const makeFeatured=v=>v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1" title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;
+  const thumbsHTML=all.length>1?`<div class="ev-thumbs" id="evThumbs">${all.map((v,i)=>`<div class="ev-thumb${i===0?' active':''}" data-idx="${i}"><div class="ev-thumb-img">${v.thumb?`<img src="${v.thumb}" alt="${v.label}" loading="lazy">`:'<div style="color:rgba(255,255,255,0.5);font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;height:100%">MP4</div>'}<div class="ev-thumb-play">&#9654;</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>`:'';
+  container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="evFeatured">${makeFeatured(first)}</div>${thumbsHTML}</div>`;
+  if(all.length>1){document.getElementById('evThumbs').addEventListener('click',e=>{const thumb=e.target.closest('.ev-thumb');if(!thumb)return;document.querySelectorAll('.ev-thumb').forEach(t=>t.classList.remove('active'));thumb.classList.add('active');const v=all[+thumb.dataset.idx];document.getElementById('evFeatured').innerHTML=v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&autoplay=1" title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls autoplay playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;});}
 }
 
-// Lightbox
-const lightbox=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'), lbCaption=document.getElementById('lbCaption');
-let lbPhotos=[], lbIdx=0;
+const lightbox=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCaption=document.getElementById('lbCaption');
+let lbPhotos=[],lbIdx=0;
 function openLightboxAt(i){lbPhotos=window._ssUrls||[];lbIdx=i;lbImg.src=lbPhotos[lbIdx];lbCaption.textContent=`${lbIdx+1} / ${lbPhotos.length}`;lightbox.classList.add('open');document.body.style.overflow='hidden';}
 function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow='';}
 function lbNav(dir){lbIdx=(lbIdx+dir+lbPhotos.length)%lbPhotos.length;lbImg.src=lbPhotos[lbIdx];lbCaption.textContent=`${lbIdx+1} / ${lbPhotos.length}`;if(window._ssGoTo)window._ssGoTo(lbIdx);}
 document.getElementById('lbClose').onclick=closeLightbox;
-lightbox.addEventListener('click', e=>{if(e.target===lightbox)closeLightbox();});
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox();});
 document.getElementById('lbPrev').onclick=()=>lbNav(-1);
 document.getElementById('lbNext').onclick=()=>lbNav(1);
 
-// File modal
-const fileModal=document.getElementById('fileModal'), fileModalTitle=document.getElementById('fileModalTitle'), fileModalBody=document.getElementById('fileModalBody'), fileModalDownload=document.getElementById('fileModalDownload'), fileModalClose=document.getElementById('fileModalClose');
+const fileModal=document.getElementById('fileModal'),fileModalTitle=document.getElementById('fileModalTitle'),fileModalBody=document.getElementById('fileModalBody'),fileModalDownload=document.getElementById('fileModalDownload'),fileModalClose=document.getElementById('fileModalClose');
 function openFileModal(src,title,type,file){fileModalTitle.textContent=title;fileModalDownload.href=src;fileModalDownload.download=file;fileModalBody.innerHTML='';if(type==='pdf'){const f=document.createElement('iframe');f.src=src;fileModalBody.appendChild(f);}else{const img=document.createElement('img');img.src=src;img.alt=title;fileModalBody.appendChild(img);}fileModal.classList.add('open');document.body.style.overflow='hidden';}
 function closeFileModal(){fileModal.classList.remove('open');fileModalBody.innerHTML='';document.body.style.overflow='';}
 fileModalClose.onclick=closeFileModal;
-fileModal.addEventListener('click', e=>{if(e.target===fileModal)closeFileModal();});
+fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 document.querySelectorAll('[data-modal-src]').forEach(el=>{el.addEventListener('click',()=>openFileModal(el.dataset.modalSrc,el.dataset.modalTitle,el.dataset.modalType,el.dataset.modalFile));});
 
-// Marketing promo video thumbs
-const thumbs=document.querySelectorAll('.vthumb'), featuredFrame=document.getElementById('featuredFrame'), featuredIframe=document.getElementById('featuredIframe');
+const thumbs=document.querySelectorAll('.vthumb'),featuredFrame=document.getElementById('featuredFrame'),featuredIframe=document.getElementById('featuredIframe');
 thumbs.forEach(thumb=>{thumb.addEventListener('click',()=>{thumbs.forEach(t=>t.classList.remove('active'));thumb.classList.add('active');const isShort=thumb.dataset.short==='true';featuredFrame.style.aspectRatio=isShort?'9/16':'16/9';featuredFrame.style.maxWidth=isShort?'360px':'';featuredFrame.style.margin=isShort?'0 auto':'';featuredIframe.src=`https://www.youtube.com/embed/${thumb.dataset.id}?rel=0&modestbranding=1&autoplay=1`;});});
 
-// Speeches accordion
-const speechesToggle=document.getElementById('speechesToggle'), speechesBody=document.getElementById('speechesBody'), speechesChevron=document.getElementById('speechesChevron');
+const speechesToggle=document.getElementById('speechesToggle'),speechesBody=document.getElementById('speechesBody'),speechesChevron=document.getElementById('speechesChevron');
 speechesToggle.addEventListener('click',()=>{const isOpen=speechesBody.classList.toggle('open');speechesChevron.classList.toggle('open',isOpen);speechesToggle.setAttribute('aria-expanded',isOpen);});
 
-// Tabs
 document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+btn.dataset.tab).classList.add('active');});});
 
-// Keyboard
-document.addEventListener('keydown', e=>{
+document.addEventListener('keydown',e=>{
   if(lightbox.classList.contains('open')){if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);}
   if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();
 });
 
-// Fade-in
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 
