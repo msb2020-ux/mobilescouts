@@ -231,27 +231,37 @@ fileModalClose.onclick=closeFileModal;
 fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 document.addEventListener('keydown',e=>{if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();});
 
-// ── Past Camporees — dynamic carousel with swipe ───────────────────────────
+// ── Past Camporees — fully dynamic carousel ────────────────────────────────
 const REPO   = 'msb2020-ux/mobilescouts';
 const BRANCH = 'main';
 const IMAGE_EXTS = ['jpg','jpeg','png','gif','webp'];
-const CARD_W = 210 + 20; // card width + gap
+const CARD_W = 210 + 20;
 let scrollPos = 0;
 
+// All events — title and label only. Link and patch are detected automatically.
 const EVENTS = [
-  { year:'2026', season:'Spring', label:'2026 SPRING', title:'TBD',                              link:null },
-  { year:'2025', season:'Fall',   label:'2025 FALL',   title:'Avengers Quest',                   link:'2025/Fall/' },
-  { year:'2025', season:'Spring', label:'2025 SPRING', title:'TBD',                              link:null },
-  { year:'2024', season:'Fall',   label:'2024 FALL',   title:'Galactic Heist',                   link:null },
-  { year:'2024', season:'Spring', label:'2024 SPRING', title:'TBD',                              link:null },
-  { year:'2023', season:'Fall',   label:'2023 FALL',   title:'Code Breaker: Impossible Mission', link:null },
-  { year:'2023', season:'Spring', label:'2023 SPRING', title:'TBD',                              link:null },
-  { year:'2022', season:'Fall',   label:'2022 FALL',   title:'Zombie Survival',                  link:null },
-  { year:'2022', season:'Spring', label:'2022 SPRING', title:'Cooking',                          link:null },
-  { year:'2021', season:'Fall',   label:'2021 FALL',   title:'Highland Games',                   link:null },
-  { year:'2021', season:'Spring', label:'2021 SPRING', title:'TBD',                              link:null },
+  { year:'2026', season:'Spring', label:'2026 SPRING', title:'TBD' },
+  { year:'2025', season:'Fall',   label:'2025 FALL',   title:'Avengers Quest' },
+  { year:'2025', season:'Spring', label:'2025 SPRING', title:'TBD' },
+  { year:'2024', season:'Fall',   label:'2024 FALL',   title:'Galactic Heist' },
+  { year:'2024', season:'Spring', label:'2024 SPRING', title:'TBD' },
+  { year:'2023', season:'Fall',   label:'2023 FALL',   title:'Code Breaker: Impossible Mission' },
+  { year:'2023', season:'Spring', label:'2023 SPRING', title:'TBD' },
+  { year:'2022', season:'Fall',   label:'2022 FALL',   title:'Zombie Survival' },
+  { year:'2022', season:'Spring', label:'2022 SPRING', title:'Cooking' },
+  { year:'2021', season:'Fall',   label:'2021 FALL',   title:'Highland Games' },
+  { year:'2021', season:'Spring', label:'2021 SPRING', title:'TBD' },
 ];
 
+// Check if a file exists in the repo by trying the GitHub API
+async function fileExists(path) {
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
+    return r.ok;
+  } catch { return false; }
+}
+
+// Get first image in the patch folder
 async function getPatchUrl(year, season) {
   try {
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${year}/${season}/patch?ref=${BRANCH}`);
@@ -262,12 +272,12 @@ async function getPatchUrl(year, season) {
   } catch { return null; }
 }
 
-function buildCard(event, patchUrl) {
+function buildCard(event, patchUrl, hasPage) {
   const imgHtml = patchUrl
     ? `<img class="event-card-img" src="${patchUrl}" alt="${event.label} Patch" loading="lazy" draggable="false">`
     : `<span class="event-card-placeholder">&#127960;</span>`;
-  const btnHtml = event.link
-    ? `<a class="event-card-btn" href="${event.link}">View Details &#8594;</a>`
+  const btnHtml = hasPage
+    ? `<a class="event-card-btn" href="${event.year}/${event.season}/">View Details &#8594;</a>`
     : `<a class="event-card-btn disabled" href="#">Coming Soon</a>`;
   const card = document.createElement('div');
   card.className = 'event-card';
@@ -308,44 +318,32 @@ document.getElementById('carouselPrev').addEventListener('click', () => scrollCa
 document.getElementById('carouselNext').addEventListener('click', () => scrollCarousel(1));
 window.addEventListener('resize', () => applyScroll());
 
-// ── Touch & mouse drag swipe ───────────────────────────────────────────────
+// ── Touch & mouse drag ─────────────────────────────────────────────────────
 (function initDrag() {
   const viewport = document.getElementById('cardsViewport');
   let startX = 0, startScroll = 0, isDragging = false, moved = false;
 
-  // Touch
   viewport.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startScroll = scrollPos;
-    moved = false;
+    startX = e.touches[0].clientX; startScroll = scrollPos; moved = false;
   }, { passive: true });
 
   viewport.addEventListener('touchmove', e => {
     const dx = startX - e.touches[0].clientX;
     if (Math.abs(dx) > 5) moved = true;
     scrollPos = startScroll + dx;
-    applyScroll(false); // no CSS transition while dragging
+    applyScroll(false);
   }, { passive: true });
 
   viewport.addEventListener('touchend', e => {
     const dx = startX - e.changedTouches[0].clientX;
-    // Snap to nearest card boundary
-    scrollPos = startScroll + dx;
-    const snapped = Math.round(scrollPos / CARD_W) * CARD_W;
-    scrollPos = snapped;
+    scrollPos = Math.round((startScroll + dx) / CARD_W) * CARD_W;
     applyScroll(true);
-    // Prevent card link click if we actually dragged
-    if (moved) {
-      e.preventDefault();
-    }
+    if (moved) e.preventDefault();
   }, { passive: false });
 
-  // Mouse drag (desktop)
   viewport.addEventListener('mousedown', e => {
-    isDragging = true;
-    moved = false;
-    startX = e.clientX;
-    startScroll = scrollPos;
+    isDragging = true; moved = false;
+    startX = e.clientX; startScroll = scrollPos;
     viewport.classList.add('dragging');
   });
 
@@ -361,14 +359,10 @@ window.addEventListener('resize', () => applyScroll());
     if (!isDragging) return;
     isDragging = false;
     viewport.classList.remove('dragging');
-    const dx = startX - e.clientX;
-    scrollPos = startScroll + dx;
-    const snapped = Math.round(scrollPos / CARD_W) * CARD_W;
-    scrollPos = snapped;
+    scrollPos = Math.round((startScroll + (startX - e.clientX)) / CARD_W) * CARD_W;
     applyScroll(true);
   });
 
-  // Prevent clicks on cards after a drag
   viewport.addEventListener('click', e => {
     if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
   }, true);
@@ -376,8 +370,15 @@ window.addEventListener('resize', () => applyScroll());
 
 async function buildCarousel() {
   const track = document.getElementById('cardsTrack');
-  const patches = await Promise.all(EVENTS.map(e => getPatchUrl(e.year, e.season)));
-  EVENTS.forEach((event, i) => track.appendChild(buildCard(event, patches[i])));
+  // Fetch patch images and index.html existence in parallel
+  const results = await Promise.all(EVENTS.map(e => Promise.all([
+    getPatchUrl(e.year, e.season),
+    fileExists(`${e.year}/${e.season}/index.html`)
+  ])));
+  EVENTS.forEach((event, i) => {
+    const [patchUrl, hasPage] = results[i];
+    track.appendChild(buildCard(event, patchUrl, hasPage));
+  });
   applyScroll();
 }
 
