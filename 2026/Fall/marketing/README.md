@@ -1,2 +1,2 @@
-# 2026 Marketing Assets
-Upload social media graphics, promotional images, and videos here.
+# Marketing
+Place 2026 Fall flyers and graphics here.
