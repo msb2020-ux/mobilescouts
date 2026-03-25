@@ -7,9 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root { --navy:#002868; --red:#bf0a30; --gold:#f5c518; --offwhite:#f8f6f1; --ink:#1a1a2e; --muted:#6b6b7b; --card-shadow:0 6px 28px rgba(0,40,104,0.11); }
+:root{--navy:#002868;--red:#bf0a30;--gold:#f5c518;--offwhite:#f8f6f1;--ink:#1a1a2e;--muted:#6b6b7b;--card-shadow:0 6px 28px rgba(0,40,104,0.11);}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
+body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .header{background:var(--navy);padding:15px;text-align:center}
 .header img{max-height:60px}
 .hero{background:var(--red);color:white;text-align:center;padding:50px 20px}
@@ -61,24 +61,29 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 .file-modal-footer{background:#f4f4f4;padding:10px 20px;display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
 .file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700;transition:background 0.18s}
 .file-modal-footer a:hover{background:var(--red)}
+
+/* ── Past Camporees carousel ── */
 .past-events{background:#f4f4f4;padding:48px 20px}
 .past-events h2{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--navy);margin-bottom:8px}
 .past-events-sub{text-align:center;font-size:0.85rem;color:#666;margin-bottom:28px}
-.cards-outer{overflow-x:auto;padding:8px 0 16px;-webkit-overflow-scrolling:touch}
-.cards-outer::-webkit-scrollbar{height:5px}
-.cards-outer::-webkit-scrollbar-thumb{background:var(--navy);border-radius:3px}
-.cards-track{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;min-width:min-content;padding:4px}
+.carousel-wrap{position:relative;display:flex;align-items:center;gap:0}
+.carousel-arrow{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:2px solid var(--navy);background:white;color:var(--navy);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.18s,color 0.18s;z-index:2;box-shadow:0 2px 8px rgba(0,40,104,0.12)}
+.carousel-arrow:hover{background:var(--navy);color:white}
+.carousel-arrow:disabled{opacity:0.25;cursor:default;pointer-events:none}
+.cards-viewport{flex:1;overflow:hidden;margin:0 10px}
+.cards-track{display:flex;gap:20px;transition:transform 0.35s ease;padding:8px 4px 16px}
 .event-card{flex-shrink:0;width:210px;background:white;border-radius:14px;box-shadow:0 4px 18px rgba(0,40,104,0.12);overflow:hidden;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s}
 .event-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,40,104,0.18)}
 .event-card-img-wrap{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .event-card-img{width:100%;height:100%;object-fit:cover;display:block}
-.event-card-placeholder{font-size:3.5rem;opacity:0.25;user-select:none}
+.event-card-placeholder{font-size:3.5rem;opacity:0.2;user-select:none}
 .event-card-body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1;border-top:3px solid var(--navy)}
 .event-card-year{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.12em;color:var(--red);margin-bottom:2px}
 .event-card-title{font-weight:700;font-size:0.92rem;color:var(--navy);line-height:1.3;margin-bottom:12px;flex:1}
 .event-card-btn{display:block;text-align:center;background:var(--navy);color:white;text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;padding:8px 14px;border-radius:6px;transition:background 0.18s}
 .event-card-btn:hover{background:var(--red)}
 .event-card-btn.disabled{background:#bbb;pointer-events:none;cursor:default}
+
 .social{text-align:center;padding:40px 20px}
 .social img.qr{width:150px;margin-top:20px}
 footer{background:var(--navy);color:white;text-align:center;padding:20px}
@@ -89,6 +94,7 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   .feature-tab-btn{font-size:0.72rem;padding:9px 6px;min-width:80px}
   .feature-tab-panel{padding:20px 16px}
   .file-modal-inner{width:96vw;height:90vh}
+  .carousel-arrow{width:36px;height:36px;font-size:1rem}
 }
 </style>
 </head>
@@ -163,10 +169,12 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
 <section class="past-events" id="carousel">
   <h2>Past Camporees</h2>
   <p class="past-events-sub">Five Rivers District &middot; Camp Maubila, Grove Hill, AL</p>
-  <div class="cards-outer">
-    <div class="cards-track" id="cardsTrack">
-      <!-- Dynamically populated by JS -->
+  <div class="carousel-wrap">
+    <button class="carousel-arrow" id="carouselPrev">&#8249;</button>
+    <div class="cards-viewport" id="cardsViewport">
+      <div class="cards-track" id="cardsTrack"></div>
     </div>
+    <button class="carousel-arrow" id="carouselNext">&#8250;</button>
   </div>
 </section>
 
@@ -194,7 +202,7 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
 </div>
 
 <script>
-// ── Countdown ──────────────────────────────────────────────
+// ── Countdown ──────────────────────────────────────────────────────────────
 const eventDate = new Date("October 23, 2026 08:00:00").getTime();
 const timer = document.getElementById("countdown");
 setInterval(() => {
@@ -204,7 +212,7 @@ setInterval(() => {
   timer.innerHTML = "&#9203; " + days + " days, " + hours + " hours until Camporee!";
 }, 1000);
 
-// ── Feature tabs ───────────────────────────────────────────
+// ── Feature tabs ───────────────────────────────────────────────────────────
 document.querySelectorAll('.feature-tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const vid = document.querySelector('#ftab-promo video');
@@ -216,7 +224,7 @@ document.querySelectorAll('.feature-tab-btn').forEach(btn => {
   });
 });
 
-// ── File modal ─────────────────────────────────────────────
+// ── File modal ─────────────────────────────────────────────────────────────
 const fileModal=document.getElementById('fileModal'),fileModalTitle=document.getElementById('fileModalTitle'),fileModalBody=document.getElementById('fileModalBody'),fileModalDownload=document.getElementById('fileModalDownload'),fileModalClose=document.getElementById('fileModalClose');
 function openFileModal(src,title,type,file){fileModalTitle.textContent=title;fileModalDownload.href=src;fileModalDownload.download=file;fileModalBody.innerHTML='';if(type==='pdf'){const f=document.createElement('iframe');f.src=src;fileModalBody.appendChild(f);}else{const img=document.createElement('img');img.src=src;img.alt=title;fileModalBody.appendChild(img);}fileModal.classList.add('open');document.body.style.overflow='hidden';}
 function closeFileModal(){fileModal.classList.remove('open');fileModalBody.innerHTML='';document.body.style.overflow='';}
@@ -224,20 +232,24 @@ fileModalClose.onclick=closeFileModal;
 fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 document.addEventListener('keydown',e=>{if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();});
 
-// ── Dynamic Past Camporees Carousel ───────────────────────
-// Each entry: { year, season, label, title, link }
-// link: path to the event index.html — set to null for "Coming Soon"
-const REPO = 'msb2020-ux/mobilescouts';
+// ── Past Camporees — dynamic carousel ─────────────────────────────────────
+const REPO   = 'msb2020-ux/mobilescouts';
 const BRANCH = 'main';
 const IMAGE_EXTS = ['jpg','jpeg','png','gif','webp'];
 
+// All events — most recent first. Set link:null for Coming Soon.
 const EVENTS = [
+  { year:'2026', season:'Spring', label:'2026 SPRING', title:'TBD',                           link:null },
   { year:'2025', season:'Fall',   label:'2025 FALL',   title:'Avengers Quest',                link:'2025/Fall/' },
+  { year:'2025', season:'Spring', label:'2025 SPRING', title:'TBD',                           link:null },
   { year:'2024', season:'Fall',   label:'2024 FALL',   title:'Galactic Heist',                link:null },
+  { year:'2024', season:'Spring', label:'2024 SPRING', title:'TBD',                           link:null },
   { year:'2023', season:'Fall',   label:'2023 FALL',   title:'Code Breaker: Impossible Mission', link:null },
+  { year:'2023', season:'Spring', label:'2023 SPRING', title:'TBD',                           link:null },
   { year:'2022', season:'Fall',   label:'2022 FALL',   title:'Zombie Survival',               link:null },
   { year:'2022', season:'Spring', label:'2022 SPRING', title:'Cooking',                       link:null },
   { year:'2021', season:'Fall',   label:'2021 FALL',   title:'Highland Games',                link:null },
+  { year:'2021', season:'Spring', label:'2021 SPRING', title:'TBD',                           link:null },
 ];
 
 async function getPatchUrl(year, season) {
@@ -245,7 +257,7 @@ async function getPatchUrl(year, season) {
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${year}/${season}/patch?ref=${BRANCH}`);
     if (!r.ok) return null;
     const files = await r.json();
-    const img = files.find(f => f.type === 'file' && IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
+    const img = files.find(f => f.type==='file' && IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
     return img ? img.download_url : null;
   } catch { return null; }
 }
@@ -269,13 +281,38 @@ function buildCard(event, patchUrl) {
   return card;
 }
 
+// Arrow scroll logic
+const CARD_WIDTH = 210 + 20; // card width + gap
+let scrollPos = 0;
+
+function updateArrows() {
+  const viewport = document.getElementById('cardsViewport');
+  const track = document.getElementById('cardsTrack');
+  const maxScroll = track.scrollWidth - viewport.clientWidth;
+  document.getElementById('carouselPrev').disabled = scrollPos <= 0;
+  document.getElementById('carouselNext').disabled = scrollPos >= maxScroll - 1;
+}
+
+function scrollCarousel(dir) {
+  const viewport = document.getElementById('cardsViewport');
+  const track = document.getElementById('cardsTrack');
+  const visibleCards = Math.max(1, Math.floor(viewport.clientWidth / CARD_WIDTH));
+  const step = visibleCards * CARD_WIDTH;
+  const maxScroll = track.scrollWidth - viewport.clientWidth;
+  scrollPos = Math.max(0, Math.min(maxScroll, scrollPos + dir * step));
+  track.style.transform = `translateX(-${scrollPos}px)`;
+  updateArrows();
+}
+
+document.getElementById('carouselPrev').addEventListener('click', () => scrollCarousel(-1));
+document.getElementById('carouselNext').addEventListener('click', () => scrollCarousel(1));
+window.addEventListener('resize', updateArrows);
+
 async function buildCarousel() {
   const track = document.getElementById('cardsTrack');
-  // Build all cards in parallel
   const patches = await Promise.all(EVENTS.map(e => getPatchUrl(e.year, e.season)));
-  EVENTS.forEach((event, i) => {
-    track.appendChild(buildCard(event, patches[i]));
-  });
+  EVENTS.forEach((event, i) => track.appendChild(buildCard(event, patches[i])));
+  updateArrows();
 }
 
 buildCarousel();
