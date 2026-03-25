@@ -70,8 +70,9 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#ffffff;color:#1a1a1a}
 .cards-track{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;min-width:min-content;padding:4px}
 .event-card{flex-shrink:0;width:210px;background:white;border-radius:14px;box-shadow:0 4px 18px rgba(0,40,104,0.12);overflow:hidden;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s}
 .event-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,40,104,0.18)}
-.event-card-img-wrap{width:100%;aspect-ratio:1/1;background:#e8e8e8;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.event-card-img-wrap{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .event-card-img{width:100%;height:100%;object-fit:cover;display:block}
+.event-card-placeholder{font-size:3.5rem;opacity:0.25;user-select:none}
 .event-card-body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1;border-top:3px solid var(--navy)}
 .event-card-year{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.12em;color:var(--red);margin-bottom:2px}
 .event-card-title{font-weight:700;font-size:0.92rem;color:var(--navy);line-height:1.3;margin-bottom:12px;flex:1}
@@ -163,74 +164,8 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   <h2>Past Camporees</h2>
   <p class="past-events-sub">Five Rivers District &middot; Camp Maubila, Grove Hill, AL</p>
   <div class="cards-outer">
-    <div class="cards-track">
-
-      <div class="event-card">
-        <div class="event-card-img-wrap">
-          <img class="event-card-img" src="2025/Fall/patch/2025-patch.png" alt="2025 Avengers Quest Patch">
-        </div>
-        <div class="event-card-body">
-          <div class="event-card-year">2025 FALL</div>
-          <div class="event-card-title">Avengers Quest</div>
-          <a class="event-card-btn" href="2025/Fall/">View Details &#8594;</a>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-card-img-wrap">
-          <img class="event-card-img" src="2024/Fall/patch/2024-patch.jpg" alt="2024 Galactic Heist Patch">
-        </div>
-        <div class="event-card-body">
-          <div class="event-card-year">2024 FALL</div>
-          <div class="event-card-title">Galactic Heist</div>
-          <a class="event-card-btn disabled" href="#">Coming Soon</a>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-card-img-wrap">
-          <img class="event-card-img" src="2023/Fall/patch/2023-patch.jpg" alt="2023 Code Breaker Patch">
-        </div>
-        <div class="event-card-body">
-          <div class="event-card-year">2023 FALL</div>
-          <div class="event-card-title">Code Breaker: Impossible Mission</div>
-          <a class="event-card-btn disabled" href="#">Coming Soon</a>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-card-img-wrap">
-          <img class="event-card-img" src="2022/Fall/patch/2022 zombie.jpg" alt="2022 Zombie Survival Patch">
-        </div>
-        <div class="event-card-body">
-          <div class="event-card-year">2022 FALL</div>
-          <div class="event-card-title">Zombie Survival</div>
-          <a class="event-card-btn disabled" href="#">Coming Soon</a>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-card-img-wrap">
-          <img class="event-card-img" src="2022/Spring/patch/2022 - Cooking.png" alt="2022 Spring Cooking Patch">
-        </div>
-        <div class="event-card-body">
-          <div class="event-card-year">2022 SPRING</div>
-          <div class="event-card-title">Cooking</div>
-          <a class="event-card-btn disabled" href="#">Coming Soon</a>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-card-img-wrap">
-          <img class="event-card-img" src="2021/Fall/patch/2021-Patch.jpg" alt="2021 Highland Games Patch">
-        </div>
-        <div class="event-card-body">
-          <div class="event-card-year">2021 FALL</div>
-          <div class="event-card-title">Highland Games</div>
-          <a class="event-card-btn disabled" href="#">Coming Soon</a>
-        </div>
-      </div>
-
+    <div class="cards-track" id="cardsTrack">
+      <!-- Dynamically populated by JS -->
     </div>
   </div>
 </section>
@@ -259,6 +194,7 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
 </div>
 
 <script>
+// ── Countdown ──────────────────────────────────────────────
 const eventDate = new Date("October 23, 2026 08:00:00").getTime();
 const timer = document.getElementById("countdown");
 setInterval(() => {
@@ -267,6 +203,8 @@ setInterval(() => {
   const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
   timer.innerHTML = "&#9203; " + days + " days, " + hours + " hours until Camporee!";
 }, 1000);
+
+// ── Feature tabs ───────────────────────────────────────────
 document.querySelectorAll('.feature-tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const vid = document.querySelector('#ftab-promo video');
@@ -277,12 +215,70 @@ document.querySelectorAll('.feature-tab-btn').forEach(btn => {
     document.getElementById('ftab-' + btn.dataset.ftab).classList.add('active');
   });
 });
+
+// ── File modal ─────────────────────────────────────────────
 const fileModal=document.getElementById('fileModal'),fileModalTitle=document.getElementById('fileModalTitle'),fileModalBody=document.getElementById('fileModalBody'),fileModalDownload=document.getElementById('fileModalDownload'),fileModalClose=document.getElementById('fileModalClose');
 function openFileModal(src,title,type,file){fileModalTitle.textContent=title;fileModalDownload.href=src;fileModalDownload.download=file;fileModalBody.innerHTML='';if(type==='pdf'){const f=document.createElement('iframe');f.src=src;fileModalBody.appendChild(f);}else{const img=document.createElement('img');img.src=src;img.alt=title;fileModalBody.appendChild(img);}fileModal.classList.add('open');document.body.style.overflow='hidden';}
 function closeFileModal(){fileModal.classList.remove('open');fileModalBody.innerHTML='';document.body.style.overflow='';}
 fileModalClose.onclick=closeFileModal;
 fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 document.addEventListener('keydown',e=>{if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();});
+
+// ── Dynamic Past Camporees Carousel ───────────────────────
+// Each entry: { year, season, label, title, link }
+// link: path to the event index.html — set to null for "Coming Soon"
+const REPO = 'msb2020-ux/mobilescouts';
+const BRANCH = 'main';
+const IMAGE_EXTS = ['jpg','jpeg','png','gif','webp'];
+
+const EVENTS = [
+  { year:'2025', season:'Fall',   label:'2025 FALL',   title:'Avengers Quest',                link:'2025/Fall/' },
+  { year:'2024', season:'Fall',   label:'2024 FALL',   title:'Galactic Heist',                link:null },
+  { year:'2023', season:'Fall',   label:'2023 FALL',   title:'Code Breaker: Impossible Mission', link:null },
+  { year:'2022', season:'Fall',   label:'2022 FALL',   title:'Zombie Survival',               link:null },
+  { year:'2022', season:'Spring', label:'2022 SPRING', title:'Cooking',                       link:null },
+  { year:'2021', season:'Fall',   label:'2021 FALL',   title:'Highland Games',                link:null },
+];
+
+async function getPatchUrl(year, season) {
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${year}/${season}/patch?ref=${BRANCH}`);
+    if (!r.ok) return null;
+    const files = await r.json();
+    const img = files.find(f => f.type === 'file' && IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
+    return img ? img.download_url : null;
+  } catch { return null; }
+}
+
+function buildCard(event, patchUrl) {
+  const imgHtml = patchUrl
+    ? `<img class="event-card-img" src="${patchUrl}" alt="${event.label} Patch" loading="lazy">`
+    : `<span class="event-card-placeholder">&#127960;</span>`;
+  const btnHtml = event.link
+    ? `<a class="event-card-btn" href="${event.link}">View Details &#8594;</a>`
+    : `<a class="event-card-btn disabled" href="#">Coming Soon</a>`;
+  const card = document.createElement('div');
+  card.className = 'event-card';
+  card.innerHTML = `
+    <div class="event-card-img-wrap">${imgHtml}</div>
+    <div class="event-card-body">
+      <div class="event-card-year">${event.label}</div>
+      <div class="event-card-title">${event.title}</div>
+      ${btnHtml}
+    </div>`;
+  return card;
+}
+
+async function buildCarousel() {
+  const track = document.getElementById('cardsTrack');
+  // Build all cards in parallel
+  const patches = await Promise.all(EVENTS.map(e => getPatchUrl(e.year, e.season)));
+  EVENTS.forEach((event, i) => {
+    track.appendChild(buildCard(event, patches[i]));
+  });
+}
+
+buildCarousel();
 </script>
 </body>
 </html>
