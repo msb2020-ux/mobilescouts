@@ -82,6 +82,8 @@
   .speech-card{border-radius:0!important;border-left:4px solid #3a5fa0!important;box-shadow:none!important;border-bottom:1px solid rgba(0,40,104,0.08)}
   .speech-card:last-child{border-bottom:none}
   .speech-card:hover{border-color:var(--red)!important}
+  .program-videos-wrap{background:white;border-radius:12px;padding:20px;box-shadow:var(--card-shadow);margin-top:14px}
+  .program-videos-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);font-weight:700;margin-bottom:12px}
   .slideshow-wrap{position:relative;border-radius:16px;overflow:hidden;background:#111;box-shadow:var(--card-shadow);aspect-ratio:16/9}
   .slideshow-track{display:flex;height:100%;transition:transform 0.5s ease}
   .slideshow-slide{flex-shrink:0;width:100%;height:100%}
@@ -101,7 +103,6 @@
   .ss-thumb.active{border-color:var(--red)}
   .ss-thumb img{width:100%;height:100%;object-fit:cover;display:block}
   .ss-empty{background:linear-gradient(135deg,var(--navy),#00408a);border-radius:16px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:rgba(255,255,255,0.4);box-shadow:var(--card-shadow)}
-  .ss-empty p{font-size:0.82rem;letter-spacing:0.06em}
   .ev-player{display:flex;flex-direction:column;gap:14px}
   .ev-featured{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9}
   .ev-featured iframe,.ev-featured video{width:100%;height:100%;border:none;display:block}
@@ -225,65 +226,13 @@
 
 <div class="tabs-container">
   <div class="tab-bar">
-    <button class="tab-btn active" data-tab="program">&#128203; Event Program</button>
-    <button class="tab-btn" data-tab="marketing">&#128138; Event Marketing</button>
+    <button class="tab-btn active" data-tab="marketing">&#128138; Marketing</button>
+    <button class="tab-btn" data-tab="program">&#128203; Program</button>
+    <button class="tab-btn" data-tab="photos">&#128247; Photos &amp; Videos</button>
   </div>
 
-  <div class="tab-panel active" id="tab-program">
-    <div class="section-header"><span class="section-num">01</span><h2>Event Documents</h2><div class="rule"></div></div>
-    <div class="downloads-grid">
-      <div class="dl-card" data-modal-src="program/2025 - Five Rivers Fall Camporee - FINAL.pdf" data-modal-title="Leader's Guide" data-modal-type="pdf" data-modal-file="2025 - Five Rivers Fall Camporee - FINAL.pdf">
-        <span class="dl-icon">&#128203;</span><div class="dl-info"><div class="dl-title">Leader's Guide</div><div class="dl-sub">PDF &middot; 2025 Final Edition</div></div><span class="dl-arrow">&#8599;</span>
-      </div>
-      <div class="dl-card" data-modal-src="map/Map-PSD.jpg" data-modal-title="Event Map" data-modal-type="image" data-modal-file="Map-PSD.jpg">
-        <span class="dl-icon">&#128506;&#65039;</span><div class="dl-info"><div class="dl-title">Event Map</div><div class="dl-sub">JPG &middot; Camp Layout</div></div><span class="dl-arrow">&#8599;</span>
-      </div>
-      <div class="dl-card" data-modal-src="SPL/SPL 2025.pdf" data-modal-title="SPL Guide" data-modal-type="pdf" data-modal-file="SPL 2025.pdf">
-        <span class="dl-icon">&#11088;</span><div class="dl-info"><div class="dl-title">SPL Guide</div><div class="dl-sub">PDF &middot; Senior Patrol Leader</div></div><span class="dl-arrow">&#8599;</span>
-      </div>
-      <div class="dl-card" data-modal-src="scoring/Scoring Rubrik.pdf" data-modal-title="Scoring Rubric" data-modal-type="pdf" data-modal-file="Scoring Rubrik.pdf">
-        <span class="dl-icon">&#128202;</span><div class="dl-info"><div class="dl-title">Scoring Rubric</div><div class="dl-sub">PDF &middot; Event Judging</div></div><span class="dl-arrow">&#8599;</span>
-      </div>
-    </div>
-
-    <div class="speeches-wrap" style="margin-top:28px">
-      <button class="speeches-toggle" id="speechesToggle" aria-expanded="false">
-        <span class="speeches-toggle-left">
-          <span class="speeches-icon">&#127908;</span>
-          <span><strong>Event Speeches</strong><span class="speeches-sub">6 documents &middot; Friday &amp; Saturday ceremonies</span></span>
-        </span>
-        <span class="speeches-chevron" id="speechesChevron">&#9660;</span>
-      </button>
-      <div class="speeches-body" id="speechesBody">
-        <div class="dl-card speech-card" data-modal-src="speeches/Welcome Speech - Friday Night - 1.pdf" data-modal-title="Welcome Speech &mdash; Friday Night (v1)" data-modal-type="pdf" data-modal-file="Welcome Speech - Friday Night - 1.pdf">
-          <span class="dl-icon">&#127769;</span><div class="dl-info"><div class="dl-title">Welcome Speech &mdash; Friday Night (v1)</div><div class="dl-sub">PDF &middot; Opening Ceremony</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="speeches/Welcome Speech - Friday Night - 2.pdf" data-modal-title="Welcome Speech &mdash; Friday Night (v2)" data-modal-type="pdf" data-modal-file="Welcome Speech - Friday Night - 2.pdf">
-          <span class="dl-icon">&#127769;</span><div class="dl-info"><div class="dl-title">Welcome Speech &mdash; Friday Night (v2)</div><div class="dl-sub">PDF &middot; Opening Ceremony</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="speeches/Saturday AM - Speech 3.pdf" data-modal-title="Saturday AM &mdash; Speech 3" data-modal-type="pdf" data-modal-file="Saturday AM - Speech 3.pdf">
-          <span class="dl-icon">&#127748;</span><div class="dl-info"><div class="dl-title">Saturday AM &mdash; Speech 3</div><div class="dl-sub">PDF &middot; Morning Session</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="speeches/Saturday PM - Speech 4.pdf" data-modal-title="Saturday PM &mdash; Speech 4" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 4.pdf">
-          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 4</div><div class="dl-sub">PDF &middot; Afternoon Session</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="speeches/Saturday PM - Speech 5.pdf" data-modal-title="Saturday PM &mdash; Speech 5" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 5.pdf">
-          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 5</div><div class="dl-sub">PDF &middot; Afternoon Session</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-        <div class="dl-card speech-card" data-modal-src="speeches/Saturday PM - Speech 6.pdf" data-modal-title="Saturday PM &mdash; Speech 6" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 6.pdf">
-          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 6</div><div class="dl-sub">PDF &middot; Afternoon Session</div></div><span class="dl-arrow">&#8599;</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Event Videos</h2><div class="rule"></div></div>
-    <div id="eventVideosSection"></div>
-
-    <div class="section-header" style="margin-top:48px"><span class="section-num">03</span><h2>Event Photos</h2><div class="rule"></div></div>
-    <div id="photoSlideshowSection"></div>
-  </div>
-
-  <div class="tab-panel" id="tab-marketing">
+  <!-- TAB 1: MARKETING -->
+  <div class="tab-panel active" id="tab-marketing">
     <div class="section-header"><span class="section-num">01</span><h2>Promo Videos</h2><div class="rule"></div></div>
     <div class="video-player">
       <div class="video-featured" id="featuredFrame">
@@ -303,6 +252,69 @@
     <div class="downloads-grid" style="margin-top:14px">
       <div class="dl-card" data-modal-src="marketing/2025-Flyer.pdf" data-modal-title="Camporee Flyer" data-modal-type="pdf" data-modal-file="2025-Flyer.pdf"><span class="dl-icon">&#128196;</span><div class="dl-info"><div class="dl-title">Camporee Flyer</div><div class="dl-sub">PDF &middot; Promotional</div></div><span class="dl-arrow">&#8599;</span></div>
     </div>
+  </div>
+
+  <!-- TAB 2: PROGRAM -->
+  <div class="tab-panel" id="tab-program">
+    <div class="section-header"><span class="section-num">01</span><h2>Event Documents</h2><div class="rule"></div></div>
+    <div class="downloads-grid">
+      <div class="dl-card" data-modal-src="program/2025 - Five Rivers Fall Camporee - FINAL.pdf" data-modal-title="Leader's Guide" data-modal-type="pdf" data-modal-file="2025 - Five Rivers Fall Camporee - FINAL.pdf">
+        <span class="dl-icon">&#128203;</span><div class="dl-info"><div class="dl-title">Leader's Guide</div><div class="dl-sub">PDF &middot; 2025 Final Edition</div></div><span class="dl-arrow">&#8599;</span>
+      </div>
+      <div class="dl-card" data-modal-src="map/Map-PSD.jpg" data-modal-title="Event Map" data-modal-type="image" data-modal-file="Map-PSD.jpg">
+        <span class="dl-icon">&#128506;&#65039;</span><div class="dl-info"><div class="dl-title">Event Map</div><div class="dl-sub">JPG &middot; Camp Layout</div></div><span class="dl-arrow">&#8599;</span>
+      </div>
+      <div class="dl-card" data-modal-src="SPL/SPL 2025.pdf" data-modal-title="SPL Guide" data-modal-type="pdf" data-modal-file="SPL 2025.pdf">
+        <span class="dl-icon">&#11088;</span><div class="dl-info"><div class="dl-title">SPL Guide</div><div class="dl-sub">PDF &middot; Senior Patrol Leader</div></div><span class="dl-arrow">&#8599;</span>
+      </div>
+      <div class="dl-card" data-modal-src="scoring/Scoring Rubrik.pdf" data-modal-title="Scoring Rubric" data-modal-type="pdf" data-modal-file="Scoring Rubrik.pdf">
+        <span class="dl-icon">&#128202;</span><div class="dl-info"><div class="dl-title">Scoring Rubric</div><div class="dl-sub">PDF &middot; Event Judging</div></div><span class="dl-arrow">&#8599;</span>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Videos Used During Event</h2><div class="rule"></div></div>
+    <div class="program-videos-wrap">
+      <div class="program-videos-label">&#127916; Videos played as part of the event program</div>
+      <div id="programVideosSection"><p style="color:var(--muted);font-size:0.9rem">Loading&hellip;</p></div>
+    </div>
+
+    <div class="speeches-wrap" style="margin-top:28px">
+      <button class="speeches-toggle" id="speechesToggle" aria-expanded="false">
+        <span class="speeches-toggle-left">
+          <span class="speeches-icon">&#127908;</span>
+          <span><strong>Event Speeches</strong><span class="speeches-sub">6 documents &middot; Friday &amp; Saturday ceremonies</span></span>
+        </span>
+        <span class="speeches-chevron" id="speechesChevron">&#9660;</span>
+      </button>
+      <div class="speeches-body" id="speechesBody">
+        <div class="dl-card speech-card" data-modal-src="speeches/Welcome Speech - Friday Night - 1.pdf" data-modal-title="Welcome Speech &mdash; Friday Night (v1)" data-modal-type="pdf" data-modal-file="Welcome Speech - Friday Night - 1.pdf">
+          <span class="dl-icon">&#127769;</span><div class="dl-info"><div class="dl-title">Welcome Speech &mdash; Friday Night (v1)</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="speeches/Welcome Speech - Friday Night - 2.pdf" data-modal-title="Welcome Speech &mdash; Friday Night (v2)" data-modal-type="pdf" data-modal-file="Welcome Speech - Friday Night - 2.pdf">
+          <span class="dl-icon">&#127769;</span><div class="dl-info"><div class="dl-title">Welcome Speech &mdash; Friday Night (v2)</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="speeches/Saturday AM - Speech 3.pdf" data-modal-title="Saturday AM &mdash; Speech 3" data-modal-type="pdf" data-modal-file="Saturday AM - Speech 3.pdf">
+          <span class="dl-icon">&#127748;</span><div class="dl-info"><div class="dl-title">Saturday AM &mdash; Speech 3</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="speeches/Saturday PM - Speech 4.pdf" data-modal-title="Saturday PM &mdash; Speech 4" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 4.pdf">
+          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 4</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="speeches/Saturday PM - Speech 5.pdf" data-modal-title="Saturday PM &mdash; Speech 5" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 5.pdf">
+          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 5</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span>
+        </div>
+        <div class="dl-card speech-card" data-modal-src="speeches/Saturday PM - Speech 6.pdf" data-modal-title="Saturday PM &mdash; Speech 6" data-modal-type="pdf" data-modal-file="Saturday PM - Speech 6.pdf">
+          <span class="dl-icon">&#9728;&#65039;</span><div class="dl-info"><div class="dl-title">Saturday PM &mdash; Speech 6</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: PHOTOS & VIDEOS -->
+  <div class="tab-panel" id="tab-photos">
+    <div class="section-header"><span class="section-num">01</span><h2>Event Videos</h2><div class="rule"></div></div>
+    <div id="eventVideosSection"></div>
+    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Event Photos</h2><div class="rule"></div></div>
+    <div id="photoSlideshowSection"></div>
   </div>
 </div>
 
@@ -326,19 +338,51 @@
 
 <script>
 const REPO='msb2020-ux/mobilescouts', BRANCH='main';
-const PHOTOS_PATH='2025/Fall/photos';
-const VIDEOS_PATH='2025/Fall/videos';
+const BASE='2025/Fall';
 const IMAGE_EXTS=['jpg','jpeg','png','gif','webp'];
 
 async function fetchFolder(path){
   try{const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);if(!r.ok)return[];return(await r.json()).filter(f=>f.type==='file'&&f.name!=='README.md');}catch{return[];}
 }
 
+// Program videos — reads program/README.md for YouTube IDs used DURING the event
+async function buildProgramVideos(){
+  const container=document.getElementById('programVideosSection');
+  let entries=[];
+  try{
+    const r=await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${BASE}/program/README.md`);
+    if(r.ok){const text=await r.text();entries=text.split('\n').filter(l=>!l.startsWith('#')&&l.includes('|')).map(l=>{const[id,label]=l.split('|').map(s=>s.trim());return{id,label:label||'Program Video'};}).filter(e=>e.id&&e.id.length>3);}
+  }catch{}
+  if(!entries.length){container.innerHTML='<p style="color:var(--muted);font-size:0.9rem">No program videos yet. Add YouTube IDs to <code>program/README.md</code>.</p>';return;}
+  let current=entries[0];
+  const thumbsHTML=entries.length>1?`<div class="ev-thumbs" id="pvThumbs">${entries.map((v,i)=>`<div class="ev-thumb${i===0?' active':''}" data-id="${v.id}"><div class="ev-thumb-img"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy"><div class="ev-thumb-play">&#9654;</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>`:'';
+  container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="pvFeatured"><iframe src="https://www.youtube.com/embed/${current.id}?rel=0&modestbranding=1" title="${current.label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe></div>${thumbsHTML}</div>`;
+  if(entries.length>1){document.getElementById('pvThumbs').addEventListener('click',e=>{const t=e.target.closest('.ev-thumb');if(!t)return;document.querySelectorAll('#pvThumbs .ev-thumb').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('pvFeatured').innerHTML=`<iframe src="https://www.youtube.com/embed/${t.dataset.id}?rel=0&modestbranding=1&autoplay=1" title="Video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`;});}
+}
+
+// Event videos — reads videos/README.md
+async function buildEventVideos(){
+  const container=document.getElementById('eventVideosSection');
+  let ytEntries=[];
+  try{
+    const r=await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${BASE}/videos/README.md`);
+    if(r.ok){const text=await r.text();ytEntries=text.split('\n').filter(l=>!l.startsWith('#')&&l.includes('|')).map(l=>{const[id,label]=l.split('|').map(s=>s.trim());return{type:'yt',id,label:label||'Event Video',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`};}).filter(e=>e.id&&e.id.length>3);}
+  }catch{}
+  let mp4Entries=[];
+  try{const files=await fetchFolder(`${BASE}/videos`);mp4Entries=files.filter(f=>f.name.toLowerCase().endsWith('.mp4')).map((f,i)=>({type:'mp4',url:f.download_url,label:`Event Clip ${i+1}`,thumb:null}));}catch{}
+  const all=[...ytEntries,...mp4Entries];
+  if(!all.length){container.innerHTML='<div class="ev-empty" style="border-radius:14px;aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4)"><p>No event videos yet.</p></div>';return;}
+  const makeFeatured=v=>v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1" title="${v.label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;
+  const thumbsHTML=all.length>1?`<div class="ev-thumbs" id="evThumbs">${all.map((v,i)=>`<div class="ev-thumb${i===0?' active':''}" data-idx="${i}"><div class="ev-thumb-img">${v.thumb?`<img src="${v.thumb}" alt="${v.label}" loading="lazy">`:'<div style="color:rgba(255,255,255,0.5);font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;height:100%">MP4</div>'}<div class="ev-thumb-play">&#9654;</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>`:'';
+  container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="evFeatured">${makeFeatured(all[0])}</div>${thumbsHTML}</div>`;
+  if(all.length>1){document.getElementById('evThumbs').addEventListener('click',e=>{const thumb=e.target.closest('.ev-thumb');if(!thumb)return;document.querySelectorAll('#evThumbs .ev-thumb').forEach(t=>t.classList.remove('active'));thumb.classList.add('active');const v=all[+thumb.dataset.idx];document.getElementById('evFeatured').innerHTML=v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&autoplay=1" title="${v.label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls autoplay playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;});}
+}
+
 async function buildPhotoSlideshow(){
   const container=document.getElementById('photoSlideshowSection');
-  const files=await fetchFolder(PHOTOS_PATH);
+  const files=await fetchFolder(`${BASE}/photos`);
   const photos=files.filter(f=>IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
-  if(!photos.length){container.innerHTML='<div class="ss-empty"><p>No photos found</p></div>';return;}
+  if(!photos.length){container.innerHTML='<div class="ss-empty"><p>No photos yet.</p></div>';return;}
   let current=0,autoTimer;
   const urls=photos.map(f=>f.download_url);
   container.innerHTML=`<div class="slideshow-wrap"><div class="slideshow-track" id="ssTrack">${urls.map((u,i)=>`<div class="slideshow-slide"><img src="${u}" alt="Photo ${i+1}" loading="${i===0?'eager':'lazy'}"></div>`).join('')}</div><button class="ss-btn ss-prev" id="ssPrev">&#8249;</button><button class="ss-btn ss-next" id="ssNext">&#8250;</button><div class="ss-dots" id="ssDots">${urls.map((_,i)=>`<button class="ss-dot${i===0?' active':''}" data-i="${i}"></button>`).join('')}</div><div class="ss-counter" id="ssCounter">1 / ${urls.length}</div></div><div class="ss-thumbs" id="ssThumbs">${urls.map((u,i)=>`<div class="ss-thumb${i===0?' active':''}" data-i="${i}"><img src="${u}" alt="" loading="lazy"></div>`).join('')}</div>`;
@@ -354,23 +398,6 @@ async function buildPhotoSlideshow(){
   track.addEventListener('touchend',e=>{if(touchX===null)return;const diff=touchX-e.changedTouches[0].clientX;if(Math.abs(diff)>40)goTo(diff>0?current+1:current-1);touchX=null;},{passive:true});
   autoTimer=setInterval(()=>goTo(current+1),4500);
   window._ssUrls=urls;window._ssGoTo=goTo;
-}
-
-async function buildEventVideos(){
-  const container=document.getElementById('eventVideosSection');
-  let ytEntries=[];
-  try{
-    const r=await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${VIDEOS_PATH}/README.md`);
-    if(r.ok){const text=await r.text();ytEntries=text.split('\n').filter(l=>!l.startsWith('#')&&l.includes('|')).map(l=>{const[id,label]=l.split('|').map(s=>s.trim());return{type:'yt',id,label:label||'Event Video',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`};}).filter(e=>e.id&&e.id.length>3);}
-  }catch{}
-  let mp4Entries=[];
-  try{const files=await fetchFolder(VIDEOS_PATH);mp4Entries=files.filter(f=>f.name.toLowerCase().endsWith('.mp4')).map((f,i)=>({type:'mp4',url:f.download_url,label:`Event Clip ${i+1}`,thumb:null}));}catch{}
-  const all=[...ytEntries,...mp4Entries];
-  if(!all.length){container.innerHTML='<div class="ev-empty"><p>No event videos found.</p></div>';return;}
-  const makeFeatured=v=>v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1" title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;
-  const thumbsHTML=all.length>1?`<div class="ev-thumbs" id="evThumbs">${all.map((v,i)=>`<div class="ev-thumb${i===0?' active':''}" data-idx="${i}"><div class="ev-thumb-img">${v.thumb?`<img src="${v.thumb}" alt="${v.label}" loading="lazy">`:'<div style="color:rgba(255,255,255,0.5);font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;height:100%">MP4</div>'}<div class="ev-thumb-play">&#9654;</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>`:'';
-  container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="evFeatured">${makeFeatured(all[0])}</div>${thumbsHTML}</div>`;
-  if(all.length>1){document.getElementById('evThumbs').addEventListener('click',e=>{const thumb=e.target.closest('.ev-thumb');if(!thumb)return;document.querySelectorAll('.ev-thumb').forEach(t=>t.classList.remove('active'));thumb.classList.add('active');const v=all[+thumb.dataset.idx];document.getElementById('evFeatured').innerHTML=v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&autoplay=1" title="${v.label}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls autoplay playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;});}
 }
 
 const lightbox=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCaption=document.getElementById('lbCaption');
@@ -403,8 +430,9 @@ document.addEventListener('keydown',e=>{if(lightbox.classList.contains('open')){
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 
-buildPhotoSlideshow();
+buildProgramVideos();
 buildEventVideos();
+buildPhotoSlideshow();
 </script>
 </body>
 </html>

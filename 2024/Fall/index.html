@@ -77,6 +77,8 @@
   .speech-card{border-radius:0!important;border-left:4px solid #3a5fa0!important;box-shadow:none!important;border-bottom:1px solid rgba(0,40,104,0.08)}
   .speech-card:last-child{border-bottom:none}
   .speech-card:hover{border-color:var(--red)!important}
+  .program-videos-wrap{background:white;border-radius:12px;padding:20px;box-shadow:var(--card-shadow);margin-top:14px}
+  .program-videos-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);font-weight:700;margin-bottom:12px}
   .slideshow-wrap{position:relative;border-radius:16px;overflow:hidden;background:#111;box-shadow:var(--card-shadow);aspect-ratio:16/9}
   .slideshow-track{display:flex;height:100%;transition:transform 0.5s ease}
   .slideshow-slide{flex-shrink:0;width:100%;height:100%}
@@ -96,12 +98,12 @@
   .ss-thumb.active{border-color:var(--red)}
   .ss-thumb img{width:100%;height:100%;object-fit:cover;display:block}
   .ss-empty{background:linear-gradient(135deg,var(--navy),#00408a);border-radius:16px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:rgba(255,255,255,0.4);box-shadow:var(--card-shadow)}
-  .ss-empty p{font-size:0.82rem;letter-spacing:0.06em}
   .ev-player{display:flex;flex-direction:column;gap:14px}
   .ev-featured{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9}
   .ev-featured iframe,.ev-featured video{width:100%;height:100%;border:none;display:block}
-  .ev-empty{border-radius:14px;aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4)}
   .ev-thumbs{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px}
+  .ev-thumbs::-webkit-scrollbar{height:4px}
+  .ev-thumbs::-webkit-scrollbar-thumb{background:var(--navy);border-radius:2px}
   .ev-thumb{flex-shrink:0;cursor:pointer;border-radius:10px;overflow:hidden;border:3px solid transparent;transition:border-color 0.2s,transform 0.2s;background:white;box-shadow:0 3px 12px rgba(0,40,104,0.1);width:175px}
   .ev-thumb:hover{transform:translateY(-2px);border-color:var(--navy)}
   .ev-thumb.active{border-color:var(--red)}
@@ -196,37 +198,45 @@
 
 <div class="tabs-container">
   <div class="tab-bar">
-    <button class="tab-btn active" data-tab="program">&#128203; Event Program</button>
-    <button class="tab-btn" data-tab="marketing">&#128138; Event Marketing</button>
+    <button class="tab-btn active" data-tab="marketing">&#128138; Marketing</button>
+    <button class="tab-btn" data-tab="program">&#128203; Program</button>
+    <button class="tab-btn" data-tab="photos">&#128247; Photos &amp; Videos</button>
   </div>
 
-  <div class="tab-panel active" id="tab-program">
+  <!-- TAB 1: MARKETING -->
+  <div class="tab-panel active" id="tab-marketing">
+    <div class="section-header"><span class="section-num">01</span><h2>Graphics &amp; Flyers</h2><div class="rule"></div></div>
+    <div id="marketingSection"><p style="color:var(--muted);font-size:0.9rem">Loading&hellip;</p></div>
+  </div>
+
+  <!-- TAB 2: PROGRAM -->
+  <div class="tab-panel" id="tab-program">
     <div class="section-header"><span class="section-num">01</span><h2>Event Documents</h2><div class="rule"></div></div>
-    <div id="docsSection"><p style="color:var(--muted);font-size:0.9rem">Loading documents&hellip;</p></div>
+    <div id="docsSection"><p style="color:var(--muted);font-size:0.9rem">Loading&hellip;</p></div>
+
+    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Videos Used During Event</h2><div class="rule"></div></div>
+    <div class="program-videos-wrap">
+      <div class="program-videos-label">&#127916; Videos played as part of the event program</div>
+      <div id="programVideosSection"><p style="color:var(--muted);font-size:0.9rem">Loading&hellip;</p></div>
+    </div>
 
     <div class="speeches-wrap" style="margin-top:28px">
       <button class="speeches-toggle" id="speechesToggle" aria-expanded="false">
-        <span class="speeches-toggle-left">
-          <span class="speeches-icon">&#127908;</span>
-          <span><strong>Event Speeches</strong><span class="speeches-sub">Click to expand</span></span>
-        </span>
+        <span class="speeches-toggle-left"><span class="speeches-icon">&#127908;</span><span><strong>Event Speeches</strong><span class="speeches-sub">Click to expand</span></span></span>
         <span class="speeches-chevron" id="speechesChevron">&#9660;</span>
       </button>
       <div class="speeches-body" id="speechesBody">
-        <div id="speechesContent"><p style="padding:16px 20px;color:var(--muted);font-size:0.9rem">Loading speeches&hellip;</p></div>
+        <div id="speechesContent"><p style="padding:16px 20px;color:var(--muted);font-size:0.9rem">Loading&hellip;</p></div>
       </div>
     </div>
-
-    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Event Videos</h2><div class="rule"></div></div>
-    <div id="eventVideosSection"></div>
-
-    <div class="section-header" style="margin-top:48px"><span class="section-num">03</span><h2>Event Photos</h2><div class="rule"></div></div>
-    <div id="photoSlideshowSection"></div>
   </div>
 
-  <div class="tab-panel" id="tab-marketing">
-    <div class="section-header"><span class="section-num">01</span><h2>Graphics &amp; Marketing</h2><div class="rule"></div></div>
-    <div id="marketingSection"><p style="color:var(--muted);font-size:0.9rem">Loading&hellip;</p></div>
+  <!-- TAB 3: PHOTOS & VIDEOS -->
+  <div class="tab-panel" id="tab-photos">
+    <div class="section-header"><span class="section-num">01</span><h2>Event Videos</h2><div class="rule"></div></div>
+    <div id="eventVideosSection"></div>
+    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Event Photos</h2><div class="rule"></div></div>
+    <div id="photoSlideshowSection"></div>
   </div>
 </div>
 
@@ -258,84 +268,62 @@ async function fetchFolder(path){
   try{const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);if(!r.ok)return[];return(await r.json()).filter(f=>f.type==='file'&&f.name!=='README.md');}catch{return[];}
 }
 
-// ── Documents (program folder) ─────────────────────────────────────────────
 async function buildDocs(){
   const section=document.getElementById('docsSection');
-  const files=await fetchFolder(`${BASE}/program`);
-  const pdfs=files.filter(f=>PDF_EXTS.includes(f.name.split('.').pop().toLowerCase()));
-  const imgs=files.filter(f=>IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
-  if(!pdfs.length&&!imgs.length){section.innerHTML='<p style="color:var(--muted);font-size:0.9rem">No documents uploaded yet.</p>';return;}
-  const cards=[...pdfs,...imgs].map(f=>{
-    const ext=f.name.split('.').pop().toLowerCase();
-    const isPdf=PDF_EXTS.includes(ext);
-    const icon=isPdf?'&#128203;':'&#128506;&#65039;';
-    return `<div class="dl-card" onclick="openFileModal('${f.download_url}','${f.name}','${isPdf?'pdf':'image'}','${f.name}')">
-      <span class="dl-icon">${icon}</span><div class="dl-info"><div class="dl-title">${f.name.replace(/\.[^.]+$/,'')}</div><div class="dl-sub">${ext.toUpperCase()}</div></div><span class="dl-arrow">&#8599;</span>
-    </div>`;
-  }).join('');
-  section.innerHTML=`<div class="downloads-grid">${cards}</div>`;
+  const allFiles=[];
+  for(const sub of['program','scoring','SPL','map']){
+    const files=await fetchFolder(`${BASE}/${sub}`);
+    files.forEach(f=>f._sub=sub);
+    allFiles.push(...files);
+  }
+  const valid=allFiles.filter(f=>[...PDF_EXTS,...IMAGE_EXTS].includes(f.name.split('.').pop().toLowerCase()));
+  if(!valid.length){section.innerHTML='<p style="color:var(--muted);font-size:0.9rem">No documents uploaded yet.</p>';return;}
+  section.innerHTML=`<div class="downloads-grid">${valid.map(f=>{const ext=f.name.split('.').pop().toLowerCase();const isPdf=PDF_EXTS.includes(ext);const icon=isPdf?'&#128203;':'&#128506;&#65039;';const lbl=f._sub==='program'?'Program Guide':f._sub==='scoring'?'Scoring':f._sub==='SPL'?'SPL Guide':'Map';return`<div class="dl-card" onclick="openFileModal('${f.download_url}','${f.name}','${isPdf?'pdf':'image'}','${f.name}')"><span class="dl-icon">${icon}</span><div class="dl-info"><div class="dl-title">${lbl}: ${f.name.replace(/\.[^.]+$/,'')}</div><div class="dl-sub">${ext.toUpperCase()}</div></div><span class="dl-arrow">&#8599;</span></div>`;}).join('')}</div>`;
 }
 
-// Also check scoring and SPL folders
-async function buildExtraDocs(){
-  const extra=[
-    {path:`${BASE}/scoring`,label:'Scoring'},
-    {path:`${BASE}/SPL`,label:'SPL'},
-    {path:`${BASE}/map`,label:'Map'},
-  ];
-  let cards='';
-  for(const e of extra){
-    const files=await fetchFolder(e.path);
-    for(const f of files){
-      const ext=f.name.split('.').pop().toLowerCase();
-      const isPdf=PDF_EXTS.includes(ext);
-      const isImg=IMAGE_EXTS.includes(ext);
-      if(!isPdf&&!isImg) continue;
-      const icon=isPdf?'&#128202;':'&#128506;&#65039;';
-      cards+=`<div class="dl-card" onclick="openFileModal('${f.download_url}','${f.name}','${isPdf?'pdf':'image'}','${f.name}')">
-        <span class="dl-icon">${icon}</span><div class="dl-info"><div class="dl-title">${e.label}: ${f.name.replace(/\.[^.]+$/,'')}</div><div class="dl-sub">${ext.toUpperCase()}</div></div><span class="dl-arrow">&#8599;</span>
-      </div>`;
-    }
-  }
-  if(cards){
-    const section=document.getElementById('docsSection');
-    section.innerHTML+=`<div class="downloads-grid" style="margin-top:14px">${cards}</div>`;
-  }
-}
-
-// ── Speeches ───────────────────────────────────────────────────────────────
 async function buildSpeeches(){
   const content=document.getElementById('speechesContent');
   const files=await fetchFolder(`${BASE}/speeches`);
   const pdfs=files.filter(f=>f.name.split('.').pop().toLowerCase()==='pdf');
-  if(!pdfs.length){content.innerHTML='<p style="padding:16px 20px;color:var(--muted);font-size:0.9rem">No speeches uploaded yet.</p>';return;}
-  content.innerHTML=pdfs.map(f=>`
-    <div class="dl-card speech-card" onclick="openFileModal('${f.download_url}','${f.name}','pdf','${f.name}')">
-      <span class="dl-icon">&#127908;</span><div class="dl-info"><div class="dl-title">${f.name.replace(/\.[^.]+$/,'')}</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span>
-    </div>`).join('');
+  if(!pdfs.length){content.innerHTML='<p style="padding:16px 20px;color:var(--muted);font-size:0.9rem">No speeches yet.</p>';return;}
+  content.innerHTML=pdfs.map(f=>`<div class="dl-card speech-card" onclick="openFileModal('${f.download_url}','${f.name}','pdf','${f.name}')"><span class="dl-icon">&#127908;</span><div class="dl-info"><div class="dl-title">${f.name.replace(/\.[^.]+$/,'')}</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span></div>`).join('');
 }
 
-// ── Videos ────────────────────────────────────────────────────────────────
+async function buildProgramVideos(){
+  const container=document.getElementById('programVideosSection');
+  let entries=[];
+  try{
+    const r=await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${BASE}/program/README.md`);
+    if(r.ok){const text=await r.text();entries=text.split('\n').filter(l=>!l.startsWith('#')&&l.includes('|')).map(l=>{const[id,label]=l.split('|').map(s=>s.trim());return{id,label:label||'Program Video'};}).filter(e=>e.id&&e.id.length>3);}
+  }catch{}
+  if(!entries.length){container.innerHTML='<p style="color:var(--muted);font-size:0.9rem">No program videos yet. Add YouTube IDs to <code>program/README.md</code>.</p>';return;}
+  const thumbsHTML=entries.length>1?`<div class="ev-thumbs" id="pvThumbs">${entries.map((v,i)=>`<div class="ev-thumb${i===0?' active':''}" data-id="${v.id}"><div class="ev-thumb-img"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy"><div class="ev-thumb-play">&#9654;</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>`:'';
+  container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="pvFeatured"><iframe src="https://www.youtube.com/embed/${entries[0].id}?rel=0&modestbranding=1" title="${entries[0].label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe></div>${thumbsHTML}</div>`;
+  if(entries.length>1){document.getElementById('pvThumbs').addEventListener('click',e=>{const t=e.target.closest('.ev-thumb');if(!t)return;document.querySelectorAll('#pvThumbs .ev-thumb').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('pvFeatured').innerHTML=`<iframe src="https://www.youtube.com/embed/${t.dataset.id}?rel=0&modestbranding=1&autoplay=1" title="Video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`;});}
+}
+
 async function buildEventVideos(){
   const container=document.getElementById('eventVideosSection');
   let ytEntries=[];
-  try{const r=await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${BASE}/videos/README.md`);if(r.ok){const text=await r.text();ytEntries=text.split('\n').filter(l=>!l.startsWith('#')&&l.includes('|')).map(l=>{const[id,label]=l.split('|').map(s=>s.trim());return{type:'yt',id,label:label||'Event Video',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`};}).filter(e=>e.id&&e.id.length>3);}}catch{}
+  try{
+    const r=await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${BASE}/videos/README.md`);
+    if(r.ok){const text=await r.text();ytEntries=text.split('\n').filter(l=>!l.startsWith('#')&&l.includes('|')).map(l=>{const[id,label]=l.split('|').map(s=>s.trim());return{type:'yt',id,label:label||'Event Video',thumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`};}).filter(e=>e.id&&e.id.length>3);}
+  }catch{}
   let mp4Entries=[];
   try{const files=await fetchFolder(`${BASE}/videos`);mp4Entries=files.filter(f=>f.name.toLowerCase().endsWith('.mp4')).map((f,i)=>({type:'mp4',url:f.download_url,label:`Event Clip ${i+1}`,thumb:null}));}catch{}
   const all=[...ytEntries,...mp4Entries];
-  if(!all.length){container.innerHTML='<div class="ev-empty"><p style="padding:20px;color:rgba(255,255,255,0.4)">No event videos yet.</p></div>';return;}
+  if(!all.length){container.innerHTML='<div style="border-radius:14px;aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4)"><p>No event videos yet.</p></div>';return;}
   const makeFeatured=v=>v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1" title="${v.label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;
   const thumbsHTML=all.length>1?`<div class="ev-thumbs" id="evThumbs">${all.map((v,i)=>`<div class="ev-thumb${i===0?' active':''}" data-idx="${i}"><div class="ev-thumb-img">${v.thumb?`<img src="${v.thumb}" alt="${v.label}" loading="lazy">`:'<div style="color:rgba(255,255,255,0.5);font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;height:100%">MP4</div>'}<div class="ev-thumb-play">&#9654;</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>`:'';
   container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="evFeatured">${makeFeatured(all[0])}</div>${thumbsHTML}</div>`;
-  if(all.length>1){document.getElementById('evThumbs').addEventListener('click',e=>{const thumb=e.target.closest('.ev-thumb');if(!thumb)return;document.querySelectorAll('.ev-thumb').forEach(t=>t.classList.remove('active'));thumb.classList.add('active');const v=all[+thumb.dataset.idx];document.getElementById('evFeatured').innerHTML=v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&autoplay=1" title="${v.label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls autoplay playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;});}
+  if(all.length>1){document.getElementById('evThumbs').addEventListener('click',e=>{const thumb=e.target.closest('.ev-thumb');if(!thumb)return;document.querySelectorAll('#evThumbs .ev-thumb').forEach(t=>t.classList.remove('active'));thumb.classList.add('active');const v=all[+thumb.dataset.idx];document.getElementById('evFeatured').innerHTML=v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&autoplay=1" title="${v.label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls autoplay playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;});}
 }
 
-// ── Photos ────────────────────────────────────────────────────────────────
 async function buildPhotoSlideshow(){
   const container=document.getElementById('photoSlideshowSection');
   const files=await fetchFolder(`${BASE}/photos`);
   const photos=files.filter(f=>IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
-  if(!photos.length){container.innerHTML='<div class="ss-empty"><p>No photos uploaded yet.</p></div>';return;}
+  if(!photos.length){container.innerHTML='<div class="ss-empty"><p>No photos yet.</p></div>';return;}
   let current=0,autoTimer;
   const urls=photos.map(f=>f.download_url);
   container.innerHTML=`<div class="slideshow-wrap"><div class="slideshow-track" id="ssTrack">${urls.map((u,i)=>`<div class="slideshow-slide"><img src="${u}" alt="Photo ${i+1}" loading="${i===0?'eager':'lazy'}"></div>`).join('')}</div><button class="ss-btn ss-prev" id="ssPrev">&#8249;</button><button class="ss-btn ss-next" id="ssNext">&#8250;</button><div class="ss-dots" id="ssDots">${urls.map((_,i)=>`<button class="ss-dot${i===0?' active':''}" data-i="${i}"></button>`).join('')}</div><div class="ss-counter" id="ssCounter">1 / ${urls.length}</div></div><div class="ss-thumbs" id="ssThumbs">${urls.map((u,i)=>`<div class="ss-thumb${i===0?' active':''}" data-i="${i}"><img src="${u}" alt="" loading="lazy"></div>`).join('')}</div>`;
@@ -353,20 +341,18 @@ async function buildPhotoSlideshow(){
   window._ssUrls=urls;window._ssGoTo=goTo;
 }
 
-// ── Marketing graphics ────────────────────────────────────────────────────
 async function buildMarketing(){
   const section=document.getElementById('marketingSection');
   const files=await fetchFolder(`${BASE}/marketing`);
   const imgs=files.filter(f=>IMAGE_EXTS.includes(f.name.split('.').pop().toLowerCase()));
   const pdfs=files.filter(f=>f.name.split('.').pop().toLowerCase()==='pdf');
-  if(!imgs.length&&!pdfs.length){section.innerHTML='<p style="color:var(--muted);font-size:0.9rem">No marketing materials uploaded yet.</p>';return;}
+  if(!imgs.length&&!pdfs.length){section.innerHTML='<p style="color:var(--muted);font-size:0.9rem">No marketing materials yet.</p>';return;}
   let html='';
-  if(imgs.length) html+=`<div class="graphics-grid">${imgs.map(f=>`<div class="graphic-card" onclick="openFileModal('${f.download_url}','${f.name}','image','${f.name}')"><img src="${f.download_url}" alt="${f.name}" loading="lazy" onerror="this.closest('.graphic-card').style.display='none'"><div class="graphic-card-label">${f.name.replace(/\.[^.]+$/,'')}</div></div>`).join('')}</div>`;
-  if(pdfs.length) html+=`<div class="downloads-grid" style="margin-top:14px">${pdfs.map(f=>`<div class="dl-card" onclick="openFileModal('${f.download_url}','${f.name}','pdf','${f.name}')"><span class="dl-icon">&#128196;</span><div class="dl-info"><div class="dl-title">${f.name.replace(/\.[^.]+$/,'')}</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span></div>`).join('')}</div>`;
+  if(imgs.length)html+=`<div class="graphics-grid">${imgs.map(f=>`<div class="graphic-card" onclick="openFileModal('${f.download_url}','${f.name}','image','${f.name}')"><img src="${f.download_url}" alt="${f.name}" loading="lazy" onerror="this.closest('.graphic-card').style.display='none'"><div class="graphic-card-label">${f.name.replace(/\.[^.]+$/,'')}</div></div>`).join('')}</div>`;
+  if(pdfs.length)html+=`<div class="downloads-grid" style="margin-top:14px">${pdfs.map(f=>`<div class="dl-card" onclick="openFileModal('${f.download_url}','${f.name}','pdf','${f.name}')"><span class="dl-icon">&#128196;</span><div class="dl-info"><div class="dl-title">${f.name.replace(/\.[^.]+$/,'')}</div><div class="dl-sub">PDF</div></div><span class="dl-arrow">&#8599;</span></div>`).join('')}</div>`;
   section.innerHTML=html;
 }
 
-// ── Lightbox ──────────────────────────────────────────────────────────────
 const lightbox=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCaption=document.getElementById('lbCaption');
 let lbPhotos=[],lbIdx=0;
 function openLightboxAt(i){lbPhotos=window._ssUrls||[];lbIdx=i;lbImg.src=lbPhotos[lbIdx];lbCaption.textContent=`${lbIdx+1} / ${lbPhotos.length}`;lightbox.classList.add('open');document.body.style.overflow='hidden';}
@@ -377,34 +363,28 @@ lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox();});
 document.getElementById('lbPrev').onclick=()=>lbNav(-1);
 document.getElementById('lbNext').onclick=()=>lbNav(1);
 
-// ── File modal ────────────────────────────────────────────────────────────
 const fileModal=document.getElementById('fileModal'),fileModalTitle=document.getElementById('fileModalTitle'),fileModalBody=document.getElementById('fileModalBody'),fileModalDownload=document.getElementById('fileModalDownload'),fileModalClose=document.getElementById('fileModalClose');
 function openFileModal(src,title,type,file){fileModalTitle.textContent=title;fileModalDownload.href=src;fileModalDownload.download=file;fileModalBody.innerHTML='';if(type==='pdf'){const f=document.createElement('iframe');f.src=src;fileModalBody.appendChild(f);}else{const img=document.createElement('img');img.src=src;img.alt=title;fileModalBody.appendChild(img);}fileModal.classList.add('open');document.body.style.overflow='hidden';}
 function closeFileModal(){fileModal.classList.remove('open');fileModalBody.innerHTML='';document.body.style.overflow='';}
 fileModalClose.onclick=closeFileModal;
 fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 
-// ── Speeches accordion ────────────────────────────────────────────────────
 const speechesToggle=document.getElementById('speechesToggle'),speechesBody=document.getElementById('speechesBody'),speechesChevron=document.getElementById('speechesChevron');
 speechesToggle.addEventListener('click',()=>{const isOpen=speechesBody.classList.toggle('open');speechesChevron.classList.toggle('open',isOpen);speechesToggle.setAttribute('aria-expanded',isOpen);});
 
-// ── Tabs ──────────────────────────────────────────────────────────────────
 document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+btn.dataset.tab).classList.add('active');}));
 
-// ── Keyboard ──────────────────────────────────────────────────────────────
 document.addEventListener('keydown',e=>{if(lightbox.classList.contains('open')){if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);}if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();});
 
-// ── Fade-in ───────────────────────────────────────────────────────────────
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:0.08});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 
-// ── Init ──────────────────────────────────────────────────────────────────
+buildMarketing();
 buildDocs();
-buildExtraDocs();
 buildSpeeches();
+buildProgramVideos();
 buildEventVideos();
 buildPhotoSlideshow();
-buildMarketing();
 </script>
 </body>
 </html>
