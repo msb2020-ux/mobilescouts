@@ -61,8 +61,6 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .file-modal-footer{background:#f4f4f4;padding:10px 20px;display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
 .file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700;transition:background 0.18s}
 .file-modal-footer a:hover{background:var(--red)}
-
-/* ── Past Camporees carousel ── */
 .past-events{background:#f4f4f4;padding:48px 20px}
 .past-events h2{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--navy);margin-bottom:8px}
 .past-events-sub{text-align:center;font-size:0.85rem;color:#666;margin-bottom:28px}
@@ -70,12 +68,14 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .carousel-arrow{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:2px solid var(--navy);background:white;color:var(--navy);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.18s,color 0.18s;z-index:2;box-shadow:0 2px 8px rgba(0,40,104,0.12)}
 .carousel-arrow:hover{background:var(--navy);color:white}
 .carousel-arrow:disabled{opacity:0.25;cursor:default;pointer-events:none}
-.cards-viewport{flex:1;overflow:hidden;margin:0 10px}
-.cards-track{display:flex;gap:20px;transition:transform 0.35s ease;padding:8px 4px 16px}
+.cards-viewport{flex:1;overflow:hidden;margin:0 10px;cursor:grab}
+.cards-viewport.dragging{cursor:grabbing}
+.cards-track{display:flex;gap:20px;padding:8px 4px 16px;transition:transform 0.35s ease;user-select:none}
+.cards-track.no-transition{transition:none}
 .event-card{flex-shrink:0;width:210px;background:white;border-radius:14px;box-shadow:0 4px 18px rgba(0,40,104,0.12);overflow:hidden;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s}
 .event-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,40,104,0.18)}
 .event-card-img-wrap{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.event-card-img{width:100%;height:100%;object-fit:cover;display:block}
+.event-card-img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .event-card-placeholder{font-size:3.5rem;opacity:0.2;user-select:none}
 .event-card-body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1;border-top:3px solid var(--navy)}
 .event-card-year{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.12em;color:var(--red);margin-bottom:2px}
@@ -83,7 +83,6 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .event-card-btn{display:block;text-align:center;background:var(--navy);color:white;text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;padding:8px 14px;border-radius:6px;transition:background 0.18s}
 .event-card-btn:hover{background:var(--red)}
 .event-card-btn.disabled{background:#bbb;pointer-events:none;cursor:default}
-
 .social{text-align:center;padding:40px 20px}
 .social img.qr{width:150px;margin-top:20px}
 footer{background:var(--navy);color:white;text-align:center;padding:20px}
@@ -232,24 +231,25 @@ fileModalClose.onclick=closeFileModal;
 fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 document.addEventListener('keydown',e=>{if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();});
 
-// ── Past Camporees — dynamic carousel ─────────────────────────────────────
+// ── Past Camporees — dynamic carousel with swipe ───────────────────────────
 const REPO   = 'msb2020-ux/mobilescouts';
 const BRANCH = 'main';
 const IMAGE_EXTS = ['jpg','jpeg','png','gif','webp'];
+const CARD_W = 210 + 20; // card width + gap
+let scrollPos = 0;
 
-// All events — most recent first. Set link:null for Coming Soon.
 const EVENTS = [
-  { year:'2026', season:'Spring', label:'2026 SPRING', title:'TBD',                           link:null },
-  { year:'2025', season:'Fall',   label:'2025 FALL',   title:'Avengers Quest',                link:'2025/Fall/' },
-  { year:'2025', season:'Spring', label:'2025 SPRING', title:'TBD',                           link:null },
-  { year:'2024', season:'Fall',   label:'2024 FALL',   title:'Galactic Heist',                link:null },
-  { year:'2024', season:'Spring', label:'2024 SPRING', title:'TBD',                           link:null },
+  { year:'2026', season:'Spring', label:'2026 SPRING', title:'TBD',                              link:null },
+  { year:'2025', season:'Fall',   label:'2025 FALL',   title:'Avengers Quest',                   link:'2025/Fall/' },
+  { year:'2025', season:'Spring', label:'2025 SPRING', title:'TBD',                              link:null },
+  { year:'2024', season:'Fall',   label:'2024 FALL',   title:'Galactic Heist',                   link:null },
+  { year:'2024', season:'Spring', label:'2024 SPRING', title:'TBD',                              link:null },
   { year:'2023', season:'Fall',   label:'2023 FALL',   title:'Code Breaker: Impossible Mission', link:null },
-  { year:'2023', season:'Spring', label:'2023 SPRING', title:'TBD',                           link:null },
-  { year:'2022', season:'Fall',   label:'2022 FALL',   title:'Zombie Survival',               link:null },
-  { year:'2022', season:'Spring', label:'2022 SPRING', title:'Cooking',                       link:null },
-  { year:'2021', season:'Fall',   label:'2021 FALL',   title:'Highland Games',                link:null },
-  { year:'2021', season:'Spring', label:'2021 SPRING', title:'TBD',                           link:null },
+  { year:'2023', season:'Spring', label:'2023 SPRING', title:'TBD',                              link:null },
+  { year:'2022', season:'Fall',   label:'2022 FALL',   title:'Zombie Survival',                  link:null },
+  { year:'2022', season:'Spring', label:'2022 SPRING', title:'Cooking',                          link:null },
+  { year:'2021', season:'Fall',   label:'2021 FALL',   title:'Highland Games',                   link:null },
+  { year:'2021', season:'Spring', label:'2021 SPRING', title:'TBD',                              link:null },
 ];
 
 async function getPatchUrl(year, season) {
@@ -264,7 +264,7 @@ async function getPatchUrl(year, season) {
 
 function buildCard(event, patchUrl) {
   const imgHtml = patchUrl
-    ? `<img class="event-card-img" src="${patchUrl}" alt="${event.label} Patch" loading="lazy">`
+    ? `<img class="event-card-img" src="${patchUrl}" alt="${event.label} Patch" loading="lazy" draggable="false">`
     : `<span class="event-card-placeholder">&#127960;</span>`;
   const btnHtml = event.link
     ? `<a class="event-card-btn" href="${event.link}">View Details &#8594;</a>`
@@ -281,38 +281,104 @@ function buildCard(event, patchUrl) {
   return card;
 }
 
-// Arrow scroll logic
-const CARD_WIDTH = 210 + 20; // card width + gap
-let scrollPos = 0;
-
-function updateArrows() {
+function getMaxScroll() {
   const viewport = document.getElementById('cardsViewport');
   const track = document.getElementById('cardsTrack');
-  const maxScroll = track.scrollWidth - viewport.clientWidth;
+  return Math.max(0, track.scrollWidth - viewport.clientWidth);
+}
+
+function applyScroll(animated = true) {
+  const track = document.getElementById('cardsTrack');
+  scrollPos = Math.max(0, Math.min(getMaxScroll(), scrollPos));
+  if (!animated) track.classList.add('no-transition');
+  track.style.transform = `translateX(-${scrollPos}px)`;
+  if (!animated) requestAnimationFrame(() => track.classList.remove('no-transition'));
   document.getElementById('carouselPrev').disabled = scrollPos <= 0;
-  document.getElementById('carouselNext').disabled = scrollPos >= maxScroll - 1;
+  document.getElementById('carouselNext').disabled = scrollPos >= getMaxScroll() - 1;
 }
 
 function scrollCarousel(dir) {
   const viewport = document.getElementById('cardsViewport');
-  const track = document.getElementById('cardsTrack');
-  const visibleCards = Math.max(1, Math.floor(viewport.clientWidth / CARD_WIDTH));
-  const step = visibleCards * CARD_WIDTH;
-  const maxScroll = track.scrollWidth - viewport.clientWidth;
-  scrollPos = Math.max(0, Math.min(maxScroll, scrollPos + dir * step));
-  track.style.transform = `translateX(-${scrollPos}px)`;
-  updateArrows();
+  const visible = Math.max(1, Math.floor(viewport.clientWidth / CARD_W));
+  scrollPos += dir * visible * CARD_W;
+  applyScroll();
 }
 
 document.getElementById('carouselPrev').addEventListener('click', () => scrollCarousel(-1));
 document.getElementById('carouselNext').addEventListener('click', () => scrollCarousel(1));
-window.addEventListener('resize', updateArrows);
+window.addEventListener('resize', () => applyScroll());
+
+// ── Touch & mouse drag swipe ───────────────────────────────────────────────
+(function initDrag() {
+  const viewport = document.getElementById('cardsViewport');
+  let startX = 0, startScroll = 0, isDragging = false, moved = false;
+
+  // Touch
+  viewport.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startScroll = scrollPos;
+    moved = false;
+  }, { passive: true });
+
+  viewport.addEventListener('touchmove', e => {
+    const dx = startX - e.touches[0].clientX;
+    if (Math.abs(dx) > 5) moved = true;
+    scrollPos = startScroll + dx;
+    applyScroll(false); // no CSS transition while dragging
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', e => {
+    const dx = startX - e.changedTouches[0].clientX;
+    // Snap to nearest card boundary
+    scrollPos = startScroll + dx;
+    const snapped = Math.round(scrollPos / CARD_W) * CARD_W;
+    scrollPos = snapped;
+    applyScroll(true);
+    // Prevent card link click if we actually dragged
+    if (moved) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Mouse drag (desktop)
+  viewport.addEventListener('mousedown', e => {
+    isDragging = true;
+    moved = false;
+    startX = e.clientX;
+    startScroll = scrollPos;
+    viewport.classList.add('dragging');
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const dx = startX - e.clientX;
+    if (Math.abs(dx) > 5) moved = true;
+    scrollPos = startScroll + dx;
+    applyScroll(false);
+  });
+
+  window.addEventListener('mouseup', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    viewport.classList.remove('dragging');
+    const dx = startX - e.clientX;
+    scrollPos = startScroll + dx;
+    const snapped = Math.round(scrollPos / CARD_W) * CARD_W;
+    scrollPos = snapped;
+    applyScroll(true);
+  });
+
+  // Prevent clicks on cards after a drag
+  viewport.addEventListener('click', e => {
+    if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+  }, true);
+})();
 
 async function buildCarousel() {
   const track = document.getElementById('cardsTrack');
   const patches = await Promise.all(EVENTS.map(e => getPatchUrl(e.year, e.season)));
   EVENTS.forEach((event, i) => track.appendChild(buildCard(event, patches[i])));
-  updateArrows();
+  applyScroll();
 }
 
 buildCarousel();
