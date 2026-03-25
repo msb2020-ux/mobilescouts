@@ -106,7 +106,6 @@
   .ev-player{display:flex;flex-direction:column;gap:14px}
   .ev-featured{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9}
   .ev-featured iframe,.ev-featured video{width:100%;height:100%;border:none;display:block}
-  .ev-empty{border-radius:14px;aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4)}
   .ev-thumbs{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px}
   .ev-thumbs::-webkit-scrollbar{height:4px}
   .ev-thumbs::-webkit-scrollbar-thumb{background:var(--navy);border-radius:2px}
@@ -345,7 +344,6 @@ async function fetchFolder(path){
   try{const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);if(!r.ok)return[];return(await r.json()).filter(f=>f.type==='file'&&f.name!=='README.md');}catch{return[];}
 }
 
-// Program videos — reads program/README.md for YouTube IDs used DURING the event
 async function buildProgramVideos(){
   const container=document.getElementById('programVideosSection');
   let entries=[];
@@ -353,14 +351,12 @@ async function buildProgramVideos(){
     const r=await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${BASE}/program/README.md`);
     if(r.ok){const text=await r.text();entries=text.split('\n').filter(l=>!l.startsWith('#')&&l.includes('|')).map(l=>{const[id,label]=l.split('|').map(s=>s.trim());return{id,label:label||'Program Video'};}).filter(e=>e.id&&e.id.length>3);}
   }catch{}
-  if(!entries.length){container.innerHTML='<p style="color:var(--muted);font-size:0.9rem">No program videos yet. Add YouTube IDs to <code>program/README.md</code>.</p>';return;}
-  let current=entries[0];
+  if(!entries.length){container.innerHTML='<p style="color:var(--muted);font-size:0.9rem">No program videos yet.</p>';return;}
   const thumbsHTML=entries.length>1?`<div class="ev-thumbs" id="pvThumbs">${entries.map((v,i)=>`<div class="ev-thumb${i===0?' active':''}" data-id="${v.id}"><div class="ev-thumb-img"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy"><div class="ev-thumb-play">&#9654;</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>`:'';
-  container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="pvFeatured"><iframe src="https://www.youtube.com/embed/${current.id}?rel=0&modestbranding=1" title="${current.label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe></div>${thumbsHTML}</div>`;
+  container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="pvFeatured"><iframe src="https://www.youtube.com/embed/${entries[0].id}?rel=0&modestbranding=1" title="${entries[0].label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe></div>${thumbsHTML}</div>`;
   if(entries.length>1){document.getElementById('pvThumbs').addEventListener('click',e=>{const t=e.target.closest('.ev-thumb');if(!t)return;document.querySelectorAll('#pvThumbs .ev-thumb').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('pvFeatured').innerHTML=`<iframe src="https://www.youtube.com/embed/${t.dataset.id}?rel=0&modestbranding=1&autoplay=1" title="Video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`;});}
 }
 
-// Event videos — reads videos/README.md
 async function buildEventVideos(){
   const container=document.getElementById('eventVideosSection');
   let ytEntries=[];
@@ -371,7 +367,7 @@ async function buildEventVideos(){
   let mp4Entries=[];
   try{const files=await fetchFolder(`${BASE}/videos`);mp4Entries=files.filter(f=>f.name.toLowerCase().endsWith('.mp4')).map((f,i)=>({type:'mp4',url:f.download_url,label:`Event Clip ${i+1}`,thumb:null}));}catch{}
   const all=[...ytEntries,...mp4Entries];
-  if(!all.length){container.innerHTML='<div class="ev-empty" style="border-radius:14px;aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4)"><p>No event videos yet.</p></div>';return;}
+  if(!all.length){container.innerHTML='<div style="border-radius:14px;aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4)"><p>No event videos yet.</p></div>';return;}
   const makeFeatured=v=>v.type==='yt'?`<iframe src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1" title="${v.label}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`:`<video src="${v.url}" controls playsinline style="width:100%;height:100%;display:block;background:#000"></video>`;
   const thumbsHTML=all.length>1?`<div class="ev-thumbs" id="evThumbs">${all.map((v,i)=>`<div class="ev-thumb${i===0?' active':''}" data-idx="${i}"><div class="ev-thumb-img">${v.thumb?`<img src="${v.thumb}" alt="${v.label}" loading="lazy">`:'<div style="color:rgba(255,255,255,0.5);font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;height:100%">MP4</div>'}<div class="ev-thumb-play">&#9654;</div></div><div class="ev-thumb-label">${v.label}</div></div>`).join('')}</div>`:'';
   container.innerHTML=`<div class="ev-player"><div class="ev-featured" id="evFeatured">${makeFeatured(all[0])}</div>${thumbsHTML}</div>`;
