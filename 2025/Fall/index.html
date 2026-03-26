@@ -113,21 +113,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink
 .ev-thumb:hover .ev-thumb-play,.ev-thumb.active .ev-thumb-play{opacity:1}
 .ev-thumb-label{font-size:0.73rem;font-weight:600;color:var(--navy);padding:7px 10px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ev-thumb.active .ev-thumb-label{color:var(--red)}
-.video-player{display:flex;flex-direction:column;gap:14px}
-.video-featured{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9}
-.video-featured iframe{width:100%;height:100%;border:none;display:block}
-.vthumb{flex-shrink:0;cursor:pointer;border-radius:10px;overflow:hidden;border:3px solid transparent;transition:border-color 0.2s,transform 0.2s;background:white;box-shadow:0 3px 12px rgba(0,40,104,0.1);width:175px}
-.vthumb:hover{transform:translateY(-2px);border-color:var(--navy)}
-.vthumb.active{border-color:var(--red)}
-.vthumb-img{position:relative;aspect-ratio:16/9;overflow:hidden;background:#111}
-.vthumb-img--short{aspect-ratio:9/16;max-height:115px}
-.vthumb-img img{width:100%;height:100%;object-fit:cover;display:block}
-.vthumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);color:white;font-size:1.3rem;opacity:0;transition:opacity 0.2s}
-.vthumb:hover .vthumb-play,.vthumb.active .vthumb-play{opacity:1}
-.short-badge{position:absolute;top:5px;right:5px;background:var(--red);color:white;font-size:0.55rem;font-weight:700;padding:2px 5px;border-radius:3px}
-.vthumb-label{font-size:0.73rem;font-weight:600;color:var(--navy);padding:7px 10px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.vthumb.active .vthumb-label{color:var(--red)}
-.video-thumbs{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px}
+.short-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:9/16;max-width:360px;margin:0 auto}
+.short-video-wrap iframe{width:100%;height:100%;border:none;display:block}
 .graphics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
 .graphic-card{background:white;border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
 .graphic-card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,40,104,0.16)}
@@ -219,14 +206,9 @@ footer a{color:var(--gold);text-decoration:none}
     <button class="tab-btn" data-tab="photos">&#128247; Photos &amp; Videos</button>
   </div>
   <div class="tab-panel active" id="tab-marketing">
-    <div class="section-header"><span class="section-num">01</span><h2>Promo Videos</h2><div class="rule"></div></div>
-    <div class="video-player">
-      <div class="video-featured" id="featuredFrame"><iframe id="featuredIframe" src="https://www.youtube.com/embed/rfPglFOq-a0?rel=0&modestbranding=1" title="Promo" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
-      <div class="video-thumbs">
-        <div class="vthumb active" data-id="rfPglFOq-a0" data-short="false"><div class="vthumb-img"><img src="https://img.youtube.com/vi/rfPglFOq-a0/mqdefault.jpg" alt=""><div class="vthumb-play">&#9654;</div></div><div class="vthumb-label">Promo Video</div></div>
-        <div class="vthumb" data-id="tED-gZDS5vk" data-short="false"><div class="vthumb-img"><img src="https://img.youtube.com/vi/tED-gZDS5vk/mqdefault.jpg" alt=""><div class="vthumb-play">&#9654;</div></div><div class="vthumb-label">Recap Video</div></div>
-        <div class="vthumb" data-id="EkirhLIQpws" data-short="true"><div class="vthumb-img vthumb-img--short"><img src="https://img.youtube.com/vi/EkirhLIQpws/mqdefault.jpg" alt=""><div class="vthumb-play">&#9654;</div><span class="short-badge">SHORT</span></div><div class="vthumb-label">Highlights Short</div></div>
-      </div>
+    <div class="section-header"><span class="section-num">01</span><h2>Highlights Short</h2><div class="rule"></div></div>
+    <div class="short-video-wrap">
+      <iframe src="https://www.youtube.com/embed/EkirhLIQpws?rel=0&modestbranding=1" title="Highlights Short" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Graphics &amp; Flyers</h2><div class="rule"></div></div>
     <div class="graphics-grid">
@@ -248,7 +230,6 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Videos Used During Event</h2><div class="rule"></div></div>
     <div class="program-videos-wrap">
       <div class="program-videos-label">&#127916; Videos played as part of the event program</div>
-      <!-- Hardcoded program videos — no API fetch needed -->
       <div class="ev-player">
         <div class="ev-featured" id="pvFeatured">
           <iframe src="https://www.youtube.com/embed/tED-gZDS5vk?rel=0&modestbranding=1" title="Recap Video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>
@@ -311,10 +292,7 @@ const fm=document.getElementById('fileModal'),fmT=document.getElementById('fileM
 function openFileModal(src,title,type,file){fmT.textContent=title;fmD.href=src;fmD.download=file;fmB.innerHTML='';if(type==='pdf'){const f=document.createElement('iframe');f.src=`https://docs.google.com/viewer?url=${encodeURIComponent(src)}&embedded=true`;fmB.appendChild(f);}else{const img=document.createElement('img');img.src=src;img.alt=title;fmB.appendChild(img);}fm.classList.add('open');document.body.style.overflow='hidden';}
 function closeFileModal(){fm.classList.remove('open');fmB.innerHTML='';document.body.style.overflow='';}
 fmC.onclick=closeFileModal;fm.addEventListener('click',e=>{if(e.target===fm)closeFileModal();});
-// Program video thumbnail clicks
 document.getElementById('pvThumbs').addEventListener('click',ev=>{const t=ev.target.closest('.ev-thumb');if(!t)return;document.querySelectorAll('#pvThumbs .ev-thumb').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('pvFeatured').innerHTML=`<iframe src="https://www.youtube.com/embed/${t.dataset.id}?rel=0&modestbranding=1&autoplay=1" title="Video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`;});
-const thumbs=document.querySelectorAll('.vthumb'),ff=document.getElementById('featuredFrame'),fi=document.getElementById('featuredIframe');
-thumbs.forEach(t=>{t.addEventListener('click',()=>{thumbs.forEach(x=>x.classList.remove('active'));t.classList.add('active');const s=t.dataset.short==='true';ff.style.aspectRatio=s?'9/16':'16/9';ff.style.maxWidth=s?'360px':'';ff.style.margin=s?'0 auto':'';fi.src=`https://www.youtube.com/embed/${t.dataset.id}?rel=0&modestbranding=1&autoplay=1`;});});
 const st=document.getElementById('speechesToggle'),sb=document.getElementById('speechesBody'),sc=document.getElementById('speechesChevron');
 st.addEventListener('click',()=>{const o=sb.classList.toggle('open');sc.classList.toggle('open',o);st.setAttribute('aria-expanded',o);});
 document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active');}));
