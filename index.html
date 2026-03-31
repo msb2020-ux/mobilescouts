@@ -1,4 +1,4 @@
-<!-- v7 - patch hover z-index fix -->
+<!-- v8 - card body z-index fix on hover -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +62,6 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .file-modal-footer{background:#f4f4f4;padding:10px 20px;display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
 .file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700;transition:background 0.18s}
 .file-modal-footer a:hover{background:var(--red)}
-/* Past events section must be a stacking context so cards can z-index above it */
 .past-events{background:#f4f4f4;padding:48px 20px;position:relative;z-index:1}
 .past-events h2{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--navy);margin-bottom:8px}
 .past-events-sub{text-align:center;font-size:0.85rem;color:#666;margin-bottom:28px}
@@ -75,14 +74,15 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .cards-track{display:flex;gap:20px;padding:8px 4px 16px;transition:transform 0.35s ease;user-select:none}
 .cards-track.no-transition{transition:none}
 .event-card{flex-shrink:0;width:210px;background:white;border-radius:14px;box-shadow:0 4px 18px rgba(0,40,104,0.12);overflow:visible;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s;position:relative;z-index:1}
-/* Hovered card rises above all siblings */
 .event-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,40,104,0.18);z-index:500}
 .event-card-img-wrap{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:14px 14px 0 0;position:relative;cursor:zoom-in;transition:overflow 0s 0.35s}
 .event-card:hover .event-card-img-wrap{overflow:visible;transition:overflow 0s}
-.event-card-img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;transition:transform 0.35s ease,box-shadow 0.35s ease;border-radius:8px;position:relative;z-index:1}
+.event-card-img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;transition:transform 0.35s ease,box-shadow 0.35s ease;border-radius:8px;position:relative;z-index:2}
 .event-card:hover .event-card-img{transform:scale(2.6);box-shadow:0 24px 64px rgba(0,0,0,0.5)}
 .event-card-placeholder{font-size:3.5rem;opacity:0.2;user-select:none}
+/* Body sits at z-index:1 normally, drops to 0 on hover so zoomed image is always on top */
 .event-card-body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1;border-top:3px solid var(--navy);background:white;border-radius:0 0 14px 14px;position:relative;z-index:1}
+.event-card:hover .event-card-body{z-index:0}
 .event-card-year{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.12em;color:var(--red);margin-bottom:2px}
 .event-card-title{font-weight:700;font-size:0.92rem;color:var(--navy);line-height:1.3;margin-bottom:12px;flex:1}
 .event-card-btn{display:block;text-align:center;background:var(--navy);color:white;text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;padding:8px 14px;border-radius:6px;transition:background 0.18s}
@@ -291,7 +291,6 @@ fileModalClose.onclick=closeFileModal;
 fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 document.addEventListener('keydown',e=>{if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();});
 
-// Viewport overflow + per-card z-index boost on hover
 const vp = document.getElementById('cardsViewport');
 document.querySelectorAll('.event-card').forEach(card => {
   card.addEventListener('mouseenter', () => {
