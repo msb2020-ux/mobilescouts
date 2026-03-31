@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- 3tab-v4 hardcoded program videos -->
+<!-- 3tab-v5 patch sales -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,6 +68,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink
 .dl-title{font-weight:700;font-size:0.92rem;color:var(--navy)}
 .dl-sub{font-size:0.73rem;color:var(--muted);margin-top:3px}
 .dl-arrow{margin-left:auto;font-size:1rem;color:var(--red);opacity:0.55}
+.patch-sale-card{background:linear-gradient(135deg,var(--navy) 0%,#003a8c 100%);border-radius:16px;padding:28px 32px;box-shadow:0 8px 32px rgba(0,40,104,0.25);display:flex;align-items:center;gap:28px;flex-wrap:wrap;border:2px solid var(--gold)}
+.patch-sale-badge{flex-shrink:0;width:72px;height:72px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.2rem}
+.patch-sale-text{flex:1;min-width:200px}
+.patch-sale-text h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.06em;color:var(--gold);line-height:1;margin-bottom:6px}
+.patch-sale-text p{font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.6}
+.patch-sale-text .badges{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.patch-sale-text .badge{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;padding:3px 10px;border-radius:20px;text-transform:uppercase}
+.badge-gold{background:var(--gold);color:var(--navy)}
+.badge-silver{background:#c0c0c0;color:#1a1a2e}
+.badge-rare{background:var(--red);color:white}
+.patch-sale-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-weight:700;font-size:0.92rem;text-decoration:none;padding:12px 24px;border-radius:8px;transition:background 0.18s,transform 0.18s;white-space:nowrap}
+.patch-sale-btn:hover{background:#ffd700;transform:translateY(-2px)}
 .speeches-wrap{margin-top:14px;border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow)}
 .speeches-toggle{width:100%;background:var(--navy);color:white;border:none;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.95rem;transition:background 0.2s}
 .speeches-toggle:hover{background:#003580}
@@ -146,7 +158,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink
 .fade-in.visible{opacity:1;transform:none}
 footer{background:var(--ink);color:rgba(255,255,255,0.45);text-align:center;padding:28px 20px;font-size:0.78rem}
 footer a{color:var(--gold);text-decoration:none}
-@media(max-width:600px){.topnav{padding:10px 16px}.topnav-links a:not(.btn-home){display:none}.tab-btn{font-size:0.72rem;padding:10px 6px;min-width:80px}.tab-panel{padding:28px 16px}.file-modal-inner{width:96vw;height:90vh}}
+@media(max-width:600px){.topnav{padding:10px 16px}.topnav-links a:not(.btn-home){display:none}.tab-btn{font-size:0.72rem;padding:10px 6px;min-width:80px}.tab-panel{padding:28px 16px}.file-modal-inner{width:96vw;height:90vh}.patch-sale-card{flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
@@ -206,11 +218,25 @@ footer a{color:var(--gold);text-decoration:none}
     <button class="tab-btn" data-tab="photos">&#128247; Photos &amp; Videos</button>
   </div>
   <div class="tab-panel active" id="tab-marketing">
-    <div class="section-header"><span class="section-num">01</span><h2>Highlights Short</h2><div class="rule"></div></div>
+    <div class="section-header"><span class="section-num">01</span><h2>Patch Sales</h2><div class="rule"></div></div>
+    <div class="patch-sale-card">
+      <div class="patch-sale-badge">&#127996;</div>
+      <div class="patch-sale-text">
+        <h3>Avengers Quest 2025 &mdash; Collector Patch Set</h3>
+        <p>Rare limited-edition camporee patches available for purchase. Gold and silver border variants &mdash; a must-have for any serious Scout collector.</p>
+        <div class="badges">
+          <span class="badge badge-gold">&#11088; Gold Border</span>
+          <span class="badge badge-silver">&#11088; Silver Border</span>
+          <span class="badge badge-rare">Rare &amp; Collectible</span>
+        </div>
+      </div>
+      <a class="patch-sale-btn" href="https://www.ebay.com/itm/226986326231" target="_blank" rel="noopener">&#128722; Buy on eBay &#8599;</a>
+    </div>
+    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Highlights Short</h2><div class="rule"></div></div>
     <div class="short-video-wrap">
       <iframe src="https://www.youtube.com/embed/EkirhLIQpws?rel=0&modestbranding=1" title="Highlights Short" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
     </div>
-    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Graphics &amp; Flyers</h2><div class="rule"></div></div>
+    <div class="section-header" style="margin-top:48px"><span class="section-num">03</span><h2>Graphics &amp; Flyers</h2><div class="rule"></div></div>
     <div class="graphics-grid">
       <div class="graphic-card" onclick="openFileModal('marketing/Forging.png','Forging Graphic','image','Forging.png')"><img src="marketing/Forging.png" alt="" onerror="this.closest('.graphic-card').style.display='none'"><div class="graphic-card-label">Forging Graphic</div></div>
       <div class="graphic-card" onclick="openFileModal('marketing/A 17-year-old Boy Sc.png','Scout Promo','image','Scout Promo.png')"><img src="marketing/A 17-year-old Boy Sc.png" alt="" onerror="this.closest('.graphic-card').style.display='none'"><div class="graphic-card-label">Scout Promo Image</div></div>
