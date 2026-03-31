@@ -1,4 +1,4 @@
-<!-- v6 - patch hover zoom on carousel cards -->
+<!-- v7 - patch hover z-index fix -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +49,7 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .about-highlight p+p{margin-top:10px}
 .about-highlight strong{color:var(--gold)}
 .about-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
-.file-modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;padding:20px}
+.file-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;padding:20px}
 .file-modal.open{display:flex}
 .file-modal-inner{background:white;border-radius:14px;overflow:hidden;width:90vw;max-width:960px;height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
 .file-modal-header{background:var(--navy);color:white;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
@@ -62,26 +62,25 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .file-modal-footer{background:#f4f4f4;padding:10px 20px;display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
 .file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700;transition:background 0.18s}
 .file-modal-footer a:hover{background:var(--red)}
-.past-events{background:#f4f4f4;padding:48px 20px}
+/* Past events section must be a stacking context so cards can z-index above it */
+.past-events{background:#f4f4f4;padding:48px 20px;position:relative;z-index:1}
 .past-events h2{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--navy);margin-bottom:8px}
 .past-events-sub{text-align:center;font-size:0.85rem;color:#666;margin-bottom:28px}
 .carousel-wrap{position:relative;display:flex;align-items:center}
 .carousel-arrow{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:2px solid var(--navy);background:white;color:var(--navy);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.18s,color 0.18s;z-index:2;box-shadow:0 2px 8px rgba(0,40,104,0.12)}
 .carousel-arrow:hover{background:var(--navy);color:white}
 .carousel-arrow:disabled{opacity:0.25;cursor:default;pointer-events:none}
-.cards-viewport{flex:1;overflow:hidden;margin:0 10px;cursor:grab}
+.cards-viewport{flex:1;overflow:hidden;margin:0 10px;cursor:grab;position:relative}
 .cards-viewport.dragging{cursor:grabbing}
 .cards-track{display:flex;gap:20px;padding:8px 4px 16px;transition:transform 0.35s ease;user-select:none}
 .cards-track.no-transition{transition:none}
-/* Cards need overflow:visible so zoomed image isn't clipped by card bounds */
-.event-card{flex-shrink:0;width:210px;background:white;border-radius:14px;box-shadow:0 4px 18px rgba(0,40,104,0.12);overflow:visible;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s;position:relative}
-.event-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,40,104,0.18)}
-/* Image wrap: fixed size, clips normally, but on hover lets image escape */
-.event-card-img-wrap{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:14px 14px 0 0;position:relative;cursor:zoom-in}
-.event-card-img-wrap:hover{overflow:visible;z-index:100}
-/* The image itself scales on wrap hover */
-.event-card-img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;transition:transform 0.35s ease,box-shadow 0.35s ease;position:relative;z-index:1;border-radius:8px}
-.event-card-img-wrap:hover .event-card-img{transform:scale(2.6);box-shadow:0 24px 64px rgba(0,0,0,0.45);z-index:100}
+.event-card{flex-shrink:0;width:210px;background:white;border-radius:14px;box-shadow:0 4px 18px rgba(0,40,104,0.12);overflow:visible;display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s;position:relative;z-index:1}
+/* Hovered card rises above all siblings */
+.event-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,40,104,0.18);z-index:500}
+.event-card-img-wrap{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--navy),#00408a);display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:14px 14px 0 0;position:relative;cursor:zoom-in;transition:overflow 0s 0.35s}
+.event-card:hover .event-card-img-wrap{overflow:visible;transition:overflow 0s}
+.event-card-img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;transition:transform 0.35s ease,box-shadow 0.35s ease;border-radius:8px;position:relative;z-index:1}
+.event-card:hover .event-card-img{transform:scale(2.6);box-shadow:0 24px 64px rgba(0,0,0,0.5)}
 .event-card-placeholder{font-size:3.5rem;opacity:0.2;user-select:none}
 .event-card-body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1;border-top:3px solid var(--navy);background:white;border-radius:0 0 14px 14px;position:relative;z-index:1}
 .event-card-year{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.12em;color:var(--red);margin-bottom:2px}
@@ -100,7 +99,7 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   .feature-tab-panel{padding:20px 16px}
   .file-modal-inner{width:96vw;height:90vh}
   .carousel-arrow{width:36px;height:36px;font-size:1rem}
-  .event-card-img-wrap:hover .event-card-img{transform:scale(1.8)}
+  .event-card:hover .event-card-img{transform:scale(1.8)}
 }
 </style>
 </head>
@@ -292,25 +291,28 @@ fileModalClose.onclick=closeFileModal;
 fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 document.addEventListener('keydown',e=>{if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();});
 
-// On card hover, temporarily let the viewport overflow so the zoomed image isn't clipped
-document.querySelectorAll('.event-card-img-wrap').forEach(wrap => {
-  wrap.addEventListener('mouseenter', () => {
-    document.getElementById('cardsViewport').style.overflow = 'visible';
+// Viewport overflow + per-card z-index boost on hover
+const vp = document.getElementById('cardsViewport');
+document.querySelectorAll('.event-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    vp.style.overflow = 'visible';
+    card.style.zIndex = '500';
   });
-  wrap.addEventListener('mouseleave', () => {
-    document.getElementById('cardsViewport').style.overflow = 'hidden';
+  card.addEventListener('mouseleave', () => {
+    vp.style.overflow = 'hidden';
+    card.style.zIndex = '';
   });
 });
 
 const CARD_W=230;
 let scrollPos=0;
-function getMaxScroll(){const vp=document.getElementById('cardsViewport');const tr=document.getElementById('cardsTrack');return Math.max(0,tr.scrollWidth-vp.clientWidth);}
+function getMaxScroll(){const tr=document.getElementById('cardsTrack');return Math.max(0,tr.scrollWidth-vp.clientWidth);}
 function applyScroll(animated=true){const tr=document.getElementById('cardsTrack');scrollPos=Math.max(0,Math.min(getMaxScroll(),scrollPos));if(!animated)tr.classList.add('no-transition');tr.style.transform=`translateX(-${scrollPos}px)`;if(!animated)requestAnimationFrame(()=>tr.classList.remove('no-transition'));document.getElementById('carouselPrev').disabled=scrollPos<=0;document.getElementById('carouselNext').disabled=scrollPos>=getMaxScroll()-1;}
-function scrollCarousel(dir){const vp=document.getElementById('cardsViewport');const visible=Math.max(1,Math.floor(vp.clientWidth/CARD_W));scrollPos+=dir*visible*CARD_W;applyScroll();}
+function scrollCarousel(dir){const visible=Math.max(1,Math.floor(vp.clientWidth/CARD_W));scrollPos+=dir*visible*CARD_W;applyScroll();}
 document.getElementById('carouselPrev').addEventListener('click',()=>scrollCarousel(-1));
 document.getElementById('carouselNext').addEventListener('click',()=>scrollCarousel(1));
 window.addEventListener('resize',()=>applyScroll());
-(function(){const vp=document.getElementById('cardsViewport');let sx=0,ss=0,dr=false,mv=false;
+(function(){let sx=0,ss=0,dr=false,mv=false;
 vp.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;ss=scrollPos;mv=false;},{passive:true});
 vp.addEventListener('touchmove',e=>{const dx=sx-e.touches[0].clientX;if(Math.abs(dx)>5)mv=true;scrollPos=ss+dx;applyScroll(false);},{passive:true});
 vp.addEventListener('touchend',e=>{scrollPos=Math.round((ss+(sx-e.changedTouches[0].clientX))/CARD_W)*CARD_W;applyScroll(true);if(mv)e.preventDefault();},{passive:false});
