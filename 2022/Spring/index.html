@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- initial-v1 program only -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooking Camporee 2022 Spring | Mobile Area Scouts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#002868;--red:#bf0a30;--gold:#f5c518;--offwhite:#f8f6f1;--ink:#1a1a2e;--muted:#6b6b7b;--card-shadow:0 6px 28px rgba(0,40,104,0.11);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink);overflow-x:hidden}
+.topnav{background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:12px 32px;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.topnav img{height:44px}
+.topnav-links{display:flex;gap:24px;align-items:center}
+.topnav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.04em;transition:color 0.2s}
+.topnav-links a:hover{color:var(--gold)}
+.topnav-links .btn-home{background:var(--red);color:white;padding:7px 16px;border-radius:4px;font-weight:700}
+.year-nav{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);padding:13px 32px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.year-nav>span{color:rgba(255,255,255,0.4);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.15em;margin-right:8px}
+.year-btn{padding:5px 14px;border-radius:20px;text-decoration:none;font-size:0.82rem;font-weight:700;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.15);transition:background 0.18s,color 0.18s}
+.year-btn:hover{background:rgba(255,255,255,0.12);color:white}
+.year-btn.active{background:var(--red);color:white;border-color:var(--red)}
+.hero{background:var(--navy);color:white;position:relative;overflow:hidden;padding:72px 40px 64px;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.18) 1px,transparent 1px);background-size:38px 38px;opacity:0.45}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red))}
+.hero-year-bg{font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,20vw,14rem);line-height:0.85;color:rgba(255,255,255,0.055);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);user-select:none;white-space:nowrap}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,6rem);letter-spacing:0.05em;line-height:1;margin-bottom:8px}
+.hero-year-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:0.2em;color:var(--gold);margin-bottom:6px}
+.hero-subtheme{font-size:0.85rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:30px}
+.hero-meta{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.hero-meta-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.hero-meta-item .label{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.hero-meta-item .value{font-size:1rem;font-weight:500;color:white}
+.overview-section{max-width:1100px;margin:0 auto;padding:48px 24px 0}
+.overview-grid{display:grid;grid-template-columns:240px 1fr;gap:40px;align-items:start}
+@media(max-width:680px){.overview-grid{grid-template-columns:1fr}}
+.patch-card{background:white;border-radius:16px;padding:28px 20px;box-shadow:var(--card-shadow);text-align:center;position:relative;overflow:visible;cursor:zoom-in}
+.patch-card img{width:100%;max-width:180px;border-radius:8px;margin-bottom:14px;transition:transform 0.35s ease,box-shadow 0.35s ease;transform-origin:center top;position:relative;z-index:1}
+.patch-card:hover img{transform:scale(2.4);box-shadow:0 20px 60px rgba(0,0,0,0.35);z-index:50}
+.patch-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);font-weight:600}
+.patch-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--navy);margin-top:4px}
+.overview-text p{font-family:'Crimson Pro',serif;font-size:1.15rem;line-height:1.78;color:#333;margin-bottom:20px}
+.tabs-container{max-width:1100px;margin:48px auto 0;padding:0 24px 80px}
+.tab-bar{display:flex;gap:4px;background:var(--navy);border-radius:12px 12px 0 0;padding:8px 8px 0;flex-wrap:wrap}
+.tab-btn{flex:1;min-width:100px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.04em;padding:12px 10px;border-radius:8px 8px 0 0;transition:background 0.2s,color 0.2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.tab-btn:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8)}
+.tab-btn.active{background:var(--offwhite);color:var(--navy)}
+.tab-panel{display:none;background:var(--offwhite);border-radius:0 0 12px 12px;border:2px solid var(--navy);border-top:none;padding:40px 32px}
+.tab-panel.active{display:block}
+.section-header{display:flex;align-items:center;gap:14px;margin:40px 0 20px}
+.section-header:first-child{margin-top:0}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:1;color:var(--red);opacity:0.2;min-width:48px}
+.section-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.07em;color:var(--navy);text-transform:uppercase}
+.rule{flex:1;height:2px;background:linear-gradient(90deg,var(--navy),transparent);opacity:0.12}
+.downloads-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.dl-card{background:white;border-radius:12px;padding:18px 16px 18px 20px;box-shadow:var(--card-shadow);display:flex;align-items:center;gap:14px;cursor:pointer;border-left:4px solid var(--navy);transition:transform 0.18s,box-shadow 0.18s,border-color 0.18s}
+.dl-card:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,40,104,0.16);border-color:var(--red)}
+.dl-card.greyed{background:#f0f0f0;border-left-color:#ccc;cursor:default;opacity:0.55;pointer-events:none}
+.dl-icon{font-size:1.8rem;flex-shrink:0}
+.dl-title{font-weight:700;font-size:0.92rem;color:var(--navy)}
+.dl-sub{font-size:0.73rem;color:var(--muted);margin-top:3px}
+.dl-arrow{margin-left:auto;font-size:1rem;color:var(--red);opacity:0.55}
+.coming-soon-note{font-size:0.78rem;color:var(--muted);font-style:italic;margin-top:14px}
+.ss-empty{background:linear-gradient(135deg,var(--navy),#00408a);border-radius:16px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:0.9rem}
+.file-modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;padding:20px}
+.file-modal.open{display:flex}
+.file-modal-inner{background:white;border-radius:14px;overflow:hidden;width:90vw;max-width:960px;height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+.file-modal-header{background:var(--navy);color:white;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.file-modal-title{font-weight:700;font-size:0.9rem}
+.file-modal-close{background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;opacity:0.7;padding:0 4px}
+.file-modal-close:hover{opacity:1}
+.file-modal-body{flex:1;overflow:hidden}
+.file-modal-body iframe{width:100%;height:100%;border:none;display:block}
+.file-modal-body img{width:100%;height:100%;object-fit:contain;display:block;background:#f0f0f0}
+.file-modal-footer{background:#f4f4f4;padding:10px 20px;display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
+.file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700}
+.file-modal-footer a:hover{background:var(--red)}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease}
+.fade-in.visible{opacity:1;transform:none}
+footer{background:var(--ink);color:rgba(255,255,255,0.45);text-align:center;padding:28px 20px;font-size:0.78rem}
+footer a{color:var(--gold);text-decoration:none}
+@media(max-width:600px){.topnav{padding:10px 16px}.topnav-links a:not(.btn-home){display:none}.tab-btn{font-size:0.72rem;padding:10px 6px;min-width:80px}.tab-panel{padding:28px 16px}.file-modal-inner{width:96vw;height:90vh}.patch-card:hover img{transform:scale(1.6)}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <img src="../../Graphics/Scouting-America-MOBILE_COUNCIL_MAIN-LOGO-HEADER-NAV-edit.svg" alt="Mobile Area Scouts">
+  <div class="topnav-links">
+    <a href="../../index.html">Home</a>
+    <a href="../../index.html#carousel">All Years</a>
+    <a class="btn-home" href="../../index.html#2026">2026 Event &#8594;</a>
+  </div>
+</nav>
+<div class="year-nav">
+  <span>Archive</span>
+  <a class="year-btn active" href="../../2022/Spring/">2022 Spring</a>
+  <a class="year-btn" href="../../2022/Fall/">2022 Fall</a>
+  <a class="year-btn" href="../../2023/Fall/">2023 Fall</a>
+  <a class="year-btn" href="../../2024/Fall/">2024 Fall</a>
+  <a class="year-btn" href="../../2025/Fall/">2025 Fall</a>
+</div>
+<section class="hero">
+  <div class="hero-year-bg">2022</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mobile Area Council &middot; Camporee Archive</div>
+    <h1>Cooking</h1>
+    <div class="hero-year-label">2022 Spring</div>
+    <div class="hero-subtheme">Five Rivers Spring Camporee</div>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="label">Location</span><span class="value">Camp Maubila, Grove Hill, AL</span></div>
+      <div class="hero-meta-item"><span class="label">Edition</span><span class="value">Spring Camporee</span></div>
+    </div>
+  </div>
+</section>
+<div class="overview-section">
+  <div class="overview-grid fade-in">
+    <div class="patch-card">
+      <img src="patch/2022 - Cooking.png" alt="2022 Spring Patch" onerror="this.style.opacity='0.15'">
+      <div class="patch-label">Official Patch</div>
+      <div class="patch-name">Cooking 2022 Spring</div>
+    </div>
+    <div class="overview-text">
+      <p>The 2022 Spring Mobile Area Camporee &mdash; Cooking &mdash; challenged Scouts to master outdoor culinary skills, patrol cooking competitions, and camp kitchen techniques at Camp Maubila.</p>
+    </div>
+  </div>
+</div>
+<div class="tabs-container">
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="marketing">&#128138; Marketing</button>
+    <button class="tab-btn" data-tab="program">&#128203; Program</button>
+    <button class="tab-btn" data-tab="photos">&#128247; Photos &amp; Videos</button>
+  </div>
+
+  <!-- MARKETING TAB -->
+  <div class="tab-panel active" id="tab-marketing">
+    <div class="section-header"><span class="section-num">01</span><h2>Graphics &amp; Flyers</h2><div class="rule"></div></div>
+    <div class="downloads-grid">
+      <div class="dl-card greyed"><span class="dl-icon">&#128196;</span><div><div class="dl-title">Camporee Flyer</div><div class="dl-sub">Not yet uploaded</div></div></div>
+    </div>
+    <p class="coming-soon-note">&#9998; Marketing materials will be added as they become available.</p>
+  </div>
+
+  <!-- PROGRAM TAB -->
+  <div class="tab-panel" id="tab-program">
+    <div class="section-header"><span class="section-num">01</span><h2>Event Documents</h2><div class="rule"></div></div>
+    <div class="downloads-grid">
+      <!-- AVAILABLE -->
+      <div class="dl-card" onclick="openFileModal('https://docs.google.com/viewer?url=https://raw.githubusercontent.com/msb2020-ux/mobilescouts/main/2022/Spring/program/5Rivers-Cooking-SpringCamporee2022-LeadersGuide-Rev7b.pdf&embedded=true','Leader\'s Guide','pdf','Leaders-Guide.pdf')">
+        <span class="dl-icon">&#128203;</span>
+        <div><div class="dl-title">Leader's Guide</div><div class="dl-sub">PDF &middot; 2022 Spring Program</div></div>
+        <span class="dl-arrow">&#8599;</span>
+      </div>
+      <!-- GREYED OUT -->
+      <div class="dl-card greyed"><span class="dl-icon">&#128506;&#65039;</span><div><div class="dl-title">Event Map</div><div class="dl-sub">Not yet uploaded</div></div></div>
+      <div class="dl-card greyed"><span class="dl-icon">&#11088;</span><div><div class="dl-title">SPL Guide</div><div class="dl-sub">Not yet uploaded</div></div></div>
+      <div class="dl-card greyed"><span class="dl-icon">&#128202;</span><div><div class="dl-title">Scoring Rubric</div><div class="dl-sub">Not yet uploaded</div></div></div>
+    </div>
+    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Event Speeches</h2><div class="rule"></div></div>
+    <div class="downloads-grid">
+      <div class="dl-card greyed"><span class="dl-icon">&#127908;</span><div><div class="dl-title">Speeches</div><div class="dl-sub">Not yet uploaded</div></div></div>
+    </div>
+    <p class="coming-soon-note">&#9998; Additional program documents will be added as they become available.</p>
+  </div>
+
+  <!-- PHOTOS & VIDEOS TAB -->
+  <div class="tab-panel" id="tab-photos">
+    <div class="section-header"><span class="section-num">01</span><h2>Event Videos</h2><div class="rule"></div></div>
+    <div class="ss-empty"><p>&#127909; Videos coming soon</p></div>
+    <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Event Photos</h2><div class="rule"></div></div>
+    <div class="ss-empty"><p>&#128247; Photos coming soon</p></div>
+    <p class="coming-soon-note" style="margin-top:14px">&#9998; Photos and videos will be added as they become available.</p>
+  </div>
+</div>
+
+<div class="file-modal" id="fileModal">
+  <div class="file-modal-inner">
+    <div class="file-modal-header"><span class="file-modal-title" id="fileModalTitle">Document</span><button class="file-modal-close" id="fileModalClose">&times;</button></div>
+    <div class="file-modal-body" id="fileModalBody"></div>
+    <div class="file-modal-footer"><a id="fileModalDownload" href="#" download>&#11015; Download</a></div>
+  </div>
+</div>
+<footer><p>Mobile Area Scouting &nbsp;&middot;&nbsp; Camporee Archive &nbsp;&middot;&nbsp;<a href="../../index.html">Return to Main Site</a></p></footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active');}));
+const fm=document.getElementById('fileModal'),fmT=document.getElementById('fileModalTitle'),fmB=document.getElementById('fileModalBody'),fmD=document.getElementById('fileModalDownload'),fmC=document.getElementById('fileModalClose');
+function openFileModal(src,title,type,file){fmT.textContent=title;fmD.href=src;fmD.download=file;fmB.innerHTML='';if(type==='pdf'){const f=document.createElement('iframe');f.src=src;fmB.appendChild(f);}else{const img=document.createElement('img');img.src=src;img.alt=title;fmB.appendChild(img);}fm.classList.add('open');document.body.style.overflow='hidden';}
+function closeFileModal(){fm.classList.remove('open');fmB.innerHTML='';document.body.style.overflow='';}
+fmC.onclick=closeFileModal;fm.addEventListener('click',e=>{if(e.target===fm)closeFileModal();});
+document.addEventListener('keydown',e=>{if(fm.classList.contains('open')&&e.key==='Escape')closeFileModal();});
+new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target);}});},{threshold:0.08}).observe(document.querySelector('.fade-in'));
+</script>
+</body>
+</html>
