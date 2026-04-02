@@ -29,7 +29,7 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .feature-tab-panel{display:none;background:var(--offwhite);border-radius:0 0 10px 10px;border:2px solid var(--navy);border-top:none;padding:32px}
 .feature-tab-panel.active{display:block}
 .flyer-panel{display:flex;flex-direction:column;align-items:center;gap:20px}
-.flyer-panel img{max-width:680px;width:100%;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18)}
+.flyer-panel img{max-width:680px;width:100%;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18)}.flyer-iframe-container{width:100%;max-width:680px;aspect-ratio:8.5/11;overflow:hidden;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18);position:relative;}.flyer-iframe{width:816px;height:1056px;border:none;transform-origin:top left;display:block;pointer-events:none;}
 .flyer-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .flyer-btn{display:inline-block;padding:11px 24px;background:var(--navy);color:white;font-weight:700;text-decoration:none;border-radius:6px;font-size:0.88rem;transition:background 0.18s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
 .flyer-btn:hover{background:var(--red)}
@@ -125,7 +125,7 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   </div>
   <div class="feature-tab-panel active" id="ftab-flyer">
     <div class="flyer-panel">
-      <img src="2026/Fall/marketing/2026-Flyer.png" alt="2026 Camporee Flyer">
+      <div class="flyer-iframe-container"><iframe src="2026/Fall/marketing/2026-Flyer.html" class="flyer-iframe" scrolling="no" title="2026 Camporee Flyer"></iframe></div>
       <div class="flyer-btns">
         <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">&#9889; Register Now</a>
         <button class="flyer-btn outline" onclick="openFileModal('2026/Fall/marketing/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">&#128196; View PDF Flyer</button>
@@ -319,6 +319,7 @@ window.addEventListener('mousemove',e=>{if(!dr)return;const dx=sx-e.clientX;if(M
 window.addEventListener('mouseup',e=>{if(!dr)return;dr=false;vp.classList.remove('dragging');scrollPos=Math.round((ss+(sx-e.clientX))/CARD_W)*CARD_W;applyScroll(true);});
 vp.addEventListener('click',e=>{if(mv){e.preventDefault();e.stopPropagation();mv=false;}},true);
 })();
+function scaleFlyerIframe(){var c=document.querySelector('.flyer-iframe-container');var f=document.querySelector('.flyer-iframe');if(c&&f){var s=c.clientWidth/816;f.style.transform='scale('+s+')';}}window.addEventListener('resize',scaleFlyerIframe);scaleFlyerIframe();
 applyScroll();
 </script>
 </body>
