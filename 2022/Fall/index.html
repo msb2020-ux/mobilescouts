@@ -66,7 +66,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink
 .dl-sub{font-size:0.73rem;color:var(--muted);margin-top:3px}
 .dl-arrow{margin-left:auto;font-size:1rem;color:var(--red);opacity:0.55}
 .coming-soon-note{font-size:0.78rem;color:var(--muted);font-style:italic;margin-top:14px}
-.ss-empty{background:linear-gradient(135deg,var(--navy),#00408a);border-radius:16px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:0.9rem}
 /* ── VIDEO GRID ── */
 .video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 @media(max-width:640px){.video-grid{grid-template-columns:1fr}}
@@ -77,20 +76,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink
 .video-label{padding:12px 16px 14px;border-top:2px solid var(--navy)}
 .video-label .v-num{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--red);font-weight:700;margin-bottom:2px}
 .video-label .v-title{font-weight:700;font-size:0.9rem;color:var(--navy)}
-/* ── END VIDEO GRID ── */
-.file-modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;padding:20px}
+/* ── PHOTO GALLERY ── */
+.photo-count{font-size:0.78rem;color:var(--muted);margin-bottom:16px}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.photo-grid{grid-template-columns:repeat(2,1fr)}}
+.photo-thumb{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:10px;cursor:zoom-in;background:#e0ddd8;box-shadow:var(--card-shadow)}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s ease,filter 0.3s ease}
+.photo-thumb:hover img{transform:scale(1.06);filter:brightness(1.08)}
+.photo-thumb .photo-overlay{position:absolute;inset:0;background:rgba(0,40,104,0);display:flex;align-items:center;justify-content:center;transition:background 0.25s}
+.photo-thumb:hover .photo-overlay{background:rgba(0,40,104,0.18)}
+.photo-thumb .zoom-icon{color:white;font-size:1.6rem;opacity:0;transform:scale(0.7);transition:opacity 0.22s,transform 0.22s;text-shadow:0 2px 8px rgba(0,0,0,0.6)}
+.photo-thumb:hover .zoom-icon{opacity:1;transform:scale(1)}
+/* ── END PHOTO GALLERY ── */
+.file-modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;padding:20px}
 .file-modal.open{display:flex}
 .file-modal-inner{background:white;border-radius:14px;overflow:hidden;width:90vw;max-width:960px;height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
 .file-modal-header{background:var(--navy);color:white;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .file-modal-title{font-weight:700;font-size:0.9rem}
 .file-modal-close{background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;opacity:0.7;padding:0 4px}
 .file-modal-close:hover{opacity:1}
-.file-modal-body{flex:1;overflow:hidden}
+.file-modal-body{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#111}
 .file-modal-body iframe{width:100%;height:100%;border:none;display:block}
-.file-modal-body img{width:100%;height:100%;object-fit:contain;display:block;background:#f0f0f0}
-.file-modal-footer{background:#f4f4f4;padding:10px 20px;display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
+.file-modal-body img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.file-modal-footer{background:#f4f4f4;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-shrink:0}
 .file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700}
 .file-modal-footer a:hover{background:var(--red)}
+.modal-nav{display:flex;gap:8px}
+.modal-nav button{background:var(--navy);color:white;border:none;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:background 0.18s}
+.modal-nav button:hover{background:var(--red)}
+.modal-nav button:disabled{opacity:0.3;cursor:default}
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease}
 .fade-in.visible{opacity:1;transform:none}
 footer{background:var(--ink);color:rgba(255,255,255,0.45);text-align:center;padding:28px 20px;font-size:0.78rem}
@@ -213,25 +227,116 @@ footer a{color:var(--gold);text-decoration:none}
       </div>
     </div>
     <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Event Photos</h2><div class="rule"></div></div>
-    <div class="ss-empty"><p>&#128247; Photos coming soon</p></div>
-    <p class="coming-soon-note" style="margin-top:14px">&#9998; Photos will be added as they become available.</p>
+    <p class="photo-count">9 photos &middot; Click any image to enlarge &middot; Use arrow keys to navigate</p>
+    <div class="photo-grid" id="photoGrid">
+      <div class="photo-thumb" onclick="openPhoto(0)">
+        <img src="photos/20220925_022639412_iOS.jpg" alt="Event Photo 1" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+      <div class="photo-thumb" onclick="openPhoto(1)">
+        <img src="photos/20220925_022650248_iOS.jpg" alt="Event Photo 2" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+      <div class="photo-thumb" onclick="openPhoto(2)">
+        <img src="photos/20220925_022659358_iOS.jpg" alt="Event Photo 3" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+      <div class="photo-thumb" onclick="openPhoto(3)">
+        <img src="photos/20220925_022705132_iOS.jpg" alt="Event Photo 4" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+      <div class="photo-thumb" onclick="openPhoto(4)">
+        <img src="photos/20220925_022714083_iOS.jpg" alt="Event Photo 5" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+      <div class="photo-thumb" onclick="openPhoto(5)">
+        <img src="photos/20220925_022716654_iOS.jpg" alt="Event Photo 6" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+      <div class="photo-thumb" onclick="openPhoto(6)">
+        <img src="photos/20220925_022719437_iOS.jpg" alt="Event Photo 7" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+      <div class="photo-thumb" onclick="openPhoto(7)">
+        <img src="photos/20220925_022723253_iOS.jpg" alt="Event Photo 8" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+      <div class="photo-thumb" onclick="openPhoto(8)">
+        <img src="photos/20220925_131420012_iOS.jpg" alt="Event Photo 9" loading="lazy">
+        <div class="photo-overlay"><span class="zoom-icon">&#128269;</span></div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="file-modal" id="fileModal">
   <div class="file-modal-inner">
-    <div class="file-modal-header"><span class="file-modal-title" id="fileModalTitle">Document</span><button class="file-modal-close" id="fileModalClose">&times;</button></div>
+    <div class="file-modal-header">
+      <span class="file-modal-title" id="fileModalTitle">Document</span>
+      <button class="file-modal-close" id="fileModalClose">&times;</button>
+    </div>
     <div class="file-modal-body" id="fileModalBody"></div>
-    <div class="file-modal-footer"><a id="fileModalDownload" href="#" download>&#11015; Download</a></div>
+    <div class="file-modal-footer">
+      <div class="modal-nav" id="modalNav" style="display:none">
+        <button id="modalPrev" onclick="navPhoto(-1)">&#8592; Prev</button>
+        <span id="modalCounter" style="font-size:0.8rem;color:var(--muted);align-self:center"></span>
+        <button id="modalNext" onclick="navPhoto(1)">Next &#8594;</button>
+      </div>
+      <a id="fileModalDownload" href="#" download>&#11015; Download</a>
+    </div>
   </div>
 </div>
 <footer><p>Mobile Area Scouting &nbsp;&middot;&nbsp; Camporee Archive &nbsp;&middot;&nbsp;<a href="../../index.html">Return to Main Site</a></p></footer>
 <script>
+const photos=[
+  'photos/20220925_022639412_iOS.jpg',
+  'photos/20220925_022650248_iOS.jpg',
+  'photos/20220925_022659358_iOS.jpg',
+  'photos/20220925_022705132_iOS.jpg',
+  'photos/20220925_022714083_iOS.jpg',
+  'photos/20220925_022716654_iOS.jpg',
+  'photos/20220925_022719437_iOS.jpg',
+  'photos/20220925_022723253_iOS.jpg',
+  'photos/20220925_131420012_iOS.jpg'
+];
+let currentPhoto=-1,isPhotoMode=false;
+const fm=document.getElementById('fileModal'),fmT=document.getElementById('fileModalTitle'),fmB=document.getElementById('fileModalBody'),fmD=document.getElementById('fileModalDownload'),fmC=document.getElementById('fileModalClose'),modalNav=document.getElementById('modalNav'),modalPrev=document.getElementById('modalPrev'),modalNext=document.getElementById('modalNext'),modalCounter=document.getElementById('modalCounter');
+function openPhoto(idx){
+  currentPhoto=idx;isPhotoMode=true;
+  const src=photos[idx];
+  fmT.textContent='Event Photo '+(idx+1)+' of '+photos.length;
+  fmD.href=src;fmD.download='photo-'+(idx+1)+'.jpg';
+  fmB.innerHTML='<img src="'+src+'" alt="Event Photo '+(idx+1)+'">';
+  modalNav.style.display='flex';
+  updateModalNav();
+  fm.classList.add('open');document.body.style.overflow='hidden';
+}
+function navPhoto(dir){
+  const next=currentPhoto+dir;
+  if(next>=0&&next<photos.length)openPhoto(next);
+}
+function updateModalNav(){
+  modalPrev.disabled=currentPhoto===0;
+  modalNext.disabled=currentPhoto===photos.length-1;
+  modalCounter.textContent=(currentPhoto+1)+' / '+photos.length;
+}
+function openFileModal(src,title,type,file){
+  isPhotoMode=false;currentPhoto=-1;
+  fmT.textContent=title;fmD.href=src;fmD.download=file;
+  fmB.innerHTML='';modalNav.style.display='none';
+  if(type==='pdf'){const f=document.createElement('iframe');f.src=src;fmB.appendChild(f);}
+  else{const img=document.createElement('img');img.src=src;img.alt=title;fmB.appendChild(img);}
+  fm.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeFileModal(){fm.classList.remove('open');fmB.innerHTML='';document.body.style.overflow='';isPhotoMode=false;}
+fmC.onclick=closeFileModal;
+fm.addEventListener('click',e=>{if(e.target===fm)closeFileModal();});
+document.addEventListener('keydown',e=>{
+  if(!fm.classList.contains('open'))return;
+  if(e.key==='Escape')closeFileModal();
+  if(isPhotoMode&&e.key==='ArrowRight')navPhoto(1);
+  if(isPhotoMode&&e.key==='ArrowLeft')navPhoto(-1);
+});
 document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active');}));
-const fm=document.getElementById('fileModal'),fmT=document.getElementById('fileModalTitle'),fmB=document.getElementById('fileModalBody'),fmD=document.getElementById('fileModalDownload'),fmC=document.getElementById('fileModalClose');
-function openFileModal(src,title,type,file){fmT.textContent=title;fmD.href=src;fmD.download=file;fmB.innerHTML='';if(type==='pdf'){const f=document.createElement('iframe');f.src=src;fmB.appendChild(f);}else{const img=document.createElement('img');img.src=src;img.alt=title;fmB.appendChild(img);}fm.classList.add('open');document.body.style.overflow='hidden';}
-function closeFileModal(){fm.classList.remove('open');fmB.innerHTML='';document.body.style.overflow='';}
-fmC.onclick=closeFileModal;fm.addEventListener('click',e=>{if(e.target===fm)closeFileModal();});
-document.addEventListener('keydown',e=>{if(fm.classList.contains('open')&&e.key==='Escape')closeFileModal();});
 new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target);}});},{threshold:0.08}).observe(document.querySelector('.fade-in'));
 </script>
 </body>
