@@ -1,4 +1,4 @@
-<!-- v19 - Fix contact form submission handler -->
+<!-- v20 - Add detailed error logging and improve form handling -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -366,10 +366,9 @@ footer{background:var(--navy);color:white;padding:32px 20px}
     <div class="contact-modal-body">
       <form class="contact-form" id="contactForm" action="https://formspree.io/f/xwpkwdap" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="_replyto" placeholder="Your Email" required>
+        <input type="email" name="email" placeholder="Your Email" required>
         <input type="text" name="_subject" placeholder="Subject" value="Camporee Inquiry" required>
         <textarea name="message" placeholder="Your Message" required></textarea>
-        <input type="hidden" name="_next" value="https://mobilescouts.org/#contact-success">
         <button type="submit">Send Message</button>
       </form>
       <div class="form-status hidden" id="formStatus"></div>
@@ -448,18 +447,24 @@ applyScroll();
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 
-contactForm.addEventListener('submit', function(e) {
+contactForm.addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = contactForm.querySelector('button');
   btn.disabled = true;
   btn.textContent = 'Sending...';
   formStatus.className = 'form-status hidden';
   
-  fetch(contactForm.action, {
-    method: 'POST',
-    body: new FormData(contactForm),
-    headers: {'Accept': 'application/json'}
-  }).then(response => {
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: {'Accept': 'application/json'}
+    });
+    
+    console.log('Response status:', response.status);
+    const data = await response.json();
+    console.log('Response data:', data);
+    
     if (response.ok) {
       formStatus.className = 'form-status success';
       formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
@@ -467,19 +472,19 @@ contactForm.addEventListener('submit', function(e) {
       setTimeout(() => closeContactModal(), 2000);
     } else {
       formStatus.className = 'form-status error';
-      formStatus.textContent = 'Something went wrong. Please try again or email directly.';
+      formStatus.textContent = data.error || 'Something went wrong. Please try again or email mark@oculo-facial.com directly.';
     }
-    btn.disabled = false;
-    btn.textContent = 'Send Message';
-  }).catch(error => {
+  } catch (error) {
+    console.error('Error:', error);
     formStatus.className = 'form-status error';
-    formStatus.textContent = 'Network error. Please try again later.';
-    btn.disabled = false;
-    btn.textContent = 'Send Message';
-  });
+    formStatus.textContent = 'Network error. Please try again or email mark@oculo-facial.com directly.';
+  }
+  
+  btn.disabled = false;
+  btn.textContent = 'Send Message';
 });
 
-// Check for success hash from Formspree redirect
+// Check for success hash
 if(window.location.hash === '#contact-success') {
   openContactModal();
   formStatus.className = 'form-status success';
