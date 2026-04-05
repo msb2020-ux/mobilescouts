@@ -1,4 +1,4 @@
-<!-- v18 - Contact form replaced with modal popup link -->
+<!-- v19 - Fix contact form submission handler -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,9 +109,10 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .contact-form button{padding:11px 24px;background:var(--navy);color:white;font-weight:700;border:none;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.88rem;transition:background 0.18s}
 .contact-form button:hover{background:var(--red)}
 .contact-form button:disabled{opacity:0.5;cursor:not-allowed}
-.form-status{padding:10px 14px;border-radius:6px;font-size:0.85rem;margin-top:8px;display:none}
-.form-status.success{background:var(--success);color:white;display:block}
-.form-status.error{background:var(--error);color:white;display:block}
+.form-status{padding:10px 14px;border-radius:6px;font-size:0.85rem;margin-top:8px}
+.form-status.success{background:var(--success);color:white}
+.form-status.error{background:var(--error);color:white}
+.form-status.hidden{display:none}
 .past-events{background:#f4f4f4;padding:48px 20px;position:relative;z-index:1}
 .past-events h2{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--navy);margin-bottom:8px}
 .past-events-sub{text-align:center;font-size:0.85rem;color:#666;margin-bottom:28px}
@@ -371,7 +372,7 @@ footer{background:var(--navy);color:white;padding:32px 20px}
         <input type="hidden" name="_next" value="https://mobilescouts.org/#contact-success">
         <button type="submit">Send Message</button>
       </form>
-      <div class="form-status" id="formStatus"></div>
+      <div class="form-status hidden" id="formStatus"></div>
     </div>
   </div>
 </div>
@@ -410,7 +411,6 @@ function closeContactModal(){contactModal.classList.remove('open');document.body
 openContactBtn.onclick=openContactModal;
 contactModalClose.onclick=closeContactModal;
 contactModal.addEventListener('click',e=>{if(e.target===contactModal)closeContactModal();});
-document.addEventListener('keydown',e=>{if(contactModal.classList.contains('open')&&e.key==='Escape')closeContactModal();});
 
 const vp = document.getElementById('cardsViewport');
 document.querySelectorAll('.event-card').forEach(card => {
@@ -447,39 +447,37 @@ applyScroll();
 // Contact form handling
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
-if(contactForm){
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = contactForm.querySelector('button');
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    formStatus.className = 'form-status';
-    formStatus.style.display = 'none';
-    
-    fetch(contactForm.action, {
-      method: 'POST',
-      body: new FormData(contactForm),
-      headers: {'Accept': 'application/json'}
-    }).then(response => {
-      if (response.ok) {
-        formStatus.className = 'form-status success';
-        formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
-        contactForm.reset();
-        setTimeout(() => closeContactModal(), 2000);
-      } else {
-        formStatus.className = 'form-status error';
-        formStatus.textContent = 'Something went wrong. Please try again or email directly.';
-      }
-      btn.disabled = false;
-      btn.textContent = 'Send Message';
-    }).catch(error => {
+
+contactForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = contactForm.querySelector('button');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  formStatus.className = 'form-status hidden';
+  
+  fetch(contactForm.action, {
+    method: 'POST',
+    body: new FormData(contactForm),
+    headers: {'Accept': 'application/json'}
+  }).then(response => {
+    if (response.ok) {
+      formStatus.className = 'form-status success';
+      formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+      contactForm.reset();
+      setTimeout(() => closeContactModal(), 2000);
+    } else {
       formStatus.className = 'form-status error';
-      formStatus.textContent = 'Network error. Please try again later.';
-      btn.disabled = false;
-      btn.textContent = 'Send Message';
-    });
+      formStatus.textContent = 'Something went wrong. Please try again or email directly.';
+    }
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  }).catch(error => {
+    formStatus.className = 'form-status error';
+    formStatus.textContent = 'Network error. Please try again later.';
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
   });
-}
+});
 
 // Check for success hash from Formspree redirect
 if(window.location.hash === '#contact-success') {
@@ -488,6 +486,11 @@ if(window.location.hash === '#contact-success') {
   formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
   window.location.hash = '';
 }
+
+// Close modals with keyboard
+document.addEventListener('keydown',e=>{
+  if(contactModal.classList.contains('open')&&e.key==='Escape')closeContactModal();
+});
 </script>
 </body>
 </html>
