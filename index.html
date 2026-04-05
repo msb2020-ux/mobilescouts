@@ -1,14 +1,37 @@
-<!-- v14 - 2022 Spring patch filename fix -->
+<!-- v15 - SEO meta tags, contact form, Marketing tab added -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobile Area Fall Camporee 2026</title>
+<title>Mobile Area Fall Camporee 2026 | Ride of the Headless Horseman | Camp Maubila</title>
+<meta name="description" content="Mobile Area Fall Camporee 2026 – Ride of the Headless Horseman at Camp Maubila, October 23-25. Skills-based, story-driven camporee for all Scouts. Five Rivers District, Boy Scouts of America.">
+<meta name="keywords" content="Mobile Area Scouts, Fall Camporee, Camp Maubila, Five Rivers District, Boy Scouts of America, BSA, Scouting, Alabama camping, Scout events, camporee patches, Headless Horseman, Grove Hill Alabama">
+<meta name="author" content="Mark S. Brown, MD">
+<meta name="robots" content="index, follow">
+
+<!-- OpenGraph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mobilescouts.org/">
+<meta property="og:title" content="Mobile Area Fall Camporee 2026 | Ride of the Headless Horseman">
+<meta property="og:description" content="October 23-25, 2026 at Camp Maubila. Skills-based, story-driven camporee for all Scouts. Daylight prepares the camp. Night tests it.">
+<meta property="og:image" content="https://mobilescouts.org/2026/Fall/marketing/2026-Flyer.png">
+<meta property="og:site_name" content="Mobile Area Scouts Camporee Archive">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://mobilescouts.org/">
+<meta name="twitter:title" content="Mobile Area Fall Camporee 2026 | Ride of the Headless Horseman">
+<meta name="twitter:description" content="October 23-25, 2026 at Camp Maubila. Skills-based, story-driven camporee for all Scouts.">
+<meta name="twitter:image" content="https://mobilescouts.org/2026/Fall/marketing/2026-Flyer.png">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://mobilescouts.org/">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#002868;--red:#bf0a30;--gold:#f5c518;--offwhite:#f8f6f1;--ink:#1a1a2e;--muted:#6b6b7b;--card-shadow:0 6px 28px rgba(0,40,104,0.11);}
+:root{--navy:#002868;--red:#bf0a30;--gold:#f5c518;--offwhite:#f8f6f1;--ink:#1a1a2e;--muted:#6b6b7b;--card-shadow:0 6px 28px rgba(0,40,104,0.11);--success:#16a34a;--error:#dc2626}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .header{background:var(--navy);padding:15px;text-align:center}
@@ -35,6 +58,15 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .flyer-btn:hover{background:var(--red)}
 .flyer-btn.outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
 .flyer-btn.outline:hover{background:var(--navy);color:white}
+.marketing-panel{max-width:860px;margin:0 auto}
+.marketing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:28px}
+.marketing-card{background:white;border-radius:12px;padding:24px;box-shadow:var(--card-shadow)}
+.marketing-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:var(--navy);margin-bottom:12px}
+.marketing-card p{font-size:0.92rem;line-height:1.6;color:#333;margin-bottom:16px}
+.marketing-card ul{padding-left:20px;margin-bottom:16px}
+.marketing-card li{font-size:0.88rem;line-height:1.6;color:#444;margin-bottom:6px}
+.marketing-video-wrap{border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;margin-bottom:16px}
+.marketing-video-wrap iframe{width:100%;height:100%;display:block;border:none}
 .promo-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;max-width:860px;margin:0 auto}
 .promo-video-wrap video{width:100%;height:100%;display:block}
 .promo-video-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
@@ -89,8 +121,23 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .event-card-btn.disabled{background:#bbb;pointer-events:none;cursor:default}
 .social{text-align:center;padding:40px 20px}
 .social img.qr{width:150px;margin-top:20px}
-footer{background:var(--navy);color:white;text-align:center;padding:20px}
-footer a{color:var(--gold);text-decoration:none;font-weight:bold}
+footer{background:var(--navy);color:white;padding:48px 20px 28px}
+.footer-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
+.footer-col h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;color:var(--gold);margin-bottom:16px}
+.footer-col p{font-size:0.88rem;line-height:1.6;color:rgba(255,255,255,0.8);margin-bottom:12px}
+.footer-col a{color:var(--gold);text-decoration:none;font-weight:600}
+.footer-col a:hover{text-decoration:underline}
+.contact-form{display:flex;flex-direction:column;gap:12px}
+.contact-form input,.contact-form textarea{width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,0.3);border-radius:6px;background:rgba(255,255,255,0.1);color:white;font-family:'DM Sans',sans-serif;font-size:0.88rem}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:rgba(255,255,255,0.5)}
+.contact-form textarea{resize:vertical;min-height:100px}
+.contact-form button{padding:11px 24px;background:var(--gold);color:var(--navy);font-weight:700;border:none;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.88rem;transition:background 0.18s}
+.contact-form button:hover{background:#ffd700}
+.contact-form button:disabled{opacity:0.5;cursor:not-allowed}
+.form-status{padding:10px 14px;border-radius:6px;font-size:0.85rem;margin-top:8px;display:none}
+.form-status.success{background:var(--success);color:white;display:block}
+.form-status.error{background:var(--error);color:white;display:block}
+.footer-bottom{text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.2);font-size:0.82rem;color:rgba(255,255,255,0.6)}
 .sticky{position:fixed;bottom:0;width:100%;background:var(--red);text-align:center;padding:10px;z-index:99}
 .sticky a{background:white;color:var(--navy);padding:10px 20px;border-radius:5px;font-weight:bold;text-decoration:none}
 @media(max-width:600px){
@@ -99,6 +146,7 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   .file-modal-inner{width:96vw;height:90vh}
   .carousel-arrow{width:36px;height:36px;font-size:1rem}
   .event-card:hover .event-card-img{transform:scale(1.15)}
+  .footer-container{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -120,6 +168,7 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   <div class="countdown" id="countdown"></div>
   <div class="feature-tabs">
     <button class="feature-tab-btn active" data-ftab="flyer">&#128444;&#65039; Flyer &amp; Register</button>
+    <button class="feature-tab-btn" data-ftab="marketing">&#128226; Marketing</button>
     <button class="feature-tab-btn" data-ftab="promo">&#127908; Promo Video</button>
     <button class="feature-tab-btn" data-ftab="about">&#128214; About This Event</button>
   </div>
@@ -129,6 +178,40 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
       <div class="flyer-btns">
         <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">&#9889; Register Now</a>
         <button class="flyer-btn outline" onclick="openFileModal('2026/Fall/marketing/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">&#128196; View PDF Flyer</button>
+      </div>
+    </div>
+  </div>
+  <div class="feature-tab-panel" id="ftab-marketing">
+    <div class="marketing-panel">
+      <div class="marketing-grid">
+        <div class="marketing-card">
+          <h3>&#128226; Promote This Event</h3>
+          <p>Help spread the word about the 2026 Fall Camporee! Download flyers, graphics, and videos to share with your troop.</p>
+          <ul>
+            <li>Digital flyer (PDF format)</li>
+            <li>Social media graphics</li>
+            <li>Promo video for troop meetings</li>
+            <li>Event highlights video</li>
+          </ul>
+          <div class="flyer-btns">
+            <button class="flyer-btn outline" onclick="openFileModal('2026/Fall/marketing/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">&#128196; Download Flyer PDF</button>
+            <a class="flyer-btn outline" href="2026/Fall/marketing/2026-Flyer.png" download>&#128247; Download PNG</a>
+          </div>
+        </div>
+        <div class="marketing-card">
+          <h3>&#127909; Video Resources</h3>
+          <p>Watch and share our promotional video to get Scouts excited about this year's camporee adventure.</p>
+          <div class="marketing-video-wrap">
+            <video src="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" controls playsinline preload="metadata" poster="2026/Fall/marketing/2026-Flyer.png">Your browser does not support video playback.</video>
+          </div>
+          <div class="flyer-btns">
+            <a class="flyer-btn outline" href="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" download>&#11015; Download Video</a>
+          </div>
+        </div>
+      </div>
+      <div class="flyer-btns" style="justify-content:center">
+        <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">&#9889; Register Now</a>
+        <button class="flyer-btn outline" onclick="document.querySelector('[data-ftab=about]').click()">&#128214; Learn More</button>
       </div>
     </div>
   </div>
@@ -248,7 +331,32 @@ footer a{color:var(--gold);text-decoration:none;font-weight:bold}
   <img class="qr" src="Graphics/mobile_area_scouts_qr (2).png" alt="QR Code">
 </section>
 
-<footer><p>Mobile Area Scouting | Camporee Events</p></footer>
+<footer>
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>Mobile Area Scouts</h3>
+      <p>Five Rivers District camporee archive and event information for Scouts BSA troops in the Mobile Area Council, serving scouts throughout southern Alabama.</p>
+      <p><a href="https://www.instagram.com/mobile_area_scouts/" target="_blank">Instagram</a> | <a href="https://www.youtube.com/@MobileAreaScouts-sv1xm" target="_blank">YouTube</a></p>
+    </div>
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <p>Have questions about camporee events, patch sales, or event planning? Send us a message.</p>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xwpkwdap" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="_replyto" placeholder="Your Email" required>
+        <input type="text" name="_subject" placeholder="Subject" value="Camporee Inquiry" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <input type="hidden" name="_next" value="https://mobilescouts.org/#contact-success">
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="form-status" id="formStatus"></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Mobile Area Scouts | Site maintained by <a href="mailto:mark@oculo-facial.com">Mark S. Brown, MD</a></p>
+  </div>
+</footer>
+
 <div class="sticky"><a href="https://scoutingevent.com/004" target="_blank">Register for 2026</a></div>
 
 <div class="file-modal" id="fileModal">
@@ -276,6 +384,8 @@ document.querySelectorAll('.feature-tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const vid = document.querySelector('#ftab-promo video');
     if (vid) vid.pause();
+    const mvid = document.querySelector('#ftab-marketing video');
+    if (mvid) mvid.pause();
     document.querySelectorAll('.feature-tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.feature-tab-panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
@@ -321,6 +431,49 @@ vp.addEventListener('click',e=>{if(mv){e.preventDefault();e.stopPropagation();mv
 })();
 function scaleFlyerIframe(){var c=document.querySelector('.flyer-iframe-container');var f=document.querySelector('.flyer-iframe');if(c&&f){var s=c.clientWidth/816;f.style.transform='scale('+s+')';}}window.addEventListener('resize',scaleFlyerIframe);scaleFlyerIframe();
 applyScroll();
+
+// Contact form handling
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+if(contactForm){
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = contactForm.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    formStatus.className = 'form-status';
+    formStatus.style.display = 'none';
+    
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: {'Accept': 'application/json'}
+    }).then(response => {
+      if (response.ok) {
+        formStatus.className = 'form-status success';
+        formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+        contactForm.reset();
+      } else {
+        formStatus.className = 'form-status error';
+        formStatus.textContent = 'Something went wrong. Please try again or email directly.';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    }).catch(error => {
+      formStatus.className = 'form-status error';
+      formStatus.textContent = 'Network error. Please try again later.';
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    });
+  });
+}
+
+// Check for success hash from Formspree redirect
+if(window.location.hash === '#contact-success') {
+  formStatus.className = 'form-status success';
+  formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+  window.location.hash = '';
+}
 </script>
 </body>
 </html>
