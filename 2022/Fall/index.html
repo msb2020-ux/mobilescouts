@@ -67,6 +67,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink
 .dl-arrow{margin-left:auto;font-size:1rem;color:var(--red);opacity:0.55}
 .coming-soon-note{font-size:0.78rem;color:var(--muted);font-style:italic;margin-top:14px}
 .ss-empty{background:linear-gradient(135deg,var(--navy),#00408a);border-radius:16px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:0.9rem}
+/* ── VIDEO GRID ── */
+.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:640px){.video-grid{grid-template-columns:1fr}}
+.video-card{background:white;border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);transition:transform 0.18s,box-shadow 0.18s}
+.video-card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,40,104,0.18)}
+.video-thumb-wrap{position:relative;width:100%;aspect-ratio:16/9;cursor:pointer;overflow:hidden;background:#000}
+.video-thumb-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-label{padding:12px 16px 14px;border-top:2px solid var(--navy)}
+.video-label .v-num{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--red);font-weight:700;margin-bottom:2px}
+.video-label .v-title{font-weight:700;font-size:0.9rem;color:var(--navy)}
+/* ── END VIDEO GRID ── */
 .file-modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;padding:20px}
 .file-modal.open{display:flex}
 .file-modal-inner{background:white;border-radius:14px;overflow:hidden;width:90vw;max-width:960px;height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
@@ -163,10 +174,47 @@ footer a{color:var(--gold);text-decoration:none}
   </div>
   <div class="tab-panel" id="tab-photos">
     <div class="section-header"><span class="section-num">01</span><h2>Event Videos</h2><div class="rule"></div></div>
-    <div class="ss-empty"><p>&#127909; Videos coming soon</p></div>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/ZS74vZED_J4" title="Program Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-label">
+          <div class="v-num">Video 1 &middot; Program</div>
+          <div class="v-title">Zombie Survival 2022</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/_erFSgnj52A" title="Program Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-label">
+          <div class="v-num">Video 2 &middot; Program</div>
+          <div class="v-title">Zombie Survival 2022</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/0U8Msj99LbQ" title="Program Video 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-label">
+          <div class="v-num">Video 3 &middot; Program</div>
+          <div class="v-title">Zombie Survival 2022</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb-wrap">
+          <iframe src="https://www.youtube.com/embed/KdJDtjc7MCY" title="Program Video 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-label">
+          <div class="v-num">Video 4 &middot; Program</div>
+          <div class="v-title">Zombie Survival 2022</div>
+        </div>
+      </div>
+    </div>
     <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h2>Event Photos</h2><div class="rule"></div></div>
     <div class="ss-empty"><p>&#128247; Photos coming soon</p></div>
-    <p class="coming-soon-note" style="margin-top:14px">&#9998; Photos and videos will be added as they become available.</p>
+    <p class="coming-soon-note" style="margin-top:14px">&#9998; Photos will be added as they become available.</p>
   </div>
 </div>
 <div class="file-modal" id="fileModal">
