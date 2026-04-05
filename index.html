@@ -1,4 +1,4 @@
-<!-- v16 - Marketing tab updated with graphics grid matching 2025 layout -->
+<!-- v17 - Restructured: About tab first with flyer + description, other tabs match year page format -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,21 +62,15 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .graphic-card img{width:100%;display:block;object-fit:cover;max-height:220px}
 .graphic-card-label{padding:10px 14px;font-size:0.78rem;font-weight:600;color:var(--navy)}
 .flyer-panel{display:flex;flex-direction:column;align-items:center;gap:20px}
-.flyer-panel img{max-width:680px;width:100%;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18)}.flyer-iframe-container{width:100%;max-width:680px;aspect-ratio:8.5/11;overflow:hidden;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18);position:relative;}.flyer-iframe{width:816px;height:1056px;border:none;transform-origin:top left;display:block;pointer-events:none;}
+.flyer-iframe-container{width:100%;max-width:680px;aspect-ratio:8.5/11;overflow:hidden;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18);position:relative;margin:0 auto}.flyer-iframe{width:816px;height:1056px;border:none;transform-origin:top left;display:block;pointer-events:none;}
 .flyer-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .flyer-btn{display:inline-block;padding:11px 24px;background:var(--navy);color:white;font-weight:700;text-decoration:none;border-radius:6px;font-size:0.88rem;transition:background 0.18s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
 .flyer-btn:hover{background:var(--red)}
 .flyer-btn.outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
 .flyer-btn.outline:hover{background:var(--navy);color:white}
-.marketing-panel{max-width:1100px;margin:0 auto}
-.short-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:9/16;max-width:360px;margin:0 auto}
-.short-video-wrap iframe,.short-video-wrap video{width:100%;height:100%;border:none;display:block}
-.promo-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;max-width:860px;margin:0 auto}
-.promo-video-wrap video{width:100%;height:100%;display:block}
-.promo-video-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
-.about-panel{max-width:760px;margin:0 auto}
-.about-kicker{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:14px}
-.about-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:0.04em;color:var(--navy);line-height:1.1;margin-bottom:20px}
+.about-panel{max-width:860px;margin:0 auto}
+.about-kicker{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:14px;text-align:center}
+.about-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:0.04em;color:var(--navy);line-height:1.1;margin-bottom:20px;text-align:center}
 .about-body{font-family:'Crimson Pro',serif;font-size:1.12rem;line-height:1.8;color:#333}
 .about-body p{margin-bottom:16px}
 .about-body strong{color:var(--navy);font-weight:600}
@@ -84,7 +78,9 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .about-highlight p{font-size:0.92rem;line-height:1.7;color:rgba(255,255,255,0.88)}
 .about-highlight p+p{margin-top:10px}
 .about-highlight strong{color:var(--gold)}
-.about-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+.about-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.short-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:9/16;max-width:360px;margin:0 auto}
+.short-video-wrap video{width:100%;height:100%;border:none;display:block}
 .file-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;padding:20px}
 .file-modal.open{display:flex}
 .file-modal-inner{background:white;border-radius:14px;overflow:hidden;width:90vw;max-width:960px;height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
@@ -171,48 +167,22 @@ footer{background:var(--navy);color:white;padding:48px 20px 28px}
   <div class="feature-date">October 23&#x2013;25, 2026 &middot; Camp Maubila, Grove Hill, AL</div>
   <div class="countdown" id="countdown"></div>
   <div class="feature-tabs">
-    <button class="feature-tab-btn active" data-ftab="flyer">&#128444;&#65039; Flyer &amp; Register</button>
-    <button class="feature-tab-btn" data-ftab="marketing">&#128226; Marketing</button>
-    <button class="feature-tab-btn" data-ftab="promo">&#127908; Promo Video</button>
-    <button class="feature-tab-btn" data-ftab="about">&#128214; About This Event</button>
+    <button class="feature-tab-btn active" data-ftab="about">&#128214; About This Event</button>
+    <button class="feature-tab-btn" data-ftab="marketing">&#128138; Marketing</button>
+    <button class="feature-tab-btn" data-ftab="program">&#128203; Program</button>
+    <button class="feature-tab-btn" data-ftab="photos">&#128247; Photos &amp; Videos</button>
   </div>
-  <div class="feature-tab-panel active" id="ftab-flyer">
-    <div class="flyer-panel">
+  
+  <div class="feature-tab-panel active" id="ftab-about">
+    <div class="about-panel">
+      <div class="section-header"><span class="section-num">01</span><h3>Event Flyer</h3><div class="rule"></div></div>
       <div class="flyer-iframe-container"><iframe src="2026/Fall/marketing/2026-Flyer.html" class="flyer-iframe" scrolling="no" title="2026 Camporee Flyer"></iframe></div>
-      <div class="flyer-btns">
+      <div class="flyer-btns" style="margin-top:20px">
         <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">&#9889; Register Now</a>
         <button class="flyer-btn outline" onclick="openFileModal('2026/Fall/marketing/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">&#128196; View PDF Flyer</button>
       </div>
-    </div>
-  </div>
-  <div class="feature-tab-panel" id="ftab-marketing">
-    <div class="marketing-panel">
-      <div class="section-header"><span class="section-num">01</span><h3>Promo Video</h3><div class="rule"></div></div>
-      <div class="short-video-wrap">
-        <video src="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" controls playsinline preload="metadata" poster="2026/Fall/marketing/2026-Flyer.png">Your browser does not support video playback.</video>
-      </div>
-      <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h3>Graphics &amp; Flyers</h3><div class="rule"></div></div>
-      <div class="graphics-grid">
-        <div class="graphic-card" onclick="openFileModal('2026/Fall/marketing/2026-Flyer.png','Event Flyer','image','2026-Flyer.png')"><img src="2026/Fall/marketing/2026-Flyer.png" alt=""><div class="graphic-card-label">Event Flyer</div></div>
-        <div class="graphic-card" onclick="openFileModal('2026/Fall/marketing/Instagram promotiona2.png','Instagram Promo','image','Instagram promotiona2.png')"><img src="2026/Fall/marketing/Instagram promotiona2.png" alt=""><div class="graphic-card-label">Instagram Promo</div></div>
-      </div>
-      <div class="flyer-btns" style="justify-content:center;margin-top:28px">
-        <button class="flyer-btn outline" onclick="openFileModal('2026/Fall/marketing/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">&#128196; Download Flyer PDF</button>
-        <a class="flyer-btn outline" href="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" download>&#11015; Download Video</a>
-      </div>
-    </div>
-  </div>
-  <div class="feature-tab-panel" id="ftab-promo">
-    <div class="promo-video-wrap">
-      <video src="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" controls playsinline preload="metadata" poster="2026/Fall/marketing/2026-Flyer.png">Your browser does not support video playback.</video>
-    </div>
-    <div class="promo-video-btns">
-      <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">&#9889; Register Now</a>
-      <a class="flyer-btn outline" href="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" download>&#11015; Download Video</a>
-    </div>
-  </div>
-  <div class="feature-tab-panel" id="ftab-about">
-    <div class="about-panel">
+      
+      <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h3>About the Event</h3><div class="rule"></div></div>
       <div class="about-kicker">Camp Maubila &middot; October 23&#x2013;25, 2026</div>
       <div class="about-headline">This is not a Halloween party.</div>
       <div class="about-body">
@@ -232,10 +202,39 @@ footer{background:var(--navy);color:white;padding:48px 20px 28px}
         </div>
         <div class="about-cta">
           <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">&#9889; Register Now</a>
-          <button class="flyer-btn outline" onclick="document.querySelector('[data-ftab=flyer]').click()">&#128444;&#65039; View Flyer</button>
-          <button class="flyer-btn outline" onclick="document.querySelector('[data-ftab=promo]').click()">&#127908; Watch Promo</button>
+          <button class="flyer-btn outline" onclick="document.querySelector('[data-ftab=marketing]').click()">&#128138; View Marketing Materials</button>
         </div>
       </div>
+    </div>
+  </div>
+  
+  <div class="feature-tab-panel" id="ftab-marketing">
+    <div class="about-panel">
+      <div class="section-header"><span class="section-num">01</span><h3>Promo Video</h3><div class="rule"></div></div>
+      <div class="short-video-wrap">
+        <video src="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" controls playsinline preload="metadata" poster="2026/Fall/marketing/2026-Flyer.png">Your browser does not support video playback.</video>
+      </div>
+      <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h3>Graphics &amp; Flyers</h3><div class="rule"></div></div>
+      <div class="graphics-grid">
+        <div class="graphic-card" onclick="openFileModal('2026/Fall/marketing/2026-Flyer.png','Event Flyer','image','2026-Flyer.png')"><img src="2026/Fall/marketing/2026-Flyer.png" alt=""><div class="graphic-card-label">Event Flyer</div></div>
+        <div class="graphic-card" onclick="openFileModal('2026/Fall/marketing/Instagram promotiona2.png','Instagram Promo','image','Instagram promotiona2.png')"><img src="2026/Fall/marketing/Instagram promotiona2.png" alt=""><div class="graphic-card-label">Instagram Promo</div></div>
+      </div>
+      <div class="flyer-btns" style="justify-content:center;margin-top:28px">
+        <button class="flyer-btn outline" onclick="openFileModal('2026/Fall/marketing/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">&#128196; Download Flyer PDF</button>
+        <a class="flyer-btn outline" href="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" download>&#11015; Download Video</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="feature-tab-panel" id="ftab-program">
+    <div class="about-panel">
+      <p style="text-align:center;color:var(--muted);font-size:0.9rem;padding:40px 20px">Program documents will be posted closer to the event date.</p>
+    </div>
+  </div>
+  
+  <div class="feature-tab-panel" id="ftab-photos">
+    <div class="about-panel">
+      <p style="text-align:center;color:var(--muted);font-size:0.9rem;padding:40px 20px">Photos and videos will be posted after the event.</p>
     </div>
   </div>
 </div>
@@ -369,10 +368,8 @@ setInterval(() => {
 
 document.querySelectorAll('.feature-tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const vid = document.querySelector('#ftab-promo video');
+    const vid = document.querySelector('#ftab-marketing video');
     if (vid) vid.pause();
-    const mvid = document.querySelector('#ftab-marketing video');
-    if (mvid) mvid.pause();
     document.querySelectorAll('.feature-tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.feature-tab-panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
