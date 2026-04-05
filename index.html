@@ -1,4 +1,4 @@
-<!-- v20 - Add detailed error logging and improve form handling -->
+<!-- v21 - Update Formspree endpoint to xdapyngv -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -364,7 +364,7 @@ footer{background:var(--navy);color:white;padding:32px 20px}
       <button class="contact-modal-close" id="contactModalClose">&times;</button>
     </div>
     <div class="contact-modal-body">
-      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xwpkwdap" method="POST">
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xdapyngv" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
         <input type="text" name="_subject" placeholder="Subject" value="Camporee Inquiry" required>
@@ -461,21 +461,17 @@ contactForm.addEventListener('submit', async function(e) {
       headers: {'Accept': 'application/json'}
     });
     
-    console.log('Response status:', response.status);
-    const data = await response.json();
-    console.log('Response data:', data);
-    
     if (response.ok) {
       formStatus.className = 'form-status success';
       formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
       contactForm.reset();
       setTimeout(() => closeContactModal(), 2000);
     } else {
+      const data = await response.json();
       formStatus.className = 'form-status error';
       formStatus.textContent = data.error || 'Something went wrong. Please try again or email mark@oculo-facial.com directly.';
     }
   } catch (error) {
-    console.error('Error:', error);
     formStatus.className = 'form-status error';
     formStatus.textContent = 'Network error. Please try again or email mark@oculo-facial.com directly.';
   }
@@ -483,14 +479,6 @@ contactForm.addEventListener('submit', async function(e) {
   btn.disabled = false;
   btn.textContent = 'Send Message';
 });
-
-// Check for success hash
-if(window.location.hash === '#contact-success') {
-  openContactModal();
-  formStatus.className = 'form-status success';
-  formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
-  window.location.hash = '';
-}
 
 // Close modals with keyboard
 document.addEventListener('keydown',e=>{
