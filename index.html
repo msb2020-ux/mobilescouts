@@ -1,4 +1,4 @@
-<!-- v15 - SEO meta tags, contact form, Marketing tab added -->
+<!-- v16 - Marketing tab updated with graphics grid matching 2025 layout -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +51,16 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .feature-tab-btn.active{background:var(--offwhite);color:var(--navy)}
 .feature-tab-panel{display:none;background:var(--offwhite);border-radius:0 0 10px 10px;border:2px solid var(--navy);border-top:none;padding:32px}
 .feature-tab-panel.active{display:block}
+.section-header{display:flex;align-items:center;gap:14px;margin:40px 0 20px}
+.section-header:first-child{margin-top:0}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:1;color:var(--red);opacity:0.2;min-width:48px}
+.section-header h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.07em;color:var(--navy);text-transform:uppercase}
+.rule{flex:1;height:2px;background:linear-gradient(90deg,var(--navy),transparent);opacity:0.12}
+.graphics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.graphic-card{background:white;border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+.graphic-card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,40,104,0.16)}
+.graphic-card img{width:100%;display:block;object-fit:cover;max-height:220px}
+.graphic-card-label{padding:10px 14px;font-size:0.78rem;font-weight:600;color:var(--navy)}
 .flyer-panel{display:flex;flex-direction:column;align-items:center;gap:20px}
 .flyer-panel img{max-width:680px;width:100%;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18)}.flyer-iframe-container{width:100%;max-width:680px;aspect-ratio:8.5/11;overflow:hidden;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,0.18);position:relative;}.flyer-iframe{width:816px;height:1056px;border:none;transform-origin:top left;display:block;pointer-events:none;}
 .flyer-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
@@ -58,15 +68,9 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .flyer-btn:hover{background:var(--red)}
 .flyer-btn.outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
 .flyer-btn.outline:hover{background:var(--navy);color:white}
-.marketing-panel{max-width:860px;margin:0 auto}
-.marketing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:28px}
-.marketing-card{background:white;border-radius:12px;padding:24px;box-shadow:var(--card-shadow)}
-.marketing-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:var(--navy);margin-bottom:12px}
-.marketing-card p{font-size:0.92rem;line-height:1.6;color:#333;margin-bottom:16px}
-.marketing-card ul{padding-left:20px;margin-bottom:16px}
-.marketing-card li{font-size:0.88rem;line-height:1.6;color:#444;margin-bottom:6px}
-.marketing-video-wrap{border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;margin-bottom:16px}
-.marketing-video-wrap iframe{width:100%;height:100%;display:block;border:none}
+.marketing-panel{max-width:1100px;margin:0 auto}
+.short-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:9/16;max-width:360px;margin:0 auto}
+.short-video-wrap iframe,.short-video-wrap video{width:100%;height:100%;border:none;display:block}
 .promo-video-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);background:#000;aspect-ratio:16/9;max-width:860px;margin:0 auto}
 .promo-video-wrap video{width:100%;height:100%;display:block}
 .promo-video-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
@@ -183,35 +187,18 @@ footer{background:var(--navy);color:white;padding:48px 20px 28px}
   </div>
   <div class="feature-tab-panel" id="ftab-marketing">
     <div class="marketing-panel">
-      <div class="marketing-grid">
-        <div class="marketing-card">
-          <h3>&#128226; Promote This Event</h3>
-          <p>Help spread the word about the 2026 Fall Camporee! Download flyers, graphics, and videos to share with your troop.</p>
-          <ul>
-            <li>Digital flyer (PDF format)</li>
-            <li>Social media graphics</li>
-            <li>Promo video for troop meetings</li>
-            <li>Event highlights video</li>
-          </ul>
-          <div class="flyer-btns">
-            <button class="flyer-btn outline" onclick="openFileModal('2026/Fall/marketing/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">&#128196; Download Flyer PDF</button>
-            <a class="flyer-btn outline" href="2026/Fall/marketing/2026-Flyer.png" download>&#128247; Download PNG</a>
-          </div>
-        </div>
-        <div class="marketing-card">
-          <h3>&#127909; Video Resources</h3>
-          <p>Watch and share our promotional video to get Scouts excited about this year's camporee adventure.</p>
-          <div class="marketing-video-wrap">
-            <video src="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" controls playsinline preload="metadata" poster="2026/Fall/marketing/2026-Flyer.png">Your browser does not support video playback.</video>
-          </div>
-          <div class="flyer-btns">
-            <a class="flyer-btn outline" href="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" download>&#11015; Download Video</a>
-          </div>
-        </div>
+      <div class="section-header"><span class="section-num">01</span><h3>Promo Video</h3><div class="rule"></div></div>
+      <div class="short-video-wrap">
+        <video src="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" controls playsinline preload="metadata" poster="2026/Fall/marketing/2026-Flyer.png">Your browser does not support video playback.</video>
       </div>
-      <div class="flyer-btns" style="justify-content:center">
-        <a class="flyer-btn" href="https://scoutingevent.com/004" target="_blank">&#9889; Register Now</a>
-        <button class="flyer-btn outline" onclick="document.querySelector('[data-ftab=about]').click()">&#128214; Learn More</button>
+      <div class="section-header" style="margin-top:48px"><span class="section-num">02</span><h3>Graphics &amp; Flyers</h3><div class="rule"></div></div>
+      <div class="graphics-grid">
+        <div class="graphic-card" onclick="openFileModal('2026/Fall/marketing/2026-Flyer.png','Event Flyer','image','2026-Flyer.png')"><img src="2026/Fall/marketing/2026-Flyer.png" alt=""><div class="graphic-card-label">Event Flyer</div></div>
+        <div class="graphic-card" onclick="openFileModal('2026/Fall/marketing/Instagram promotiona2.png','Instagram Promo','image','Instagram promotiona2.png')"><img src="2026/Fall/marketing/Instagram promotiona2.png" alt=""><div class="graphic-card-label">Instagram Promo</div></div>
+      </div>
+      <div class="flyer-btns" style="justify-content:center;margin-top:28px">
+        <button class="flyer-btn outline" onclick="openFileModal('2026/Fall/marketing/Flyer  R1.pdf','Event Flyer R1','pdf','Flyer R1.pdf')">&#128196; Download Flyer PDF</button>
+        <a class="flyer-btn outline" href="2026/Fall/marketing/Video_Generation_Request_Fulfilled.mp4" download>&#11015; Download Video</a>
       </div>
     </div>
   </div>
