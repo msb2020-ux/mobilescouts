@@ -1,4 +1,4 @@
-<!-- v17 - Restructured: About tab first with flyer + description, other tabs match year page format -->
+<!-- v18 - Contact form replaced with modal popup link -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,6 +94,24 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .file-modal-footer{background:#f4f4f4;padding:10px 20px;display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
 .file-modal-footer a{background:var(--navy);color:white;text-decoration:none;padding:8px 18px;border-radius:6px;font-size:0.8rem;font-weight:700;transition:background 0.18s}
 .file-modal-footer a:hover{background:var(--red)}
+.contact-modal{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;padding:20px}
+.contact-modal.open{display:flex}
+.contact-modal-inner{background:white;border-radius:14px;overflow:hidden;width:90vw;max-width:500px;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+.contact-modal-header{background:var(--navy);color:white;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.contact-modal-title{font-weight:700;font-size:0.9rem;letter-spacing:0.04em}
+.contact-modal-close{background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;line-height:1;opacity:0.7;padding:0 4px}
+.contact-modal-close:hover{opacity:1}
+.contact-modal-body{padding:32px 24px}
+.contact-form{display:flex;flex-direction:column;gap:12px}
+.contact-form input,.contact-form textarea{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:6px;background:white;color:#333;font-family:'DM Sans',sans-serif;font-size:0.88rem}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#999}
+.contact-form textarea{resize:vertical;min-height:100px}
+.contact-form button{padding:11px 24px;background:var(--navy);color:white;font-weight:700;border:none;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.88rem;transition:background 0.18s}
+.contact-form button:hover{background:var(--red)}
+.contact-form button:disabled{opacity:0.5;cursor:not-allowed}
+.form-status{padding:10px 14px;border-radius:6px;font-size:0.85rem;margin-top:8px;display:none}
+.form-status.success{background:var(--success);color:white;display:block}
+.form-status.error{background:var(--error);color:white;display:block}
 .past-events{background:#f4f4f4;padding:48px 20px;position:relative;z-index:1}
 .past-events h2{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--navy);margin-bottom:8px}
 .past-events-sub{text-align:center;font-size:0.85rem;color:#666;margin-bottom:28px}
@@ -121,32 +139,25 @@ body{font-family:'DM Sans',Arial,sans-serif;background:#fff;color:#1a1a1a}
 .event-card-btn.disabled{background:#bbb;pointer-events:none;cursor:default}
 .social{text-align:center;padding:40px 20px}
 .social img.qr{width:150px;margin-top:20px}
-footer{background:var(--navy);color:white;padding:48px 20px 28px}
-.footer-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
-.footer-col h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;color:var(--gold);margin-bottom:16px}
+footer{background:var(--navy);color:white;padding:32px 20px}
+.footer-container{max-width:1100px;margin:0 auto;text-align:center}
+.footer-col h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;color:var(--gold);margin-bottom:12px}
 .footer-col p{font-size:0.88rem;line-height:1.6;color:rgba(255,255,255,0.8);margin-bottom:12px}
 .footer-col a{color:var(--gold);text-decoration:none;font-weight:600}
 .footer-col a:hover{text-decoration:underline}
-.contact-form{display:flex;flex-direction:column;gap:12px}
-.contact-form input,.contact-form textarea{width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,0.3);border-radius:6px;background:rgba(255,255,255,0.1);color:white;font-family:'DM Sans',sans-serif;font-size:0.88rem}
-.contact-form input::placeholder,.contact-form textarea::placeholder{color:rgba(255,255,255,0.5)}
-.contact-form textarea{resize:vertical;min-height:100px}
-.contact-form button{padding:11px 24px;background:var(--gold);color:var(--navy);font-weight:700;border:none;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.88rem;transition:background 0.18s}
-.contact-form button:hover{background:#ffd700}
-.contact-form button:disabled{opacity:0.5;cursor:not-allowed}
-.form-status{padding:10px 14px;border-radius:6px;font-size:0.85rem;margin-top:8px;display:none}
-.form-status.success{background:var(--success);color:white;display:block}
-.form-status.error{background:var(--error);color:white;display:block}
-.footer-bottom{text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.2);font-size:0.82rem;color:rgba(255,255,255,0.6)}
+.contact-link{display:inline-block;margin-top:8px;padding:10px 20px;background:var(--gold);color:var(--navy);font-weight:700;text-decoration:none;border-radius:6px;font-size:0.88rem;transition:background 0.18s;cursor:pointer}
+.contact-link:hover{background:#ffd700}
+.footer-bottom{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.2);font-size:0.82rem;color:rgba(255,255,255,0.6)}
 .sticky{position:fixed;bottom:0;width:100%;background:var(--red);text-align:center;padding:10px;z-index:99}
 .sticky a{background:white;color:var(--navy);padding:10px 20px;border-radius:5px;font-weight:bold;text-decoration:none}
 @media(max-width:600px){
   .feature-tab-btn{font-size:0.72rem;padding:9px 6px;min-width:80px}
   .feature-tab-panel{padding:20px 16px}
   .file-modal-inner{width:96vw;height:90vh}
+  .contact-modal-inner{width:96vw}
+  .contact-modal-body{padding:24px 16px}
   .carousel-arrow{width:36px;height:36px;font-size:1rem}
   .event-card:hover .event-card-img{transform:scale(1.15)}
-  .footer-container{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -323,19 +334,8 @@ footer{background:var(--navy);color:white;padding:48px 20px 28px}
       <h3>Mobile Area Scouts</h3>
       <p>Five Rivers District camporee archive and event information for Scouts BSA troops in the Mobile Area Council, serving scouts throughout southern Alabama.</p>
       <p><a href="https://www.instagram.com/mobile_area_scouts/" target="_blank">Instagram</a> | <a href="https://www.youtube.com/@MobileAreaScouts-sv1xm" target="_blank">YouTube</a></p>
-    </div>
-    <div class="footer-col">
-      <h3>Contact</h3>
-      <p>Have questions about camporee events, patch sales, or event planning? Send us a message.</p>
-      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xwpkwdap" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="_replyto" placeholder="Your Email" required>
-        <input type="text" name="_subject" placeholder="Subject" value="Camporee Inquiry" required>
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <input type="hidden" name="_next" value="https://mobilescouts.org/#contact-success">
-        <button type="submit">Send Message</button>
-      </form>
-      <div class="form-status" id="formStatus"></div>
+      <p>Have questions about camporee events, patch sales, or event planning?</p>
+      <button class="contact-link" id="openContactBtn">&#9993; Contact Us</button>
     </div>
   </div>
   <div class="footer-bottom">
@@ -353,6 +353,26 @@ footer{background:var(--navy);color:white;padding:48px 20px 28px}
     </div>
     <div class="file-modal-body" id="fileModalBody"></div>
     <div class="file-modal-footer"><a id="fileModalDownload" href="#" download>&#11015; Download</a></div>
+  </div>
+</div>
+
+<div class="contact-modal" id="contactModal">
+  <div class="contact-modal-inner">
+    <div class="contact-modal-header">
+      <span class="contact-modal-title">Contact Us</span>
+      <button class="contact-modal-close" id="contactModalClose">&times;</button>
+    </div>
+    <div class="contact-modal-body">
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xwpkwdap" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="_replyto" placeholder="Your Email" required>
+        <input type="text" name="_subject" placeholder="Subject" value="Camporee Inquiry" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <input type="hidden" name="_next" value="https://mobilescouts.org/#contact-success">
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="form-status" id="formStatus"></div>
+    </div>
   </div>
 </div>
 
@@ -383,6 +403,14 @@ function closeFileModal(){fileModal.classList.remove('open');fileModalBody.inner
 fileModalClose.onclick=closeFileModal;
 fileModal.addEventListener('click',e=>{if(e.target===fileModal)closeFileModal();});
 document.addEventListener('keydown',e=>{if(fileModal.classList.contains('open')&&e.key==='Escape')closeFileModal();});
+
+const contactModal=document.getElementById('contactModal'),contactModalClose=document.getElementById('contactModalClose'),openContactBtn=document.getElementById('openContactBtn');
+function openContactModal(){contactModal.classList.add('open');document.body.style.overflow='hidden';}
+function closeContactModal(){contactModal.classList.remove('open');document.body.style.overflow='';}
+openContactBtn.onclick=openContactModal;
+contactModalClose.onclick=closeContactModal;
+contactModal.addEventListener('click',e=>{if(e.target===contactModal)closeContactModal();});
+document.addEventListener('keydown',e=>{if(contactModal.classList.contains('open')&&e.key==='Escape')closeContactModal();});
 
 const vp = document.getElementById('cardsViewport');
 document.querySelectorAll('.event-card').forEach(card => {
@@ -437,6 +465,7 @@ if(contactForm){
         formStatus.className = 'form-status success';
         formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
         contactForm.reset();
+        setTimeout(() => closeContactModal(), 2000);
       } else {
         formStatus.className = 'form-status error';
         formStatus.textContent = 'Something went wrong. Please try again or email directly.';
@@ -454,6 +483,7 @@ if(contactForm){
 
 // Check for success hash from Formspree redirect
 if(window.location.hash === '#contact-success') {
+  openContactModal();
   formStatus.className = 'form-status success';
   formStatus.textContent = 'Message sent successfully! We\'ll get back to you soon.';
   window.location.hash = '';
